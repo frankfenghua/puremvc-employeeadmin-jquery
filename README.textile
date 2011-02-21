@@ -13,13 +13,13 @@ License: Creative Commons Attribution 3.0 United States License
 License for Prototype Core: MIT and CC BY-SA
 --------------------------------------------------------------------------
 
-h3. Releases
+h2. Releases
 
-h2. Version 1.0
+h3. Version 1.0
 
 This demo is inspired originally from PureMVC Employee Admin for AS3 standard
-port and PureMVC Employee Admin demo for Objective C for its wise UI
-respectively by Cliff Hall and Brian Knorr.
+port and PureMVC Employee Admin demo for Objective C respectively by Cliff Hall
+and Brian Knorr.
 
 Unit Tests follow the PureMVC for AS3 standard port with some specific
 additions for the JavaScript language.
