@@ -1,0 +1,156 @@
+<!DOCTYPE html> 
+<html> 
+<!--
+ PureMVC Javascript Objs Employee Admin Demo for jQueryMobile by Frederic Saunier <frederic.saunier@puremvc.org> 
+ PureMVC - Copyright(c) 2006-11 Futurescale, Inc., Some rights reserved. 
+ Your reuse is governed by the Creative Commons Attribution 3.0 License
+-->
+	<head>
+		<meta charset="utf-8" content="text/html" /> 
+		<title> PureMVC Javascript Objs EmployeeAdmin demo for jQueryMobile </title>
+
+		<link rel="stylesheet" href="lib/jquery.mobile-1.0a3/jquery.mobile-1.0a3.min.css" />
+		<link rel="stylesheet" href="css/application.css"/> 
+		
+		<script type="text/javascript" src="lib/jquery-1.5.js"></script>
+		<script type="text/javascript" src="lib/jquery.mobile-1.0a3/jquery.mobile-1.0a3.js"></script>
+
+		<!-- Objs library -->
+		<script type="text/javascript" src="lib/objs-2.0.js"></script>
+
+		<!-- PureMVC framework for JavaScript based on Objs -->
+		<script type="text/javascript" src="lib/puremvc_objs-2.0.js"></script>
+		
+		<!--script type="text/javascript" src="bin/puremvc_employeeadmin_jquerymobile.js"></script-->
+
+		<!-- uncomment to debug -->
+		<script type="text/javascript" src="src/org/puremvc/js/demos/objs/employeeadmin/abc/MediatorNames.js"></script>
+		<script type="text/javascript" src="src/org/puremvc/js/demos/objs/employeeadmin/abc/NotificationNames.js"></script>
+		<script type="text/javascript" src="src/org/puremvc/js/demos/objs/employeeadmin/abc/ProxyNames.js"></script>
+
+		<script type="text/javascript" src="src/org/puremvc/js/demos/objs/employeeadmin/controller/DeleteUserCommand.js"></script>
+		<script type="text/javascript" src="src/org/puremvc/js/demos/objs/employeeadmin/controller/PrepModelCommand.js"></script>
+		<script type="text/javascript" src="src/org/puremvc/js/demos/objs/employeeadmin/controller/PrepViewCommand.js"></script>
+		<script type="text/javascript" src="src/org/puremvc/js/demos/objs/employeeadmin/controller/StartupCommand.js"></script>
+
+		<script type="text/javascript" src="src/org/puremvc/js/demos/objs/employeeadmin/model/enum/DeptEnum.js"></script>
+		<script type="text/javascript" src="src/org/puremvc/js/demos/objs/employeeadmin/model/enum/RoleEnum.js"></script>
+
+		<script type="text/javascript" src="src/org/puremvc/js/demos/objs/employeeadmin/model/vo/RoleVO.js"></script>
+		<script type="text/javascript" src="src/org/puremvc/js/demos/objs/employeeadmin/model/vo/UserVO.js"></script>
+
+		<script type="text/javascript" src="src/org/puremvc/js/demos/objs/employeeadmin/model/RoleProxy.js"></script>
+		<script type="text/javascript" src="src/org/puremvc/js/demos/objs/employeeadmin/model/UserProxy.js"></script>
+
+		<script type="text/javascript" src="src/org/puremvc/js/demos/objs/employeeadmin/view/components/UiComponent.js"></script>
+		<script type="text/javascript" src="src/org/puremvc/js/demos/objs/employeeadmin/view/components/UserForm.js"></script>
+		<script type="text/javascript" src="src/org/puremvc/js/demos/objs/employeeadmin/view/components/UserList.js"></script>
+
+		<script type="text/javascript" src="src/org/puremvc/js/demos/objs/employeeadmin/view/UserFormMediator.js"></script>
+		<script type="text/javascript" src="src/org/puremvc/js/demos/objs/employeeadmin/view/UserListMediator.js"></script>
+
+		<script type="text/javascript" src="src/org/puremvc/js/demos/objs/employeeadmin/ApplicationFacade.js"></script>
+		<!-- uncomment to debug -->
+
+		<script type="text/javascript">
+		$(document).ready
+		(
+			function()
+			{
+				var applicationFacade/*ApplicationFacade*/ = ApplicationFacade.getInstance();
+				applicationFacade.startup( $("body") );
+			}
+		);
+		</script>
+	</head>
+
+	<body>
+
+		<!-- User List Page -->
+		<div data-role="page">
+			
+			<div data-role="header">
+				<h1>Users</h1>
+			</div>
+			
+			<div data-role="content">
+				<div id="user-list-panel">	
+						
+					<!-- User List -->
+					<ul id="user-list" data-role="listview" data-inset="true"></ul>
+					
+					<!-- Add User Button -->
+					<a id="new-button" data-role="button" href="#" data-icon="plus">Add</a>
+				</div>
+			</div>
+		</div>
+
+		<!-- User Form Page -->		
+		<div data-role="page" id="UserForm">
+	
+			<div data-role="header">
+				<h1>User Form</h1>
+			</div>
+
+			<div data-role="content">
+
+				<div id="user-form-panel">
+					<!-- First Name-->
+					<div data-role="fieldcontain">
+						<label for="fname">First Name</label>
+						<input type="text" id="fname" value="" />
+					</div>
+
+					<!-- Last Name -->
+					<div data-role="fieldcontain">
+						<label for="lname">Last Name</label>
+						<input type="text" id="lname" value="" />
+					</div>
+
+					<!-- Email -->
+					<div data-role="fieldcontain">
+						<label for="email">Email</label>
+						<input type="text" id="email" value="" />
+					</div>
+
+					<!-- Username -->
+					<div data-role="fieldcontain">
+						<label for="uname" class="required">Username</label>
+						<input type="text" id="uname" value="" />
+					</div>
+
+					<!-- Password -->
+					<div data-role="fieldcontain">
+						<label for="password" class="required">Password</label>
+						<input type="password" id="password" value=""/>
+					</div>
+
+					<!-- Confirm Password -->
+					<div data-role="fieldcontain">
+						<label for="confirm" class="required">Confirm Password</label>
+						<input type="password" id="confirm" value="" />
+					</div>
+
+					<!-- Department Combo -->
+					<div data-role="fieldcontain">
+						<label for="department" class="required">Department</label>
+						<select id="department"><option></option></select>
+					</div>
+
+					<!-- User Roles Button -->
+					<div data-role="fieldcontain">
+						<label for="roles">User Roles:</label> 
+						<select id="roles" multiple="multiple"><option></option></select> 
+					</div> 
+
+					<!-- Save Button -->
+					<button id="submit-button" data-role="button" data-icon="check">Save</button>
+
+					<!-- Delete User Button -->
+					<button id="delete-button" data-role="button" data-icon="delete">Delete</button>
+				</div>
+			</div>		
+		</div>
+		
+	</body>
+</html>

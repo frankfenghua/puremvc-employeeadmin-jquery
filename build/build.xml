@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="YUICompression" basedir=".." default="ConcatenateAndCompress">
+
+    <target name="ConcatenateAndCompress" description="Concatenate and minifiy a set of files">
+
+        <taskdef name="yuicompress" classname="com.yahoo.platform.yui.compressor.YUICompressTask">
+            <classpath>
+                <pathelement path="${basedir}/build/lib/yuicompressor-2.4.2.jar"/>
+                <pathelement path="${basedir}/build/lib/yuiant.jar"/>
+            </classpath>
+        </taskdef>
+		
+        <delete>
+           <fileset dir="${basedir}/bin/" includes="*.js"/>
+        </delete>
+		
+        <concat
+			destfile="${basedir}/bin/puremvc_employeeadmin_jquerymobile.js"
+			append="no"
+			encoding="UTF-8"
+			outputencoding="UTF-8"
+			fixlastline="true"
+		>
+
+			<!--
+				We need to respect an order for classes declaration to allow
+				classes to inherit from their dependencies so we have to list
+				each file here
+		 	-->
+			<path>
+
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/abc/MediatorNames.js" />
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/abc/NotificationNames.js" />
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/abc/ProxyNames.js" />
+		
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/controller/AddRoleResultCommand.js" />
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/controller/DeleteUserCommand.js" />
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/controller/PrepModelCommand.js" />
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/controller/PrepViewCommand.js" />
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/controller/StartupCommand.js" />
+		
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/model/enum/DeptEnum.js" />
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/model/enum/RoleEnum.js" />
+		
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/model/vo/RoleVO.js" />
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/model/vo/UserVO.js" />
+		
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/model/RoleProxy.js" />
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/model/UserProxy.js" />
+		
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/view/components/UiComponent.js" />
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/view/components/RolePanel.js" />
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/view/components/UserForm.js" />
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/view/components/UserList.js" />
+		
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/view/RolePanelMediator.js" />
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/view/UserFormMediator.js" />
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/view/UserListMediator.js" />
+		
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/ApplicationFacade.js" />
+
+			</path>
+
+        </concat>
+
+        <yuicompress
+			charset="UTF-8"
+			linebreak="80"
+			warn="false"
+			munge="no"
+			preserveallsemicolons="true"
+			preservestringlitterals="true"
+			outputfolder="${basedir}/bin/"
+			outputsuffix="-min"
+		>
+            <fileset dir="${basedir}/bin/">
+                <include name="**/*.js"/>
+            </fileset>
+        </yuicompress>
+
+    </target>
+
+</project>

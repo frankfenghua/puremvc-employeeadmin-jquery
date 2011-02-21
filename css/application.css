@@ -1,0 +1,22 @@
+#user-form-panel label.required
+{
+	background-image:url("../img/required_field.gif");
+	background-repeat:no-repeat;
+	background-position:center right;
+}
+
+#user-form-panel label.fieldError
+{
+	background-image:url("../img/field_error.gif");
+}
+
+#user-form-panel .fieldError
+{
+	background:#FFAAAA;
+}
+
+input[type=text],
+input[type=password]
+{
+	border:thin #CCCCCC solid;
+}
