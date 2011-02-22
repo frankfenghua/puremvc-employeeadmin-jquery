@@ -11,7 +11,6 @@
  *
  * @see org.puremvc.js.patterns.command.SimpleCommand SimpleCommand
  * @see org.puremvc.js.patterns.observer.Notification Notification
- * @see org.puremvc.js.demos.objs.employeeadmin.ApplicationFacade ApplicationFacade
  * @see org.puremvc.js.demos.objs.employeeadmin.model.UserProxy UserProxy
  * @see org.puremvc.js.demos.objs.employeeadmin.model.RoleProxy RoleProxy
  * @see org.puremvc.js.demos.objs.employeeadmin.model.vo.UserVO UserVO
@@ -25,21 +24,7 @@ var DeleteUserCommand = Objs.add
 	"org.puremvc.js.demos.objs.employeeadmin.controller.DeleteUserCommand",
 	SimpleCommand,
 	{
-		
-		/**
-		 * @override
-		 * 
-		 * Initialize a <code>DeleteUserCommand</code> instance.
-		 */
-		initialize: function()
-		{
-			SimpleCommand.prototype.initialize.call(this);
-		},
-		
-		/**
-		 * @override
-		 */
-		execute: function( notification/*Notification*/ )
+		execute: function( notification )
 		{
 			var user/*UserVO*/ = notification.getBody();
 			var userProxy/*UserProxy*/ = this.facade.retrieveProxy( UserProxy.NAME );

@@ -18,17 +18,6 @@ var StartupCommand = Objs.add
 	"org.puremvc.js.demos.objs.employeeadmin.controller.StartupCommand",
 	MacroCommand,
 	{
-		
-		/**
-		 * @override
-		 * 
-		 * Initialize a <code>StartupCommand</code> instance.
-		 */
-		initialize: function()
-		{
-			MacroCommand.prototype.initialize.call(this);
-		},
-		
 		/**
 		 * @override
 		 * 

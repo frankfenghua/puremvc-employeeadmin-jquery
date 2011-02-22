@@ -17,18 +17,7 @@ var PrepViewCommand = Objs.add
 (
 	"org.puremvc.js.demos.objs.employeeadmin.controller.PrepViewCommand",
 	SimpleCommand,
-	{
-		
-		/**
-		 * @override
-		 * 
-		 * Initialize a <code>PrepViewCommand</code> instance.
-		 */
-		initialize: function()
-		{
-			SimpleCommand.prototype.initialize.call(this);
-		},
-		
+	{	
 		/**
 		 * @override
 		 */

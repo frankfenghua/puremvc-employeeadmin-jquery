@@ -55,6 +55,8 @@ var ApplicationFacade = Objs.add
 		
 			this.registerCommand( NotificationNames.STARTUP, StartupCommand );
 			this.registerCommand( NotificationNames.DELETE_USER, DeleteUserCommand );
+			this.registerCommand( NotificationNames.ADD_ROLE_RESULT, AddRoleResultCommand );
+
 		}
 	}
 );
