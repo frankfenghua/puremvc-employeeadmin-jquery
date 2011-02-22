@@ -171,7 +171,7 @@ var UserForm = Objs.add
 			this.roles.focus( function(evt){ that.field_focusHandler(evt) } );
 			this.submitButton.click( function(evt){ that.submit_clickHandler(evt) } );
 		
-			//TODO Bind the event on the jQueryMobile page header back button
+			//TODO Bind the event on the jQuery page header back button
 			//this.cancelButton.click( function(evt){ that.cancel_clickHandler(evt) } );
 			this.deleteButton.click( function(evt){ that.deleteButton_clickHandler(evt) } );
 		
@@ -192,7 +192,7 @@ var UserForm = Objs.add
 				var deptEnum/*DeptEnum*/ = deptEnumList[i];
 				
 				/*
-				 * An item not having a value in jQueryMobile will be excluded from the
+				 * An item not having a value in jQuery will be excluded from the
 				 * pop-up menu.
 				 */ 
 				var valueAttr = deptEnum.ordinal >= 0 ? 'value="' + deptEnum.ordinal + '"' : "";
@@ -234,7 +234,7 @@ var UserForm = Objs.add
 				var roleEnum/*RoleEnum*/ = roleEnumList[i];
 		
 				/*
-				 * An item not having a value in jQueryMobile will be excluded from the
+				 * An item not having a value in jQuery will be excluded from the
 				 * pop-up menu.
 				 */ 
 				var valueAttr/*String*/ = roleEnum.ordinal >= 0 ? 'value="' + roleEnum.ordinal + '"' : "";

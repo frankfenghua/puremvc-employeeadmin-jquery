@@ -117,7 +117,7 @@ var UserList = Objs.add
 		 * 
 		 * <P>
 		 * We are currently unable to listen for a <code>select</code> event on an
-		 * unumbered list in jQueryMobile so we have to listen for the click on the
+		 * unumbered list in jQuery so we have to listen for the click on the
 		 * whole list and identify the clicked <li /> element.
 		 *
 		 * @param {Event} event

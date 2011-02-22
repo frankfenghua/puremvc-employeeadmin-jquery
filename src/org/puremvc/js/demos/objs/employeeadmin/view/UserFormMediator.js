@@ -1,5 +1,5 @@
 /*
- PureMVC Javascript Objs Employee Admin Demo for jQueryMobile
+ PureMVC Javascript Objs Employee Admin Demo for jQuery
  by Frederic Saunier <frederic.saunier@puremvc.org> 
  PureMVC - Copyright(c) 2006-11 Futurescale, Inc., Some rights reserved. 
  Your reuse is governed by the Creative Commons Attribution 3.0 License
@@ -76,7 +76,7 @@ var UserFormMediator = Objs.add
 		 * The form component is in ADD or EDIT mode.
 		 *
 		 * <P>
-		 * Note that in the jQueryMobile version this is only needed to be able to
+		 * Note that in the jQuery version this is only needed to be able to
 		 * disable the <code>uname</code> field when in EDIT mode.
 		 *
 		 * @type {String}

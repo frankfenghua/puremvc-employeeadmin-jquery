@@ -1,5 +1,5 @@
 /*
- PureMVC Javascript Objs Employee Admin Demo for jQueryMobile
+ PureMVC Javascript Objs Employee Admin Demo for jQuery
  by Frederic Saunier <frederic.saunier@puremvc.org> 
  PureMVC - Copyright(c) 2006-11 Futurescale, Inc., Some rights reserved. 
  Your reuse is governed by the Creative Commons Attribution 3.0 License
@@ -130,7 +130,7 @@ var UserListMediator = Objs.add
 			this.sendNotification( NotificationNames.NEW_USER, user );
 			
 			/*
-			 * In the jQueryMobile implementation of the demo adding the demo imply to
+			 * In the jQuery implementation of the demo adding the demo imply to
 			 * set it as the currently selected user.
 			 */
 			this.sendNotification( NotificationNames.USER_SELECTED, user );
