@@ -1,49 +1,77 @@
 HTML,BODY
 {
-	background-color:#7E949F;
+	background-color:#8CA4DB;
 	font-family:Arial,Helvetica,sans-serif;
-	font-size:0.9em;
 	text-align:center;
+	padding:0;
+	margin:0;
 }
+
+
+
+/* =============================================================================== *
+ * ================================ Application ================================== *
+ * =============================================================================== */
+
 
 .application
 {
-	margin-top:10px;
-	margin-left:10px;
-	width:680px;
-	height:560px;
+	width:670px;
+	height:540px;
+	margin:auto;
+}
 
-	background-color:#ABB9BF;
+.application .title
+{
+	height:33px;
+	text-align:left;
+	background-color:white;
+	padding-top:8px;
+	vertical-align:middle;
+	margin-bottom:10px;
+}
+
+.application .name
+{
+	margin-left:20px;
+	color:#0559CC;
+	font-size:1.4em;
+}
+
+.application .category
+{
+	padding-left:12px;
+	color:0;
+	font-size:0.6em;
+	font-weight:bold;
 }
 
 /* =============================================================================== *
  * ================================== User List ================================== *
  * =============================================================================== */
 
-.userListPanel
+.user-list-panel
 {
-	margin-top:10px;
-	margin-left:10px;
+	border: red thin solid;
 
 	padding:10px;
-	background-color:#ABB9BF;
-	width:650px;
-	height:260px;
-	text-align:center;
-	vertical-align:middle;
+	width:630px;
+	height:240px;
+	background-color:#B1BFDE;
+	margin-left:10px;
 }
 
-.userListPanel .userList
+.user-list-panel .user-list
 {
 	font-family: monospaced;
 	width:640px;
 	height:200px;
 }
 
-.userListPanel .controlBar
+.user-list-panel .control-bar
 {
-	text-align:right;
-	padding-right: 1em;
+	text-align:center;
+	padding-right:1em;
 }
 
 
@@ -51,82 +79,164 @@ HTML,BODY
 /* =============================================================================== *
  * ================================== User Form ================================== *
  * =============================================================================== */
-	
-.userFormPanel
+
+.user-form-panel
 {
-	margin-top:280px;
+	border: red thin solid;
+	
 	margin-left:10px;
+	margin-top:10px;
+
+	width:300px;
+	height:280px;
+	
 
 	padding:10px;
-	background-color:#ABB9BF;
-	width:320px;
-	height:260px;
+	background-color:#B1BFDE;
 	text-align:center;
 	vertical-align:middle;
 }
 
-.userFormPanel .userForm
+.user-form-panel-content
 {
 	text-align:right;
 	background-color:#FFF;
-	width:300px;
+	width:280px;
 	height:195px;
-	margin:auto;
-	padding:5px;
+	padding:10px;
+	margin-bottom:10px;
 }
 
-.userFormPanel .userForm, .department,
-input
+.user-form-panel-content .field
 {
+	margin-bottom:5px;
+}
+
+.user-form-panel-content label
+{
+	font-size:0.8em;
+	padding-right:1em;
+}
+
+.user-form-panel-content label.required
+{
+	font-size:0.8em;
+	padding-right:1em;
+
+	background-image:url("../img/required_field.gif");
+	background-repeat:no-repeat;
+	background-position:center right;
+}
+
+.user-form-panel-content label.fieldError
+{
+	background-image:url("../img/field_error.gif");
+}
+
+.user-form-panel-content input
+{
+	margin:0;
 	width:150px;
 }
 
+.user-form-panel-content input.fieldError
+{
+	background:#FFD087;
+}
+
+.user-form-panel-content select
+{
+	margin:0;
+	width:155px;
+}
+
+.user-form-panel-content select.fieldError
+{
+	background:#FFD087;
+}
 
 
 /* =============================================================================== *
  * ================================== Role List ================================== *
  * =============================================================================== */
 
-.roleListPanel
+
+.role-list-panel
 {
-	top:280px;
-	left:340px;
+	border: red thin solid;
+
+	float:right;
+
+	margin-right:10px;
+	margin-top:-300px;
+
+	width:300px;
+	height:280px;
 
 	padding:10px;
-	background-color:#ABB9BF;
-	width:320px;
-	height:260px;
+	background-color:#B1BFDE;
 	text-align:center;
 	vertical-align:middle;
 }
 
-.roleListPanel .roleList
+.role-list-panel-content
 {
-	width:300px;
-	height:200px;
+	text-align:right;
+	background-color:#FFF;
+	width:280px;
+	height:195px;
+	padding:10px;
+	margin-bottom:10px;
 }
 
-.roleListPanel .HBox
-{
-	width:650px;
-	height:260px;
-}
 
-.roleListPanel .panelTitle
+.panel-title
 {
 	padding-left:4px;
 	margin-bottom:2px;
 	text-align:left;
 	font-weight:bold;
+	font-size:0.8em;
+	height:20px;
 }
 
-.roleListPanel .controlBar
+.control-bar
 {
-	margin-top:10px;
-	text-align:center;
+	margin-top:8px;
+	text-align:right;
+	vertical-align:middle;
 }
 
-.fullRoleList
+.user-role-list
 {
-	width: 110px;
+	width:280px;
+	height:190px;
+}
+
+.role-list
+{
+	width:170px;
+}
+
+BUTTON
+{
+	background:#CDD4E4;
+	font-weight:bold;
+	border:1px solid #999;
+	height:1.7em;
+	font-size:0.8em;
+	vertical-align: middle;
+	padding:0 0.1em 0.1em 0.1em;
+	margin-left:0.25em;
+}
+
+BUTTON:disabled
+{
+	color:#DDD;
+	background:#C0C5D0;
+}
+
+SELECT
+{
+	font-size:0.8em;
 }
