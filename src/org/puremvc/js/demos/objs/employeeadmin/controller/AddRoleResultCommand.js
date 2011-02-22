@@ -22,13 +22,14 @@ var AddRoleResultCommand =	Objs.add
 	"org.puremvc.js.demos.objs.employeeadmin.controller.AddRoleResultCommand",
 	SimpleCommand,
 	{
-		var o = AddRoleResultCommand.prototype;
-
-		o.execute = function( notification/*INotification*/ )
+		/**
+		 * @override
+		 */
+		execute: function( note )
 		{
-			var result/*Boolean*/ = notification.getBody();
-			if( result == false )
+			var result/*Boolean*/ = note.getBody();
+			if( !result )
 				alert('Role already exists for this user!\nAdd User Role');
 		}
 	}
-}
+);

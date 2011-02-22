@@ -27,7 +27,7 @@ var StartupCommand = Objs.add
 		 * proxies)followed by preparation of the View (mostly registering 
 		 * Mediators).
 		 * 
-		 * @param {Notification} notification
+		 * @param {Notification} note
 		 * 		The <code>Notification</code> object to be passed to each entry
 		 * 		of <i>subCommands</i> list.
 		 */

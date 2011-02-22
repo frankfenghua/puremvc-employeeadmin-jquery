@@ -1,0 +1,132 @@
+HTML,BODY
+{
+	background-color:#7E949F;
+	font-family:Arial,Helvetica,sans-serif;
+	font-size:0.9em;
+	text-align:center;
+}
+
+.application
+{
+	margin-top:10px;
+	margin-left:10px;
+	width:680px;
+	height:560px;
+
+	background-color:#ABB9BF;
+}
+
+/* =============================================================================== *
+ * ================================== User List ================================== *
+ * =============================================================================== */
+
+.userListPanel
+{
+	margin-top:10px;
+	margin-left:10px;
+
+	padding:10px;
+	background-color:#ABB9BF;
+	width:650px;
+	height:260px;
+	text-align:center;
+	vertical-align:middle;
+}
+
+.userListPanel .userList
+{
+	font-family: monospaced;
+	width:640px;
+	height:200px;
+}
+
+.userListPanel .controlBar
+{
+	text-align:right;
+	padding-right: 1em;
+}
+
+
+
+/* =============================================================================== *
+ * ================================== User Form ================================== *
+ * =============================================================================== */
+	
+.userFormPanel
+{
+	margin-top:280px;
+	margin-left:10px;
+
+	padding:10px;
+	background-color:#ABB9BF;
+	width:320px;
+	height:260px;
+	text-align:center;
+	vertical-align:middle;
+}
+
+.userFormPanel .userForm
+{
+	text-align:right;
+	background-color:#FFF;
+	width:300px;
+	height:195px;
+	margin:auto;
+	padding:5px;
+}
+
+.userFormPanel .userForm, .department,
+input
+{
+	width:150px;
+}
+
+
+
+/* =============================================================================== *
+ * ================================== Role List ================================== *
+ * =============================================================================== */
+
+.roleListPanel
+{
+	top:280px;
+	left:340px;
+
+	padding:10px;
+	background-color:#ABB9BF;
+	width:320px;
+	height:260px;
+	text-align:center;
+	vertical-align:middle;
+}
+
+.roleListPanel .roleList
+{
+	width:300px;
+	height:200px;
+}
+
+.roleListPanel .HBox
+{
+	width:650px;
+	height:260px;
+}
+
+.roleListPanel .panelTitle
+{
+	padding-left:4px;
+	margin-bottom:2px;
+	text-align:left;
+	font-weight:bold;
+}
+
+.roleListPanel .controlBar
+{
+	margin-top:10px;
+	text-align:center;
+}
+
+.fullRoleList
+{
+	width: 110px;
+}

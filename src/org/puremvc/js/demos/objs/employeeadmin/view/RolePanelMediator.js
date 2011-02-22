@@ -55,24 +55,24 @@ var RolePanelMediator = Objs.add
 			this.roleProxy = this.facade.retrieveProxy( RoleProxy.NAME );
 		},
 
-		o.getRolePanel = function()/*RolePanel*/
+		getRolePanel: function()/*RolePanel*/
 		{
 			return this.viewComponent;
 		},
 
-		o.onAddRole = function( event/*EventS*/ )
+		onAddRole: function( event/*EventS*/ )
 		{
 			this.roleProxy.addRoleToUser( this.getRolePanel().user, this.getRolePanel().selectedRole );
 		},
 
-		o.onRemoveRole = function( event/*EventS*/ )
+		onRemoveRole: function( event/*EventS*/ )
 		{
 			this.roleProxy.removeRoleFromUser( this.getRolePanel().user, this.getRolePanel().selectedRole );
 		
 			this.updateUserRoleList();
 		},
 
-		o.updateUserRoleList = function()
+		updateUserRoleList: function()
 		{
 			this.getRolePanel().setUserRoles( this.roleProxy.getUserRoles( this.getRolePanel().user.username ) );
 		},
@@ -80,7 +80,7 @@ var RolePanelMediator = Objs.add
 		/**
 		* @override
 		*/
-		o.listNotificationInterests = function()/*Array*/
+		listNotificationInterests: function()/*Array*/
 		{
 			return [
 				ApplicationFacade.NEW_USER,
@@ -96,7 +96,7 @@ var RolePanelMediator = Objs.add
 		/**
 		* @override
 		*/
-		o.handleNotification = function( note )
+		handleNotification: function( note )
 		{
 			var rolePanel/*RolePanel*/ = this.getRolePanel();
 
@@ -145,7 +145,7 @@ var RolePanelMediator = Objs.add
 			}
 		},
 
-		o.clearForm = function()
+		clearForm: function()
 		{
 			var rolePanel/*RolePanel*/ = this.getRolePanel();
 
@@ -153,4 +153,4 @@ var RolePanelMediator = Objs.add
 			rolePanel.setUserRoles(null);
 		}
 	}
-}		
+);

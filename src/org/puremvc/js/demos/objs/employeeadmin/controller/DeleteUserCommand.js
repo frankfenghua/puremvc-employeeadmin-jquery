@@ -24,9 +24,12 @@ var DeleteUserCommand = Objs.add
 	"org.puremvc.js.demos.objs.employeeadmin.controller.DeleteUserCommand",
 	SimpleCommand,
 	{
-		execute: function( notification )
+		/**
+		 * @override
+		 */
+		execute: function( note )
 		{
-			var user/*UserVO*/ = notification.getBody();
+			var user/*UserVO*/ = note.getBody();
 			var userProxy/*UserProxy*/ = this.facade.retrieveProxy( UserProxy.NAME );
 			var roleProxy/*RoleProxy*/ = this.facade.retrieveProxy( RoleProxy.NAME );
 		

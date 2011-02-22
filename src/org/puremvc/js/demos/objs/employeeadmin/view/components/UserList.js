@@ -1,6 +1,6 @@
 /*
  PureMVC Javascript Employee Admin Demo for Mootools by Frederic Saunier <frederic.saunier@puremvc.org> 
- PureMVC - Copyright(c) 2006-10 Futurescale, Inc., Some rights reserved. 
+ PureMVC - Copyright(c) 2006-11 Futurescale, Inc., Some rights reserved. 
  Your reuse is governed by the Creative Commons Attribution 3.0 License
 */
 
@@ -57,9 +57,9 @@ var UserList = Objs.add
 			/*
 			 * We use JQuery to initialize reference to UI components
 			 */
-			this.userListPanel = $("#user-list-panel");
-			this.userList = this.userListPanel.find("#user-list");
-			this.newButton = this.userListPanel.find("#new-button");
+			this.userListPanel = $(".user-list-panel");
+			this.userList = this.userListPanel.find(".user-list");
+			this.newButton = this.userListPanel.find(".new-button");
 		
 			/*
 			 * Event listeners registration
@@ -82,7 +82,7 @@ var UserList = Objs.add
 			for( var i/*Number*/ = 0; i<this.users.length; i++ )
 			{
 				var user/*UserVO*/ = this.users[i];
-				htmlList += '<li id="' + i  + '-user-list-item"><a href="#">' + user.getGivenName() + '</a></li>';
+				htmlList += '<li id="' + i  + '-user-list-item"><a href=".">' + user.getGivenName() + '</a></li>';
 			}
 		
 			/*
@@ -130,7 +130,7 @@ var UserList = Objs.add
 			//Index of the clicked list item
 			var entry/*Number*/ = parseInt( $(li).attr("id") );
 			
-			$.mobile.changePage("#UserForm", "pop", false, false);
+			$.mobile.changePage(".UserForm", "pop", false, false);
 			
 			this.dispatchEvent( UserList.SELECT, this.users[entry] );
 		},

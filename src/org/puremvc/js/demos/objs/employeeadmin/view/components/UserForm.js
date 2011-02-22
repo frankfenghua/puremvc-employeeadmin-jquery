@@ -1,6 +1,6 @@
 /*
  PureMVC Javascript Employee Admin Demo for Mootools by Frederic Saunier <frederic.saunier@puremvc.org>
- PureMVC - Copyright(c) 2006-10 Futurescale, Inc., Some rights reserved.
+ PureMVC - Copyright(c) 2006-11 Futurescale, Inc., Some rights reserved.
  Your reuse is governed by the Creative Commons Attribution 3.0 License
 */
 
@@ -146,19 +146,19 @@ var UserForm = Objs.add
 			/*
 			 * We use JQuery to initialize reference to UI components
 			 */
-			this.userFormPanel = $("#user-form-panel");
+			this.userFormPanel = $(".user-form-panel");
 		
-			this.uname = this.userFormPanel.find("#uname");
-			this.fname = this.userFormPanel.find("#fname");
-			this.lname = this.userFormPanel.find("#lname");
-			this.email = this.userFormPanel.find("#email");
-			this.password = this.userFormPanel.find("#password");
-			this.confirm = this.userFormPanel.find("#confirm");
-			this.department = this.userFormPanel.find("#department");
-			this.roles = this.userFormPanel.find("#roles");
+			this.uname = this.userFormPanel.find(".uname");
+			this.fname = this.userFormPanel.find(".fname");
+			this.lname = this.userFormPanel.find(".lname");
+			this.email = this.userFormPanel.find(".email");
+			this.password = this.userFormPanel.find(".password");
+			this.confirm = this.userFormPanel.find(".confirm");
+			this.department = this.userFormPanel.find(".department");
+			this.roles = this.userFormPanel.find(".roles");
 		
-			this.submitButton = this.userFormPanel.find("#submit-button");
-			this.deleteButton = this.userFormPanel.find("#delete-button");	
+			this.submitButton = this.userFormPanel.find(".submit-button");
+			this.deleteButton = this.userFormPanel.find(".delete-button");	
 		
 			/*
 			 * Event listeners registration
@@ -212,7 +212,7 @@ var UserForm = Objs.add
 				'pageshow',
 				function(event, ui)
 				{
-					$('#department').selectmenu('refresh',true);
+					$('.department').selectmenu('refresh',true);
 					$(document).unbind('pageshow',arguments.callee);
 					$(document).unbind('pageshow',arguments.callee);
 				}
@@ -252,7 +252,7 @@ var UserForm = Objs.add
 			 * 
 			 * $(document).bind doesn't even work there
 			 */
-			setTimeout("$('#roles').selectmenu('refresh',true);",100);	 
+			setTimeout("$('.roles').selectmenu('refresh',true);",100);	 
 		},
 		
 		/**
@@ -468,7 +468,7 @@ var UserForm = Objs.add
 		setFieldError: function( fieldName, error )
 		{
 			var label/*HTMLElement*/ = this.userFormPanel.find( 'label[for="' + fieldName + '"]' );
-			var field/*HTMLElement*/ = this.userFormPanel.find( '#' + fieldName );
+			var field/*HTMLElement*/ = this.userFormPanel.find( '.' + fieldName );
 		
 			if( error )
 				field.addClass( 'fieldError' );
