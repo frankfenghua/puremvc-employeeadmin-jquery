@@ -74,10 +74,10 @@ var UserList = Objs.add
 				   	colNames:['User Name', 'First Name', 'Last Name', 'Email', 'Department'],
 				   	colModel:
 					[
-				   		{name:'uname', index:'uname', width:120 },
-				   		{name:'fname', index:'fname', width:120 },
-				   		{name:'lname', index:'lname', width:120 },
-				   		{name:'email', index:'lname', width:140 },
+				   		{name:'uname', index:'uname', width:130 },
+				   		{name:'fname', index:'fname', width:130 },
+				   		{name:'lname', index:'lname', width:130 },
+				   		{name:'email', index:'lname', width:130 },
 				   		{name:'department', index:'department', width:130},
 				   	]
 				}
@@ -111,8 +111,20 @@ var UserList = Objs.add
 			this.userList.jqGrid( 'clearGridData' );
 
 			// Fill the data-grid
-			for(var i/*Number*/=0; i<=userList.length; i++)
-				this.userList.jqGrid( 'addRowData', i+1, userList[i] );			
+			for(var i/*Number*/=0; i<userList.length; i++)
+			{
+				var user/*UserVO*/ = userList[i];
+				var col/*Object*/ = 
+				{
+					uname: user.uname,
+					fname: user.fname,
+					lname: user.lname,
+					email: user.email,
+					department: user.department.value
+				};
+				
+				this.userList.jqGrid( 'addRowData', i+1, col );
+			}	
 		},
 		
 		/**
