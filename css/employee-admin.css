@@ -1,10 +1,42 @@
 HTML,BODY
 {
 	background-color:#8CA4DB;
-	font-family:Arial,Helvetica,sans-serif;
-	text-align:center;
 	padding:0;
 	margin:0;
+}
+
+
+
+/* =============================================================================== *
+ * =================================== Generic= ================================== *
+ * =============================================================================== */
+
+.panel-title
+{
+	padding-left:4px;
+	margin-bottom:2px;
+	text-align:left;
+	font-weight:bold;
+	font-size:0.8em;
+	height:20px;
+}
+
+.control-bar
+{
+	margin-top:8px;
+	text-align:right;
+	vertical-align:middle;
+}
+
+.user-role-list
+{
+	width:280px;
+	height:190px;
+}
+
+.role-list
+{
+	width:170px;
 }
 
 
@@ -46,6 +78,8 @@ HTML,BODY
 	font-weight:bold;
 }
 
+
+
 /* =============================================================================== *
  * ================================== User List ================================== *
  * =============================================================================== */
@@ -56,6 +90,7 @@ HTML,BODY
 	width:640px;
 	height:240px;
 	background-color:#B1BFDE;
+	text-align:center;
 }
 
 .user-list-panel .user-list
@@ -152,12 +187,12 @@ HTML,BODY
 }
 
 
+
 /* =============================================================================== *
  * ================================== Role List ================================== *
  * =============================================================================== */
 
-
-.role-list-panel
+.role-panel
 {
 	float:right;
 
@@ -173,7 +208,7 @@ HTML,BODY
 	vertical-align:middle;
 }
 
-.role-list-panel-content
+.role-panel-content
 {
 	text-align:right;
 	background-color:#FFF;
@@ -181,56 +216,4 @@ HTML,BODY
 	height:195px;
 	padding:10px;
 	margin-bottom:10px;
-}
-
-
-.panel-title
-{
-	padding-left:4px;
-	margin-bottom:2px;
-	text-align:left;
-	font-weight:bold;
-	font-size:0.8em;
-	height:20px;
-}
-
-.control-bar
-{
-	margin-top:8px;
-	text-align:right;
-	vertical-align:middle;
-}
-
-.user-role-list
-{
-	width:280px;
-	height:190px;
-}
-
-.role-list
-{
-	width:170px;
-}
-
-BUTTON
-{
-	background:#CDD4E4;
-	font-weight:bold;
-	border:1px solid #999;
-	height:1.7em;
-	font-size:0.8em;
-	vertical-align: middle;
-	padding:0 0.1em 0.1em 0.1em;
-	margin-left:0.25em;
-}
-
-BUTTON:disabled
-{
-	color:#DDD;
-	background:#C0C5D0;
-}
-
-SELECT
-{
-	font-size:0.8em;
 }

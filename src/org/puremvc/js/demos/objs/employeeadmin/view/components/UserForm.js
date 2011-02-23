@@ -153,8 +153,8 @@ var UserForm = Objs.add
 			this.department = this.userFormPanel.find(".department");
 			this.roles = this.userFormPanel.find(".roles");
 		
-			this.submitButton = this.userFormPanel.find(".submit-button");
-			this.cancelButton = this.userFormPanel.find(".cancel-button");	
+			this.submitButton = this.userFormPanel.find(".submit-button").button();
+			this.cancelButton = this.userFormPanel.find(".cancel-button").button();	
 	    },
 		
 	    /**

@@ -65,8 +65,8 @@ var UserList = Objs.add
 	    {
 			this.userListPanel = $(".user-list-panel");
 			this.userList = this.userListPanel.find(".user-list");
-			this.newButton = this.userListPanel.find(".new-button");
-			this.deleteButton = this.userListPanel.find(".delete-button");	
+			this.newButton = this.userListPanel.find(".new-button").button();
+			this.deleteButton = this.userListPanel.find(".delete-button").button();	
 	    },
 		
 	    /**

@@ -17,6 +17,50 @@ var RolePanel = Objs.add
 	"org.puremvc.js.demos.objs.employeeadmin.view.components.RolePanel",
 	UiComponent,
 	{
+		/** 
+		 * Currently selected user.
+		 * 
+		 * @private
+		 * @type {UserVO}
+		 */
+		user: null,
+	
+		/**
+		 * Currently selected role.
+		 * 
+		 * @private
+		 * @type {UserRole}
+		 */
+		selectedRole: null,
+	
+		/**
+		 * The add or remove role mode.
+		 */
+		mode: null,
+				
+		/**
+		 * The role panel HTML element.
+		 * 
+		 * @private
+		 * @type {HTMLElement}
+		 */
+		rolePanel: null,
+				
+		/**
+		 * The full role list HTML element.
+		 * 
+		 * @private
+		 * @type {HTMLElement}
+		 */
+		roleList: null,
+		
+		/**
+		 * The user role datagrid HTML element.
+		 * 
+		 * @private
+		 * @type {HTMLElement}
+		 */
+		userRoleList: null,
 		
 		/**
 		 * The add role button HTML element.
@@ -33,43 +77,6 @@ var RolePanel = Objs.add
 		 * @type {HTMLElement}
 		 */
 		removeRoleButton: null,
-		
-		/**
-		 * The full role list HTML element.
-		 * 
-		 * @private
-		 * @type {HTMLElement}
-		 */
-		roleList: null,
-		
-		/**
-		 * The user role datagrid HTML element.
-		 * 
-		 * @private
-		 * @type {HTMLElement}
-		 */
-		userRoleList: null,
-	
-		/** 
-		 * The currently selected user.
-		 * 
-		 * @private
-		 * @type {UserVO}
-		 */
-		user: null,
-	
-		/**
-		 * The currently selected user role.
-		 * 
-		 * @private
-		 * @type {UserRole}
-		 */
-		selectedRole: null,
-	
-		/**
-		 * The add or remove role mode.
-		 */
-		mode: null,
 	
 		/**
 		 * Initialize a <code>UserList</code> instance.
@@ -90,12 +97,13 @@ var RolePanel = Objs.add
 	     */
 	    initializeChildren: function()
 	    {
-			this.userRoleList = $(".user-role-list");
-			this.roleList = this.userRoleList.find(".role-list");
-			this.addRoleButton = this.userRoleList.find(".add-role-button");
-			this.removeRoleButton = this.userRoleList.find(".remove-role-button");
+			this.rolePanel = $(".role-panel");
+			this.userRoleList = this.rolePanel.find(".user-role-list");
+			this.roleList = this.rolePanel.find(".role-list");
+			this.addRoleButton = this.rolePanel.find(".add-role-button").button();
+			this.removeRoleButton = this.rolePanel.find(".remove-role-button").button();
 	    },
-		
+
 	    /**
 	     * Configure event listeners registration.
 	     */
@@ -107,7 +115,7 @@ var RolePanel = Objs.add
 			this.roleList.change( function(evt){ that.roleList_changeHandler } );
 			this.userRoleList.change( function(evt){ that.userRoleList_changeHandler } );
 	    },
-	
+
 		/**
 		 * Add items from <code>RoleEnum</code> to the <code>roleList</code>
 		 * component.
@@ -128,7 +136,7 @@ var RolePanel = Objs.add
 				option.text = role.value;
 			}
 		},
-	
+
 		/**
 		 * Set the displayed user roles list.
 		 * 
@@ -151,7 +159,7 @@ var RolePanel = Objs.add
 				option.text(role.value);
 			}
 		},
-	
+
 		/**
 		 * Enable or disable the form.
 		 * 
@@ -171,7 +179,7 @@ var RolePanel = Objs.add
 			if( !isEnabled )
 				this.roleList.selectedIndex = -1;
 		},
-	
+
 		/**
 		 * Enable or disable the form.
 		 *
@@ -198,7 +206,7 @@ var RolePanel = Objs.add
 					this.removeRoleButton.disabled = true;
 			}
 		},
-	
+
 		/**
 		 * Clear the panel from all its displayed data.
 		 */
@@ -208,7 +216,7 @@ var RolePanel = Objs.add
 			this.setUserRoles(null);
 			this.roleList.selectedIndex = 0;
 		},
-	
+
 		/**
 		 * Add button onclick event listener.
 		 */
@@ -216,7 +224,7 @@ var RolePanel = Objs.add
 		{
 			this.dispatchEvent( RolePanel.ADD );
 		},
-	
+
 		/**
 		 * Remove button onclick event listener.
 		 */
@@ -224,7 +232,7 @@ var RolePanel = Objs.add
 		{
 			this.dispatchEvent( RolePanel.REMOVE );
 		},
-	
+
 		/**
 		 * Select role to remove.
 		 */
@@ -235,7 +243,7 @@ var RolePanel = Objs.add
 			
 			this.setMode( RolePanel.REMOVE_MODE );
 		},
-	
+
 		/**
 		 * Select role to add.
 		 */
