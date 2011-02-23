@@ -99,7 +99,7 @@ var RolePanel = Objs.add
 	    {
 			this.rolePanel = $(".role-panel");
 			this.userRoleList = this.rolePanel.find(".user-role-list");
-			this.roleList = this.rolePanel.find(".role-list");
+			this.roleList = this.rolePanel.find(".role-list").combobox();
 			this.addRoleButton = this.rolePanel.find(".add-role-button").button();
 			this.removeRoleButton = this.rolePanel.find(".remove-role-button").button();
 	    },
