@@ -77,13 +77,9 @@ var RolePanel = Objs.add
 		initialize: function()
 		{
 			UiComponent.prototype.initialize.call( this );
-	
-			// Overwrite listener handlers with
-			// methods bound to 'this'
-			this.addRoleButton_clickHandler = this.addRoleButton_clickHandler.bindWithEvent(this);
-			this.removeRoleButton_clickHandler = this.removeRoleButton_clickHandler.bindWithEvent(this);
-			this.roleList_changeHandler = this.roleList_changeHandler.bindWithEvent(this);
-			this.userRoleList_changeHandler = this.userRoleList_changeHandler.bindWithEvent(this);
+			
+			this.initializeChildren();
+			this.configureListeners();
 			
 			this.fillRoleList();
 			this.setEnabled(false);
@@ -257,6 +253,9 @@ var RolePanel = Objs.add
 	}
 );
 
-RolePanel.REMOVE = "remove";
-RolePanel.ADD_MODE = "addMode";
-RolePanel.REMOVE_MODE = "removeMode";
+/*
+ * Event names
+ */
+RolePanel.REMOVE/*String*/ 			= "remove";
+RolePanel.ADD_MODE/*String*/ 		= "addMode";
+RolePanel.REMOVE_MODE/*String*/ 	= "removeMode";

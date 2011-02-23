@@ -418,6 +418,7 @@ var UserForm = Objs.add
 		getErrors: function()
 		{
 			var error/*Boolean*/ = false;
+
 			if( this.uname.val() == "" )
 				this.setFieldError( 'uname', error = true );
 			else
@@ -496,7 +497,7 @@ var UserForm = Objs.add
 		}
 	}
 );
-	
+
 /*
  * Event names
  */
