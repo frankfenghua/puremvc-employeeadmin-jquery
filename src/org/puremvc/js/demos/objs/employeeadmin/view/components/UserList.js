@@ -64,7 +64,25 @@ var UserList = Objs.add
 	    initializeChildren: function()
 	    {
 			this.userListPanel = $(".user-list-panel");
-			this.userList = this.userListPanel.find(".user-list");
+
+			this.userList = this.userListPanel.find("#user-list");
+			this.userList.jqGrid
+			(
+				{
+					datatype: "local",
+					height: 160,
+				   	colNames:['User Name', 'First Name', 'Last Name', 'Email', 'Department'],
+				   	colModel:
+					[
+				   		{name:'uname', index:'uname', width:120 },
+				   		{name:'fname', index:'fname', width:120 },
+				   		{name:'lname', index:'lname', width:120 },
+				   		{name:'email', index:'lname', width:140 },
+				   		{name:'department', index:'department', width:130},
+				   	]
+				}
+			);
+	
 			this.newButton = this.userListPanel.find(".new-button").button();
 			this.deleteButton = this.userListPanel.find(".delete-button").button();	
 	    },
@@ -88,35 +106,13 @@ var UserList = Objs.add
 		setUsers: function( userList )
 		{
 			this.users = userList;
-		
-			var htmlList/*String*/ = "";
-			for( var i/*Number*/ = 0; i<this.users.length; i++ )
-			{
-				var user/*UserVO*/ = this.users[i];
-				htmlList += '<li id="' + i  + '-user-list-item"><a href=".">' + user.getGivenName() + '</a></li>';
-			}
+			
+			// First clear all
+			this.userList.jqGrid( 'clearGridData' );
 
-			this.userList.html(htmlList);
-			
-			var that/*UserList*/ = this;
-			
-			/*
-			 * We have to bind the event on the <A /> instead of <li /> element
-			 * otherwise the event is fired twice for some odd reasons.
-			 */
-			this.userList.find("a").each
-			(
-				function()
-				{
-					$(this).click
-					(
-						function(evt)
-						{
-							that.userList_clickHandler(evt);
-						}
-					) 
-				} 
-			);
+			// Fill the data-grid
+			for(var i/*Number*/=0; i<=userList.length; i++)
+				this.userList.jqGrid( 'addRowData', i+1, userList[i] );			
 		},
 		
 		/**
