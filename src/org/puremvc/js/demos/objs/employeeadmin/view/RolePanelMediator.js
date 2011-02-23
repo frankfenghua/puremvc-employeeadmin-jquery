@@ -44,14 +44,14 @@ var RolePanelMediator = Objs.add
 		 */
 		initialize: function( name, viewComponent )
 		{
-			RolePanelMediator.$super.intialize.call( this, RolePanelMediator.NAME, viewComponent );
+			RolePanelMediator.$super.initialize.call( this, RolePanelMediator.NAME, viewComponent );
 
 
 			var rolePanel/*RolePanel*/ = this.getRolePanel();
-			rolePanel.addEventListener( RolePanel.ADD, Relegate.create(this,this.onAddRole) );
-			rolePanel.addEventListener( RolePanel.REMOVE, Relegate.create(this,this.onRemoveRole) );
+			rolePanel.addEventListener( RolePanel.ADD, this.onAddRole, this );
+			rolePanel.addEventListener( RolePanel.REMOVE, this.onRemoveRole, this );
 
-			this.roleProxy = this.facade.retrieveProxy( RoleProxy.NAME );
+			this.roleProxy = this.facade.retrieveProxy( ProxyNames.ROLE_PROXY );
 		},
 
 		getRolePanel: function()/*RolePanel*/

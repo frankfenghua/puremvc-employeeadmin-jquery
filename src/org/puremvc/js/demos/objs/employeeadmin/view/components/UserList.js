@@ -66,7 +66,7 @@ var UserList = Objs.add
 			this.userListPanel = $(".user-list-panel");
 			this.userList = this.userListPanel.find(".user-list");
 			this.newButton = this.userListPanel.find(".new-button");
-			this.deleteButton = this.userFormPanel.find(".delete-button");	
+			this.deleteButton = this.userListPanel.find(".delete-button");	
 	    },
 		
 	    /**
@@ -95,12 +95,8 @@ var UserList = Objs.add
 				var user/*UserVO*/ = this.users[i];
 				htmlList += '<li id="' + i  + '-user-list-item"><a href=".">' + user.getGivenName() + '</a></li>';
 			}
-		
-			/*
-			 * Please see http://jquerymobile.com/test/docs/lists/docs-lists.html
-			 * for more explanation on why we do this.
-			 */
-			this.userList.html(htmlList).listview('refresh', true);
+
+			this.userList.html(htmlList);
 			
 			var that/*UserList*/ = this;
 			
@@ -136,13 +132,11 @@ var UserList = Objs.add
 		 */
 		userList_clickHandler: function( event )
 		{
+			event.preventDefault()
 			var li/*HTMLElement*/ = $(event.currentTarget).parents("li");
 			
 			//Index of the clicked list item
-			var entry/*Number*/ = parseInt( $(li).attr("id") );
-			
-			$.mobile.changePage(".UserForm", "pop", false, false);
-			
+			var entry/*Number*/ = parseInt( $(li).attr("id") );			
 			this.dispatchEvent( UserList.SELECT, this.users[entry] );
 		},
 		

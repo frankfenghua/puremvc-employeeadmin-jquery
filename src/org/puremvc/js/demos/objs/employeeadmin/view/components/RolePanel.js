@@ -123,7 +123,7 @@ var RolePanel = Objs.add
 			for(var i=0; i<roleEnumList.length; i++)
 			{
 				var role/*RoleVO*/ = roleEnumList[i];
-				var option = this.roleList.appendChild( document.createElement("OPTION") );
+				var option/*HTMLElement*/ = this.roleList.append( $("<option />") );
 				option.associatedValue = role;
 				option.text = role.value;
 			}

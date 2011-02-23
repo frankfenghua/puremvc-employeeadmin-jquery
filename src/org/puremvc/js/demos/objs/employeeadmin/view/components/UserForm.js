@@ -170,7 +170,6 @@ var UserForm = Objs.add
 			this.roles.focus( function(evt){ that.field_focusHandler(evt) } );
 			this.submitButton.click( function(evt){ that.submit_clickHandler(evt) } );
 			this.cancelButton.click( function(evt){ that.cancel_clickHandler(evt) } );
-			this.deleteButton.click( function(evt){ that.deleteButton_clickHandler(evt) } );
 		
 			//Needed to erase prefilled form informations.
 			this.clearForm();
@@ -239,17 +238,7 @@ var UserForm = Objs.add
 				htmlList += '<option ' + valueAttr + ' ' + selectedAttr + ' >' + roleEnum.value + '</option>';
 			}
 		
-			this.roles.html(htmlList);
-		
-		
-			/*
-			 * Don't ask me why but we have to do this that way (jQuery Mobile alpha3,
-			 * otherwise data displayed in the component stay the same between each
-			 * user
-			 * 
-			 * $(document).bind doesn't even work there
-			 */
-			setTimeout("$('.roles').selectmenu('refresh',true);",100);	 
+			this.roles.html(htmlList); 
 		},
 		
 		/**
