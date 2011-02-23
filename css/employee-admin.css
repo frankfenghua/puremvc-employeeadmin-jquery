@@ -3,12 +3,14 @@ HTML,BODY
 	background-color:#8CA4DB;
 	padding:0;
 	margin:0;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size:1em;
 }
 
 
 
 /* =============================================================================== *
- * =================================== Generic= ================================== *
+ * =================================== Generic =================================== *
  * =============================================================================== */
 
 .panel-title
@@ -38,7 +40,6 @@ HTML,BODY
 {
 	width:170px;
 }
-
 
 
 /* =============================================================================== *
@@ -87,10 +88,11 @@ HTML,BODY
 .user-list-panel
 {
 	padding:10px;
-	width:640px;
+	width:630px;
 	height:240px;
 	background-color:#B1BFDE;
 	text-align:center;
+	margin-left:10px;
 }
 
 .user-list-panel .user-list
@@ -145,15 +147,12 @@ HTML,BODY
 
 .user-form-panel-content label
 {
-	font-size:0.8em;
+	font-size:0.7em;
 	padding-right:1em;
 }
 
 .user-form-panel-content label.required
 {
-	font-size:0.8em;
-	padding-right:1em;
-
 	background-image:url("../img/required_field.gif");
 	background-repeat:no-repeat;
 	background-position:center right;
@@ -164,11 +163,14 @@ HTML,BODY
 	background-image:url("../img/field_error.gif");
 }
 
-.user-form-panel-content input
+.user-form-panel-content input[type=text],
+.user-form-panel-content input[type=password]
 {
 	margin:0;
 	width:150px;
+	border: thin solid grey;
 }
+
 
 .user-form-panel-content input.fieldError
 {
@@ -216,4 +218,16 @@ HTML,BODY
 	height:195px;
 	padding:10px;
 	margin-bottom:10px;
+}
+
+
+
+
+/* =============================================================================== *
+ * ============================= jQuery UI overrides ============================= *
+ * =============================================================================== */
+
+.ui-widget
+{
+	font-size:0.6em;
 }

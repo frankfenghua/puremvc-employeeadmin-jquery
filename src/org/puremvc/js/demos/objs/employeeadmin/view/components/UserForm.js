@@ -150,7 +150,7 @@ var UserForm = Objs.add
 			this.email = this.userFormPanel.find(".email");
 			this.password = this.userFormPanel.find(".password");
 			this.confirm = this.userFormPanel.find(".confirm");
-			this.department = this.userFormPanel.find(".department");
+			this.department = this.userFormPanel.find(".department").combobox();
 			this.roles = this.userFormPanel.find(".roles");
 		
 			this.submitButton = this.userFormPanel.find(".submit-button").button();
@@ -394,7 +394,7 @@ var UserForm = Objs.add
 		 */
 		field_focusHandler: function( evt )
 		{
-			this.setFieldError( evt.target.id, false );
+			this.setFieldError( $(evt.target).attr("class"), false );
 		},
 		
 		/**

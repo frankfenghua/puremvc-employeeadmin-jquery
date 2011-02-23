@@ -20,7 +20,7 @@ var UiComponent = Objs.add
 (
 	"org.puremvc.js.demos.objs.employeeadmin.view.components.UiComponent",
 	{
-		
+
 		/**
 		 * Initialize a <code>UiComponent</code> instance.
 		 */
