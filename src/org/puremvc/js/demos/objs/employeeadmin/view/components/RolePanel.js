@@ -215,7 +215,7 @@ var RolePanel = Objs.add
 		 */
 		addRoleButton_clickHandler: function()
 		{
-			this.dispatchEvent( RolePanel.ADD,  );
+			this.dispatchEvent( RolePanel.ADD );
 		},
 	
 		/**

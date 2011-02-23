@@ -47,7 +47,7 @@ var UiComponent = Objs.add
 		* 		An optional anonymous object to send to listeners of the event when it
 		* 		is dispatched.
 		*/
-		dispatchEvent: function( type/*String*/, properties/*Object*/ )
+		dispatchEvent: function( type, properties )
 		{
 			if( typeof type == 'undefined' )
 				return;
@@ -56,7 +56,8 @@ var UiComponent = Objs.add
 				return;
 		
 			var queue/*Array*/ = this.listenerMap[UiComponent.QUEUE_PATTERN + type].slice(0);
-		
+			
+			var props/*Object*/ = properties || {};
 			var len/*Number*/ = queue.length;
 			for(var i/*Number*/=0; i<len; i++)
 			{
@@ -65,9 +66,9 @@ var UiComponent = Objs.add
 				if( typeof listenerDescriptor.listener == 'function' )
 				{
 					if( typeof listenerDescriptor.context != "undefined" )
-						listenerDescriptor.listener.call( listenerDescriptor.context, properties );
+						listenerDescriptor.listener.call( listenerDescriptor.context, props );
 					else
-						listenerDescriptor.listener.call( this, event, properties );
+						listenerDescriptor.listener.call( this, event, props );
 				}
 			}
 		},
@@ -166,14 +167,14 @@ UiComponent.Event = function(){}
 /**
  * Type of the dispatched event.
  * 
- * @type {String} type	
+ * @type {String}
  */
 UiComponent.Event.prototype.type = null;
 
 /**
- * Properties that follows the dispatched event.
+ * Properties that follow the dispatched event.
  * 
- * @type {Object} type	
+ * @type {Object}	
  */
 UiComponent.Event.prototype.properties = null;
 

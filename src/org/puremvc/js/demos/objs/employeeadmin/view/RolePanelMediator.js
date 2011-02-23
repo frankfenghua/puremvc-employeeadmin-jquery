@@ -67,10 +67,10 @@ var RolePanelMediator = Objs.add
 		},
 
 		/**
-		 * Called when a role is added to the selected user.
+		 * Called when a role is added to the selected user's role list.
 		 * 
-		 * @param {Object} prop
-		 * 		Dispatched event properties.
+		 * @param {UiComponent.Event} event
+		 * 		The dispatched event object.
 		 */
 		onAddRole: function( prop )
 		{
@@ -78,7 +78,13 @@ var RolePanelMediator = Objs.add
 			this.getRolePanel().setMode(null);
 		},
 
-		onRemoveRole: function( event/*EventS*/ )
+		/**
+		 * Called when a role is removed from the selected user's role list.
+		 * 
+		 * @param {UiComponent.Event} event
+		 * 		The dispatched event object.
+		 */
+		onRemoveRole: function( event )
 		{
 			this.roleProxy.removeRoleFromUser( this.getRolePanel().user, this.getRolePanel().selectedRole );
 		
@@ -86,6 +92,9 @@ var RolePanelMediator = Objs.add
 			this.getRolePanel().setMode(null);
 		},
 
+		/**
+		 * Force the user role list to update its display.
+		 */
 		updateUserRoleList: function()
 		{
 			var userName/*String*/ = this.getRolePanel().user.uname;
@@ -96,7 +105,7 @@ var RolePanelMediator = Objs.add
 		/**
 		* @override
 		*/
-		listNotificationInterests: function()/*Array*/
+		listNotificationInterests: function()
 		{
 			return [
 				NotificationNames.NEW_USER,

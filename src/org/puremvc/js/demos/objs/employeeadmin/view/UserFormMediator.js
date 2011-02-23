@@ -95,7 +95,12 @@ var UserFormMediator = Objs.add
 		},
 		
 		/**
-		 * Called when a user is added using the user form.
+		 * @private
+		 * 
+		 * Called when a user is added using the form.
+		 * 
+		 * @param {UiComponent.Event} event
+		 * 		The dispatched event object.
 		 */
 		onAdd: function( event )
 		{
@@ -108,7 +113,12 @@ var UserFormMediator = Objs.add
 		},
 		
 		/**
-		 * Called when a user is updated using the user form.
+		 * @private
+		 * 
+		 * Called when a user is updated using the form.
+		 * 
+		 * @param {UiComponent.Event} event
+		 * 		The dispatched event object.
 		 */
 		onUpdate: function()
 		{
@@ -120,19 +130,14 @@ var UserFormMediator = Objs.add
 			this.sendNotification(  NotificationNames.USER_UPDATED, user );
 		},
 		
-		onDelete: function()
-		{
-			var selectedUser/*UserVO*/ = this.getUserList().selectedUser ;
-			if(selectedUser == null)
-				return;
-		
-			this.sendNotification
-			(
-				NotificationNames.DELETE_USER,
-				this.getUserList().selectedUser 
-			);
-		},
-		
+		/**
+		 * @private
+		 * 
+		 * Called when modifications made to a user in the form are canceled.
+		 * 
+		 * @param {UiComponent.Event} event
+		 * 		The dispatched event object.
+		 */
 		onCancel: function()
 		{
 			this.sendNotification(  NotificationNames.CANCEL_SELECTED );
