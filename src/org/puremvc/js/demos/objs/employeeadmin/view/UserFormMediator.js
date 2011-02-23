@@ -81,7 +81,7 @@ var UserFormMediator = Objs.add
 		 * @type {String}
 		 */
 		mode: null,
-		
+
 		/**
 		 * @private
 		 * 
@@ -93,7 +93,7 @@ var UserFormMediator = Objs.add
 		{
 			return this.viewComponent;
 		},
-		
+
 		/**
 		 * @private
 		 * 
@@ -111,7 +111,7 @@ var UserFormMediator = Objs.add
 			//this.roleProxy.addItem( user );
 			this.sendNotification( NotificationNames.USER_ADDED, user );
 		},
-		
+
 		/**
 		 * @private
 		 * 
@@ -129,7 +129,7 @@ var UserFormMediator = Objs.add
 			//this.roleProxy.addItem( user );
 			this.sendNotification(  NotificationNames.USER_UPDATED, user );
 		},
-		
+
 		/**
 		 * @private
 		 * 

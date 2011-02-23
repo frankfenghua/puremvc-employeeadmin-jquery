@@ -138,8 +138,7 @@ var RolePanel = Objs.add
 		setUserRoles: function( userRoles )
 		{
 			/*First clear all*/
-			while( this.userRoleList.firstChild )
-				this.userRoleList.removeChild( this.userRoleList.firstChild );
+			this.userRoleList.empty();
 	
 			if( !userRoles )
 				return;
@@ -147,9 +146,9 @@ var RolePanel = Objs.add
 			for( var i/*Number*/=0; i<userRoles.length; i++ )
 			{
 				var role/*RoleVO*/ = userRoles[i];
-				var option/*HTMLElement*/ = this.userRoleList.appendChild( document.createElement("OPTION") );
+				var option/*HTMLElement*/ = this.userRoleList.append( $("<option />") );
 				option.associatedValue = role;
-				option.text = role.value;
+				option.text(role.value);
 			}
 		},
 	

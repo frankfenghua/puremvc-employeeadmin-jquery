@@ -38,13 +38,14 @@ var PrepViewCommand = Objs.add
 			 */
 			var userListMediator/*UserListMediator*/ = new UserListMediator( MediatorNames.USER_LIST_MEDIATOR, userList );
 			var userFormMediator/*UserFormMediator*/ = new UserFormMediator( MediatorNames.USER_FORM_MEDIATOR, userForm );
-			var rolePanelMediator/*RolePanelMediator*/ = new RolePanelMediator( MediatorNames.ROLE_PANEL_MEDIATOR, userForm );
+			var rolePanelMediator/*RolePanelMediator*/ = new RolePanelMediator( MediatorNames.ROLE_PANEL_MEDIATOR, rolePanel );
 		
 			/*
 			 * PureMVC mediators registration
 			 */
 			this.facade.registerMediator( userFormMediator );
 			this.facade.registerMediator( userListMediator );
+			this.facade.registerMediator( rolePanelMediator );
 		}
 	}
 );
