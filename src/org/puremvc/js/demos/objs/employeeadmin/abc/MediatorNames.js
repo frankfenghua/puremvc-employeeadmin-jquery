@@ -5,3 +5,4 @@ var MediatorNames = Objs.add("org.puremvc.js.demos.objs.employeeadmin.abc.Mediat
 
 MediatorNames.USER_FORM_MEDIATOR = "userFormMediator";
 MediatorNames.USER_LIST_MEDIATOR = "userListMediator";
+MediatorNames.ROLE_PANEL_MEDIATOR = "rolePanelMediator";

@@ -11,7 +11,6 @@
  * 
  * @see org.puremvc.js.patterns.mediator.Mediator Mediator
  * @see org.puremvc.js.patterns.observer.Notification Notification
- * @see org.puremvc.js.demos.objs.employeeadmin.ApplicationFacade ApplicationFacade
  * @see org.puremvc.js.demos.objs.employeeadmin.model.vo.UserVO UserVO
  * @see org.puremvc.js.demos.objs.employeeadmin.model.UserProxy UserProxy
  * @see org.puremvc.js.demos.objs.employeeadmin.view.components.UserList UserList
@@ -33,8 +32,6 @@ var UserListMediator = Objs.add
 		 * @type {UserList}
 		 */
 		userList: null,
-		
-		users/*Array*/: null,
 		
 		/**
 		 * @override
@@ -94,8 +91,8 @@ var UserListMediator = Objs.add
 		handleNotification: function( note )
 		{
 			var userList/*UserList*/ = this.getUserList();
-			var userProxy = this.facade.retrieveProxy( UserProxy.NAME );
-		
+			var userProxy/*UserProxy*/ = this.facade.retrieveProxy( ProxyNames.USER_PROXY );
+
 			switch( note.getName() )
 			{
 				case NotificationNames.CANCEL_SELECTED:

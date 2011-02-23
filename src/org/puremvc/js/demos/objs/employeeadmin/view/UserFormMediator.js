@@ -11,7 +11,6 @@
  *
  * @see org.puremvc.js.patterns.mediator.Mediator Mediator
  * @see org.puremvc.js.patterns.observer.Notification Notification
- * @see org.puremvc.js.demos.objs.employeeadmin.ApplicationFacade ApplicationFacade
  * @see org.puremvc.js.demos.objs.employeeadmin.model.vo.UserVO UserVO
  * @see org.puremvc.js.demos.objs.employeeadmin.model.UserProxy UserProxy
  * @see org.puremvc.js.demos.objs.employeeadmin.model.enum.DeptEnum DeptEnum

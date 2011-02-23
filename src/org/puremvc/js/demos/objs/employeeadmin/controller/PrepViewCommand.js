@@ -31,12 +31,14 @@ var PrepViewCommand = Objs.add
 			 */
 			var userForm/*UserForm*/ = new UserForm();
 			var userList/*UserList*/ = new UserList();
+			var rolePanel/*RolePanel*/ = new RolePanel();
 			
 			/*
 			 * Mediator initialization
 			 */
 			var userListMediator/*UserListMediator*/ = new UserListMediator( MediatorNames.USER_LIST_MEDIATOR, userList );
 			var userFormMediator/*UserFormMediator*/ = new UserFormMediator( MediatorNames.USER_FORM_MEDIATOR, userForm );
+			var rolePanelMediator/*RolePanelMediator*/ = new RolePanelMediator( MediatorNames.ROLE_PANEL_MEDIATOR, userForm );
 		
 			/*
 			 * PureMVC mediators registration

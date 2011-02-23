@@ -21,94 +21,94 @@ var UserForm = Objs.add
 		/**
 		 * The user form panel HTML element.
 		 * 
-		 * @type {HTMLElement}
 		 * @private
+		 * @type {HTMLElement}
 		 */
 		userFormPanel: null,
 		
 		/**
 		 * The unique name field HTML element.
 		 * 
-		 * @type {HTMLElement}
 		 * @private
+		 * @type {HTMLElement}
 		 */
 		uname: null,
 		
 		/**
 		 * The first name field HTML element.
 		 * 
-		 * @type {HTMLElement}
 		 * @private
+		 * @type {HTMLElement}
 		 */
 		fname: null,
 		
 		/**
 		 * The long name field HTML element.
 		 * 
-		 * @type {HTMLElement}
 		 * @private
+		 * @type {HTMLElement}
 		 */
 		lname: null,
 		
 		/**
 		 * The email field HTML element.
 		 * 
-		 * @type {HTMLElement}
 		 * @private
+		 * @type {HTMLElement}
 		 */
 		email: null,
 		
 		/**
 		 * The password field HTML element.
 		 * 
-		 * @type {HTMLElement}
 		 * @private
+		 * @type {HTMLElement}
 		 */
 		password: null,
 		
 		/**
 		 * The confirm password field HTML element.
 		 * 
-		 * @type {HTMLElement}
 		 * @private
+		 * @type {HTMLElement}
 		 */
 		confirm: null,
 		
 		/**
 		 * The department field HTML element.
 		 * 
-		 * @type {HTMLElement}
 		 * @private
+		 * @type {HTMLElement}
 		 */
 		department: null,
 		
 		/**
 		 * The submit button HTML element.
 		 * 
-		 * @type {HTMLElement}
 		 * @private
+		 * @type {HTMLElement}
 		 */
 		submitButton: null,
 		
 		/**
 		 * The selected user.
 		 * 
-		 * @type {UserVO}
 		 * @private
+		 * @type {UserVO}
 		 */
 		user: null,
 		
 		/**
 		 * The roles list for the selected user.
 		 * 
-		 * @type {Array}
 		 * @private
+		 * @type {Array}
 		 */
 		userRoles: null,
 		
 		/**
-		 * @type {String}
 		 * @private
+		 * @type {String}
 		 */
 		mode: null,
 		
@@ -116,8 +116,8 @@ var UserForm = Objs.add
 		 * An array used to compare currently selected items in the role list to those
 		 * lastly inserted to know which one was the last changed by the user. 
 		 * 
-		 * @type {Array}
 		 * @private
+		 * @type {Array}
 		 */
 		roleListComparer: null,
 		
@@ -130,19 +130,15 @@ var UserForm = Objs.add
 		{
 			UiComponent.prototype.initialize.call( this );
 			
-			var that/*UserForm*/ = this;
-			$(document).bind
-			(
-				'pageshow',
-				function( event, ui )
-				{
-					that.pageshow(event,ui);
-				}
-			);
+			this.initializeChildren();
+			this.configureListeners();
 		},
-		
-		pageshow: function( event, ui )
-		{
+	
+	    /**
+	     * Initialize references to DOM elements.
+	     */
+	    initializeChildren: function()
+	    {
 			/*
 			 * We use JQuery to initialize reference to UI components
 			 */
@@ -159,10 +155,13 @@ var UserForm = Objs.add
 		
 			this.submitButton = this.userFormPanel.find(".submit-button");
 			this.deleteButton = this.userFormPanel.find(".delete-button");	
+	    },
 		
-			/*
-			 * Event listeners registration
-			 */
+	    /**
+	     * Configure event listeners registration.
+	     */
+		configureListeners: function()
+		{
 			var that/*UserForm*/ = this; //Needed for closures to use "this" reference.
 			this.uname.focus( function(evt){ that.field_focusHandler(evt) } );
 			this.password.focus( function(evt){ that.field_focusHandler(evt) } );
@@ -170,9 +169,7 @@ var UserForm = Objs.add
 			this.department.focus( function(evt){ that.field_focusHandler(evt) } );
 			this.roles.focus( function(evt){ that.field_focusHandler(evt) } );
 			this.submitButton.click( function(evt){ that.submit_clickHandler(evt) } );
-		
-			//TODO Bind the event on the jQuery page header back button
-			//this.cancelButton.click( function(evt){ that.cancel_clickHandler(evt) } );
+			this.cancelButton.click( function(evt){ that.cancel_clickHandler(evt) } );
 			this.deleteButton.click( function(evt){ that.deleteButton_clickHandler(evt) } );
 		
 			//Needed to erase prefilled form informations.

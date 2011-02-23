@@ -1,186 +1,262 @@
 /*
- PureMVC Javascript Employee Admin Demo by Frederic Saunier <frederic.saunier@puremvc.org> 
- PureMVC - Copyright(c) 2006-11 Futurescale, Inc., Some rights reserved. 
+ PureMVC Javascript Employee Admin Demo for Mootools by Frederic Saunier <frederic.saunier@puremvc.org>
+ PureMVC - Copyright(c) 2006-11 Futurescale, Inc., Some rights reserved.
  Your reuse is governed by the Creative Commons Attribution 3.0 License
 */
 
-function class_org_puremvc_js_demos_js_employeeadmin_view_components_RolePanel()
-{
-	Objs.register("org.puremvc.js.demos.js.employeeadmin.view.components.RolePanel",RolePanel);
-
-	var Relegate = Objs.load("net.tekool.utils.Relegate");
-	var UserVO = Objs.load("org.puremvc.js.demos.js.employeeadmin.model.vo.UserVO");
-	var RoleVO = Objs.load("org.puremvc.js.demos.js.employeeadmin.model.vo.RoleVO");
-	var RoleEnum = Objs.load("org.puremvc.js.demos.js.employeeadmin.model.enum.RoleEnum");
-	var EventDispatcher = Objs.load("net.tekool.events.EventDispatcher");
-	var EventS = Objs.load("net.tekool.events.EventS");
-
-	RolePanel.ADD/*String*/ = 'add';
-	RolePanel.REMOVE/*String*/ = 'remove';
-
-	/**
-	 * Constructor
-	 *
-	 * Uses composition with the <code>rolepanel div</code> of the 
-	 * <code>application div</code> to add it functionalities that we cannot add
-	 * with inheritance because code behind did not exists with HTML.
-	 */
-	function RolePanel(userFormDiv/*DomElement*/)
+/**
+ * @classDescription
+ * The UI component in charge of the <em>role panel</em>.
+ * 
+ * @extends org.puremvc.js.demos.objs.employeeadmin.view.components.UiComponent UiComponent
+ *
+ * @constructor
+ */
+var RolePanel = Objs.add
+(
+	"org.puremvc.js.demos.objs.employeeadmin.view.components.RolePanel",
+	UiComponent,
 	{
-		if(Objs.extending) return;
-
-		this.__userFormDiv = userFormDiv;
-		this.__eventDispatcher = new EventDispatcher();
-
-		this.roleList = document.getElementById('roleList');
 		
-		document.getElementById('addRoleButton').onclick = Relegate.create(this,this.__onAdd);
-		document.getElementById('removeRoleButton').onclick = Relegate.create(this,this.__onRemove);
-		document.getElementById('fullRoleList').onchange = Relegate.create(this,this.__selectRoleToAdd);
-		document.getElementById('roleList').onchange = Relegate.create(this,this.__selectRoleToRemove);
-
-		this.fillFullRoleList();
-		this.setEnabled(false);
-	}
-
-	var o = RolePanel.prototype;
-
-	/**
-	 * The currently displayed user roles.
-	 */
-	o.user = null;
-
-	/**
-	 * The currently selected user role.
-	 */
-	o.selectedRole = null
-
-	/**
-	 * Set the displayed user roles list.
-	 */
-	o.setUserRoles = function(userRoles/*Array*/)
-	{
-		/*First clear all*/
-		while(this.roleList.firstChild)
-			this.roleList.removeChild(this.roleList.firstChild);
-
-		if(userRoles == null)
-			return;
-
-		for(var i=0; i<userRoles.length; i++)
+		/**
+		 * The add role button HTML element.
+		 * 
+		 * @private
+		 * @type {HTMLElement}
+		 */
+		addRoleButton: null,
+		
+		/**
+		 * The remove role button HTML element.
+		 * 
+		 * @private
+		 * @type {HTMLElement}
+		 */
+		removeRoleButton: null,
+		
+		/**
+		 * The full role list HTML element.
+		 * 
+		 * @private
+		 * @type {HTMLElement}
+		 */
+		roleList: null,
+		
+		/**
+		 * The user role datagrid HTML element.
+		 * 
+		 * @private
+		 * @type {HTMLElement}
+		 */
+		userRoleList: null,
+	
+		/** 
+		 * The currently selected user.
+		 * 
+		 * @private
+		 * @type {UserVO}
+		 */
+		user: null,
+	
+		/**
+		 * The currently selected user role.
+		 * 
+		 * @private
+		 * @type {UserRole}
+		 */
+		selectedRole: null,
+	
+		/**
+		 * The add or remove role mode.
+		 */
+		mode: null,
+	
+		/**
+		 * Initialize a <code>UserList</code> instance.
+		 */
+		initialize: function()
 		{
-			var role/*RoleVO*/ = userRoles[i];
-			var option = this.roleList.appendChild(document.createElement('OPTION'));
-			option.associatedValue = role;
-			option.text = role.value;
+			UiComponent.prototype.initialize.call( this );
+	
+			// Overwrite listener handlers with
+			// methods bound to 'this'
+			this.addRoleButton_clickHandler = this.addRoleButton_clickHandler.bindWithEvent(this);
+			this.removeRoleButton_clickHandler = this.removeRoleButton_clickHandler.bindWithEvent(this);
+			this.roleList_changeHandler = this.roleList_changeHandler.bindWithEvent(this);
+			this.userRoleList_changeHandler = this.userRoleList_changeHandler.bindWithEvent(this);
+			
+			this.fillRoleList();
+			this.setEnabled(false);
+		},
+	
+	    /**
+	     * Initialize references to DOM elements.
+	     */
+	    initializeChildren: function()
+	    {
+			this.userRoleList = $("user-role-list");
+			this.roleList = $("role-list");
+			this.addRoleButton = $("add-role-button");
+			this.removeRoleButton = $("remove-role-button");
+	    },
+		
+	    /**
+	     * Configure event listeners registration.
+	     */
+	    configureListeners: function()
+	    {
+			var that/*RolePanel*/ = this; //Needed for closures to use "this" reference.
+			this.addRoleButton.click( function(evt){ that.addRoleButton_clickHandler } );
+			this.removeRoleButton.click( function(evt){ that.removeRoleButton_clickHandler } );
+			this.roleList.change( function(evt){ that.roleList_changeHandler } );
+			this.userRoleList.change( function(evt){ that.userRoleList_changeHandler } );
+	    },
+	
+		/**
+		 * Add items from <code>RoleEnum</code> to the <code>roleList</code>
+		 * component.
+		 */
+		fillRoleList: function()
+		{
+			var roleEnumList/*Array*/ = RoleEnum.getComboList();
+	
+			/*First clear all*/
+			while( this.roleList.firstChild )
+				this.roleList.removeChild( this.roleList.firstChild );
+	
+			for(var i=0; i<roleEnumList.length; i++)
+			{
+				var role/*RoleVO*/ = roleEnumList[i];
+				var option = this.roleList.appendChild( document.createElement("OPTION") );
+				option.associatedValue = role;
+				option.text = role.value;
+			}
+		},
+	
+		/**
+		 * Set the displayed user roles list.
+		 * 
+		 * @param {Array} userRoles
+		 * 		The role list associated to the currently selected user.
+		 */
+		setUserRoles: function( userRoles )
+		{
+			/*First clear all*/
+			while( this.userRoleList.firstChild )
+				this.userRoleList.removeChild( this.userRoleList.firstChild );
+	
+			if( !userRoles )
+				return;
+	
+			for( var i/*Number*/=0; i<userRoles.length; i++ )
+			{
+				var role/*RoleVO*/ = userRoles[i];
+				var option/*HTMLElement*/ = this.userRoleList.appendChild( document.createElement("OPTION") );
+				option.associatedValue = role;
+				option.text = role.value;
+			}
+		},
+	
+		/**
+		 * Enable or disable the form.
+		 * 
+		 * @param {Boolean} isEnabled
+		 * 		When true enable the form and when false disable it. 
+		 */
+		setEnabled: function( isEnabled )
+		{
+			this.addRoleButton.disabled =
+			this.removeRoleButton.disabled =
+				!isEnabled;
+	
+			this.userRoleList.disabled =
+			this.roleList.disabled =
+				!isEnabled;
+			
+			if( !isEnabled )
+				this.roleList.selectedIndex = -1;
+		},
+	
+		/**
+		 * Enable or disable the form.
+		 *
+		 * @param {String} mode
+		 *		The Add/Remove role mode of the form.
+		 */
+		setMode: function( mode )
+		{
+			switch( mode )
+			{
+				case RolePanel.ADD_MODE:
+					this.addRoleButton.disabled = false;
+					this.removeRoleButton.disabled = true;
+				break;
+				
+				case RolePanel.REMOVE_MODE:
+					this.addRoleButton.disabled = true;
+					this.removeRoleButton.disabled = false;
+					this.roleList.selectedIndex = 0;
+				break;
+	
+				default:
+					this.addRoleButton.disabled = true;
+					this.removeRoleButton.disabled = true;
+			}
+		},
+	
+		/**
+		 * Clear the panel from all its displayed data.
+		 */
+		clearForm: function()
+		{
+			this.user = null;
+			this.setUserRoles(null);
+			this.roleList.selectedIndex = 0;
+		},
+	
+		/**
+		 * Add button onclick event listener.
+		 */
+		addRoleButton_clickHandler: function()
+		{
+			this.fireEvent( RolePanel.ADD );
+		},
+	
+		/**
+		 * Remove button onclick event listener.
+		 */
+		removeRoleButton_clickHandle: function()
+		{
+			this.fireEvent( RolePanel.REMOVE );
+		},
+	
+		/**
+		 * Select role to remove.
+		 */
+		userRoleList_changeHandler: function()
+		{
+			this.roleList.selectedIndex = -1;
+			this.selectedRole = this.userRoleList.options[ this.userRoleList.selectedIndex ].associatedValue;
+			
+			this.setMode( RolePanel.REMOVE_MODE );
+		},
+	
+		/**
+		 * Select role to add.
+		 */
+		roleList_changeHandler: function()
+		{
+			this.userRoleList.selectedIndex = -1;
+			this.selectedRole = this.roleList[this.roleList.selectedIndex].associatedValue;
+			
+			if( this.selectedRole == RoleEnum.NONE_SELECTED )
+				this.setMode( null );
+			else
+				this.setMode( RolePanel.ADD_MODE );
 		}
 	}
+);
 
-	/**
-	 * Add button onclick event listener.
-	 */
-	o.__onAdd = function()
-	{
-		this.dispatchEvent( new EventS( RolePanel.ADD, true ) );
-	}
-
-	/**
-	 * Remove button onclick event listener.
-	 */
-	o.__onRemove = function()
-	{
-		this.dispatchEvent( new EventS( RolePanel.REMOVE, true ) );
-	}
-
-	/**
-	 * Fill the full role list with the associated enum value.
-	 */
-	o.fillFullRoleList = function(userRoles/*Array*/)
-	{
-		var fullRoleEnumList = RoleEnum.getComboList();
-		var fullRoleList = document.getElementById('fullRoleList');
-
-		/*First clear all*/
-		while(fullRoleList.firstChild)
-			fullRoleList.removeChild(this.roleList.firstChild);
-
-		for(var i=0; i<fullRoleEnumList.length; i++)
-		{
-			var role/*RoleVO*/ = fullRoleEnumList[i];
-			var option = fullRoleList.appendChild(document.createElement('OPTION'));
-			option.associatedValue = role;
-			option.text = role.value;
-		}
-	}
-
-	/**
-	 * Enable or disable the form.
-	 */
-	o.setEnabled = function(isEnabled)
-	{
-		document.getElementById('addRoleButton').disabled = true;
-		document.getElementById('removeRoleButton').disabled = true;
-
-		document.getElementById('roleList').disabled =
-		document.getElementById('fullRoleList').disabled =
-			!isEnabled;
-		
-		document.getElementById('fullRoleList').selectedIndex = -1;
-	}
-
-	o.roleList/*DomElement*/ = null;
-
-	/**
-	 * Select role to remove.
-	 */
-	o.__selectRoleToRemove = function()
-	{
-		var fullRoleList = document.getElementById('fullRoleList');
-		fullRoleList.selectedIndex = RoleEnum.NONE_SELECTED.ordinal;
-		this.selectedRole = this.roleList.options[this.roleList.selectedIndex].associatedValue;
-		
-		document.getElementById('addRoleButton').disabled = true;
-		document.getElementById('removeRoleButton').disabled =	false;
-	}
-
-	/**
-	 * Select role to add.
-	 */
-	o.__selectRoleToAdd = function()
-	{
-		this.roleList.selectedIndex = -1;
-
-		var fullRoleList = document.getElementById('fullRoleList');
-		this.selectedRole = fullRoleList[fullRoleList.selectedIndex].associatedValue;
-		
-		document.getElementById('addRoleButton').disabled = this.selectedRole == RoleEnum.NONE_SELECTED;
-		document.getElementById('removeRoleButton').disabled = true;
-	}
-
-	/**
-	 * Dispatches an event into the event flow.
-	 */
-	o.dispatchEvent = function(event/*EventS*/)
-	{
-		event.target = this;
-		this.__eventDispatcher.dispatchEvent(event);
-	}
-
-	/**
-	 * Registers an event listener object with an EventDispatcher object so that
-	 * the listener receives notification of an event.
-	 */
-	o.addEventListener = function(type/*String*/, listener/*Object*/)
-	{
-		this.__eventDispatcher.addEventListener(type, listener);
-
-	}
-
-	/**
-	 * Removes a listener from the EventDispatcher object.
-	 */
-	o.removeEventListener = function(type/*String*/, listener/*Object*/)
-	{
-		this.__eventDispatcher.removeEventListener(type, listener);
-	}
-}
+RolePanel.REMOVE = "remove";
+RolePanel.ADD_MODE = "addMode";
+RolePanel.REMOVE_MODE = "removeMode";

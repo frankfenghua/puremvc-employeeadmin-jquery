@@ -11,7 +11,6 @@
  *
  * @see org.puremvc.js.patterns.mediator.Mediator Mediator
  * @see org.puremvc.js.patterns.observer.Notification Notification
- * @see org.puremvc.js.demos.objs.employeeadmin.ApplicationFacade ApplicationFacade
  * @see org.puremvc.js.demos.objs.employeeadmin.model.vo.UserVO UserVO
  * @see org.puremvc.js.demos.objs.employeeadmin.model.UserProxy UserProxy
  * @see org.puremvc.js.demos.objs.employeeadmin.model.enum.DeptEnum DeptEnum
@@ -63,6 +62,7 @@ var RolePanelMediator = Objs.add
 		onAddRole: function( event/*EventS*/ )
 		{
 			this.roleProxy.addRoleToUser( this.getRolePanel().user, this.getRolePanel().selectedRole );
+			this.getRolePanel().setMode(null);
 		},
 
 		onRemoveRole: function( event/*EventS*/ )
@@ -70,11 +70,14 @@ var RolePanelMediator = Objs.add
 			this.roleProxy.removeRoleFromUser( this.getRolePanel().user, this.getRolePanel().selectedRole );
 		
 			this.updateUserRoleList();
+			this.getRolePanel().setMode(null);
 		},
 
 		updateUserRoleList: function()
 		{
-			this.getRolePanel().setUserRoles( this.roleProxy.getUserRoles( this.getRolePanel().user.username ) );
+		var userName/*String*/ = this.getRolePanel().user.uname;
+		var userRoles/*Array*/ = this.roleProxy.getUserRoles( userName );
+		this.getRolePanel().setUserRoles( userRoles );
 		},
 
 		/**
@@ -83,13 +86,13 @@ var RolePanelMediator = Objs.add
 		listNotificationInterests: function()/*Array*/
 		{
 			return [
-				ApplicationFacade.NEW_USER,
-				ApplicationFacade.USER_ADDED,
-				ApplicationFacade.USER_UPDATED,
-				ApplicationFacade.USER_DELETED,
-				ApplicationFacade.CANCEL_SELECTED,
-				ApplicationFacade.USER_SELECTED,
-				ApplicationFacade.ADD_ROLE_RESULT
+				NotificationNames.NEW_USER,
+				NotificationNames.USER_ADDED,
+				NotificationNames.USER_UPDATED,
+				NotificationNames.USER_DELETED,
+				NotificationNames.CANCEL_SELECTED,
+				NotificationNames.USER_SELECTED,
+				NotificationNames.ADD_ROLE_RESULT
 			];
 		},
 
@@ -102,55 +105,47 @@ var RolePanelMediator = Objs.add
 
 			switch( note.getName() )
 			{
-				case ApplicationFacade.NEW_USER:
-					this.clearForm();
+				case NotificationNames.NEW_USER:
+				rolePanel.clearForm();
 					rolePanel.setEnabled(false);
 				break;
 
-				case ApplicationFacade.USER_ADDED:
+				case NotificationNames.USER_ADDED:
 					rolePanel.user/*UserVO*/ = note.getBody();
-					var roleVO/*RoleVO*/ = new RoleVO ( rolePanel.user.username );
+				var roleVO/*RoleVO*/ = new RoleVO ( rolePanel.user.uname );
 					this.roleProxy.addItem( roleVO );
-					this.clearForm();
+				rolePanel.clearForm();
 					rolePanel.setEnabled(false);
 				break;
 
-				case ApplicationFacade.USER_UPDATED:
-					this.clearForm();
+				case NotificationNames.USER_UPDATED:
+				rolePanel.clearForm();
 					rolePanel.setEnabled(false);
 				break;
 
-				case ApplicationFacade.USER_DELETED:
-					this.clearForm();
+				case NotificationNames.USER_DELETED:
+				rolePanel.clearForm();
 					rolePanel.setEnabled(false);
 				break;
 
-				case ApplicationFacade.CANCEL_SELECTED:
-					this.clearForm();
+				case NotificationNames.CANCEL_SELECTED:
+				rolePanel.clearForm();
 					rolePanel.setEnabled(false);
 				break;
 
-				case ApplicationFacade.USER_SELECTED:
+				case NotificationNames.USER_SELECTED:
+					rolePanel.clearForm();
+					rolePanel.setEnabled(true);
+					rolePanel.setMode(null);
+
 					rolePanel.user = note.getBody();
 					this.updateUserRoleList();
-				
-					//TODO rolePanel.roleCombo.selectedItem = RoleEnum.NONE_SELECTED;
-					rolePanel.setEnabled(true);
-				
 				break;
 
-				case ApplicationFacade.ADD_ROLE_RESULT:
+				case NotificationNames.ADD_ROLE_RESULT:
 					this.updateUserRoleList();
 				break;
 			}
-		},
-
-		clearForm: function()
-		{
-			var rolePanel/*RolePanel*/ = this.getRolePanel();
-
-			rolePanel.user = null;
-			rolePanel.setUserRoles(null);
 		}
 	}
 );
