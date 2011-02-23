@@ -97,7 +97,7 @@ var UserFormMediator = Objs.add
 		/**
 		 * Called when a user is added using the user form.
 		 */
-		onAdd: function()
+		onAdd: function( event )
 		{
 			var user/*UserVO*/ = this.getUserForm().getUser();
 			var userRoles/*Array*/ = this.getUserForm().getUserRoles();

@@ -28,6 +28,7 @@ var RolePanelMediator = Objs.add
 		/**
 		 * A shortcut reference to the <code>RoleProxy</code>.
 		 *
+		 * @private
 		 * @type {RoleProxy}
 		 */
 		roleProxy: null,
@@ -46,7 +47,6 @@ var RolePanelMediator = Objs.add
 		{
 			RolePanelMediator.$super.initialize.call( this, RolePanelMediator.NAME, viewComponent );
 
-
 			var rolePanel/*RolePanel*/ = this.getRolePanel();
 			rolePanel.addEventListener( RolePanel.ADD, this.onAddRole, this );
 			rolePanel.addEventListener( RolePanel.REMOVE, this.onRemoveRole, this );
@@ -54,12 +54,25 @@ var RolePanelMediator = Objs.add
 			this.roleProxy = this.facade.retrieveProxy( ProxyNames.ROLE_PROXY );
 		},
 
-		getRolePanel: function()/*RolePanel*/
+		/**
+		 * @private
+		 * 
+		 * The <code>RolePanel</code> view component this <code>Mediator</code> manage.
+		 * 
+		 * @return {RolePanel}
+		 */
+		getRolePanel: function()
 		{
 			return this.viewComponent;
 		},
 
-		onAddRole: function( event/*EventS*/ )
+		/**
+		 * Called when a role is added to the selected user.
+		 * 
+		 * @param {Object} prop
+		 * 		Dispatched event properties.
+		 */
+		onAddRole: function( prop )
 		{
 			this.roleProxy.addRoleToUser( this.getRolePanel().user, this.getRolePanel().selectedRole );
 			this.getRolePanel().setMode(null);
@@ -75,9 +88,9 @@ var RolePanelMediator = Objs.add
 
 		updateUserRoleList: function()
 		{
-		var userName/*String*/ = this.getRolePanel().user.uname;
-		var userRoles/*Array*/ = this.roleProxy.getUserRoles( userName );
-		this.getRolePanel().setUserRoles( userRoles );
+			var userName/*String*/ = this.getRolePanel().user.uname;
+			var userRoles/*Array*/ = this.roleProxy.getUserRoles( userName );
+			this.getRolePanel().setUserRoles( userRoles );
 		},
 
 		/**
@@ -106,7 +119,7 @@ var RolePanelMediator = Objs.add
 			switch( note.getName() )
 			{
 				case NotificationNames.NEW_USER:
-				rolePanel.clearForm();
+					rolePanel.clearForm();
 					rolePanel.setEnabled(false);
 				break;
 
@@ -114,22 +127,22 @@ var RolePanelMediator = Objs.add
 					rolePanel.user/*UserVO*/ = note.getBody();
 				var roleVO/*RoleVO*/ = new RoleVO ( rolePanel.user.uname );
 					this.roleProxy.addItem( roleVO );
-				rolePanel.clearForm();
+					rolePanel.clearForm();
 					rolePanel.setEnabled(false);
 				break;
 
 				case NotificationNames.USER_UPDATED:
-				rolePanel.clearForm();
+					rolePanel.clearForm();
 					rolePanel.setEnabled(false);
 				break;
 
 				case NotificationNames.USER_DELETED:
-				rolePanel.clearForm();
+					rolePanel.clearForm();
 					rolePanel.setEnabled(false);
 				break;
 
 				case NotificationNames.CANCEL_SELECTED:
-				rolePanel.clearForm();
+					rolePanel.clearForm();
 					rolePanel.setEnabled(false);
 				break;
 

@@ -43,11 +43,11 @@ var UiComponent = Objs.add
 		* @param {String} type
 		* 		The type of the event to dispatch.
 		* 
-		* @param {Object} args
+		* @param {Object} properties
 		* 		An optional anonymous object to send to listeners of the event when it
 		* 		is dispatched.
 		*/
-		dispatchEvent: function( type/*String*/, args/*Object*/ )
+		dispatchEvent: function( type/*String*/, properties/*Object*/ )
 		{
 			if( typeof type == 'undefined' )
 				return;
@@ -65,9 +65,9 @@ var UiComponent = Objs.add
 				if( typeof listenerDescriptor.listener == 'function' )
 				{
 					if( typeof listenerDescriptor.context != "undefined" )
-						listenerDescriptor.listener.call( listenerDescriptor.context, args );
+						listenerDescriptor.listener.call( listenerDescriptor.context, properties );
 					else
-						listenerDescriptor.listener.call( this, event, args );
+						listenerDescriptor.listener.call( this, event, properties );
 				}
 			}
 		},
@@ -156,6 +156,30 @@ var UiComponent = Objs.add
 		}
 	}
 );
+
+/**
+ * The event object dispatched by the <code>UiComponent</code> class to its
+ * event listeners.
+ */
+UiComponent.Event = function(){}
+
+/**
+ * Type of the dispatched event.
+ * 
+ * @type {String} type	
+ */
+UiComponent.Event.prototype.type = null;
+
+/**
+ * Properties that follows the dispatched event.
+ * 
+ * @type {Object} type	
+ */
+UiComponent.Event.prototype.properties = null;
+
+/* 
+ * Private statics
+ */
 	
 /**
  * @private
