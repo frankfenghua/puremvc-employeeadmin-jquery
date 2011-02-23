@@ -52,13 +52,10 @@ HTML,BODY
 
 .user-list-panel
 {
-	border: red thin solid;
-
 	padding:10px;
-	width:630px;
+	width:640px;
 	height:240px;
 	background-color:#B1BFDE;
-	margin-left:10px;
 }
 
 .user-list-panel .user-list
@@ -82,14 +79,13 @@ HTML,BODY
 
 .user-form-panel
 {
-	border: red thin solid;
-	
+	float:left;
+
 	margin-left:10px;
 	margin-top:10px;
 
 	width:300px;
 	height:280px;
-	
 
 	padding:10px;
 	background-color:#B1BFDE;
@@ -163,12 +159,10 @@ HTML,BODY
 
 .role-list-panel
 {
-	border: red thin solid;
-
 	float:right;
 
 	margin-right:10px;
-	margin-top:-300px;
+	margin-top:10px;
 
 	width:300px;
 	height:280px;
