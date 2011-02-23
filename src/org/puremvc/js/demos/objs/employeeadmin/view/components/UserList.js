@@ -52,21 +52,32 @@ var UserList = Objs.add
 		 */
 		initialize: function()
 		{
-			UiComponent.prototype.initialize.call( this );
-		
-			/*
-			 * We use JQuery to initialize reference to UI components
-			 */
+			UserList.$super.initialize.call( this );
+			
+			this.initializeChildren();
+			this.configureListeners();
+		},
+	
+	    /**
+	     * Initialize references to DOM elements.
+	     */
+	    initializeChildren: function()
+	    {
 			this.userListPanel = $(".user-list-panel");
 			this.userList = this.userListPanel.find(".user-list");
 			this.newButton = this.userListPanel.find(".new-button");
+			this.deleteButton = this.userFormPanel.find(".delete-button");	
+	    },
 		
-			/*
-			 * Event listeners registration
-			 */
+	    /**
+	     * Configure event listeners registration.
+	     */
+	    configureListeners: function()
+	    {
 			var that/*UserList*/ = this; //Needed for closure to use "this" reference.
 			this.newButton.click( function(evt){ that.newButton_clickHandler(evt) } );
-		},
+			this.deleteButton.click( function(evt){ that.deleteButton_clickHandler(evt) } );
+	    },
 		
 		/**
 		 * Add users from a list to the <SELECT> component.

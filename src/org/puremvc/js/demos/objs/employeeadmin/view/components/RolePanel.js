@@ -76,7 +76,7 @@ var RolePanel = Objs.add
 		 */
 		initialize: function()
 		{
-			UiComponent.prototype.initialize.call( this );
+			RolePanel.$super.initialize.call( this );
 			
 			this.initializeChildren();
 			this.configureListeners();
@@ -90,10 +90,10 @@ var RolePanel = Objs.add
 	     */
 	    initializeChildren: function()
 	    {
-			this.userRoleList = $("user-role-list");
-			this.roleList = $("role-list");
-			this.addRoleButton = $("add-role-button");
-			this.removeRoleButton = $("remove-role-button");
+			this.userRoleList = $(".user-role-list");
+			this.roleList = this.userRoleList.find(".role-list");
+			this.addRoleButton = this.userRoleList.find(".add-role-button");
+			this.removeRoleButton = this.userRoleList.find(".remove-role-button");
 	    },
 		
 	    /**

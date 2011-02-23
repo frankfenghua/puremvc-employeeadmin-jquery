@@ -128,7 +128,7 @@ var UserForm = Objs.add
 		 */
 		initialize: function()
 		{
-			UiComponent.prototype.initialize.call( this );
+			UserForm.$super.initialize.call( this );
 			
 			this.initializeChildren();
 			this.configureListeners();
@@ -154,7 +154,7 @@ var UserForm = Objs.add
 			this.roles = this.userFormPanel.find(".roles");
 		
 			this.submitButton = this.userFormPanel.find(".submit-button");
-			this.deleteButton = this.userFormPanel.find(".delete-button");	
+			this.cancelButton = this.userFormPanel.find(".cancel-button");	
 	    },
 		
 	    /**
