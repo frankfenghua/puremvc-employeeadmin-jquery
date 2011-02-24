@@ -53,7 +53,7 @@ var UserListMediator = Objs.add
 			userList.addEventListener( UserList.NEW, this.onNew, this );
 			userList.addEventListener( UserList.SELECT, this.onSelect, this );
 			
-			var userProxy = this.facade.retrieveProxy( ProxyNames.USER_PROXY );
+			var userProxy/*UserProxy*/ = this.facade.retrieveProxy( ProxyNames.USER_PROXY );
 			userList.setUsers(userProxy.getUsers());
 		},
 
@@ -139,11 +139,14 @@ var UserListMediator = Objs.add
 		 * 
 		 * Called when a user is selected in the user list.
 		 * 
-		 * @param {UserVO} selectedUser
-		 * 		The user selected in the list.
+		 * @param {String} selectedUserName
+		 * 		User name of the user selected in the list.
 		 */
-		onSelect: function( selectedUser )
+		onSelect: function( selectedUserName )
 		{
+			var userProxy/*UserProxy*/ = this.facade.retrieveProxy( ProxyNames.USER_PROXY );
+
+			var selectedUser/*UserVO*/ = userProxy.getUser( selectedUserName );
 			this.sendNotification( NotificationNames.USER_SELECTED, selectedUser );
 		}
 	}

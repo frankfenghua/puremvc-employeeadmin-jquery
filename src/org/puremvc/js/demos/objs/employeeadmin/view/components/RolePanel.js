@@ -98,7 +98,21 @@ var RolePanel = Objs.add
 	    initializeChildren: function()
 	    {
 			this.rolePanel = $(".role-panel");
-			this.userRoleList = this.rolePanel.find(".user-role-list");
+			
+			this.userRoleList = this.rolePanel.find("#user-role-list");
+			this.userRoleList.jqGrid
+			(
+				{
+					datatype: "local",
+				   	colNames:['Roles'],
+				   	colModel:
+					[
+				   		{name:'value', index:'value' }
+				   	],
+					multiselect: true
+				}
+			);
+
 			this.roleList = this.rolePanel.find(".role-list").combobox();
 			this.addRoleButton = this.rolePanel.find(".add-role-button").button();
 			this.removeRoleButton = this.rolePanel.find(".remove-role-button").button();
@@ -125,15 +139,14 @@ var RolePanel = Objs.add
 			var roleEnumList/*Array*/ = RoleEnum.getComboList();
 	
 			/*First clear all*/
-			while( this.roleList.firstChild )
-				this.roleList.removeChild( this.roleList.firstChild );
+			this.roleList.empty();
 	
-			for(var i=0; i<roleEnumList.length; i++)
+			for( var i/*Number*/=0; i<roleEnumList.length; i++ )
 			{
 				var role/*RoleVO*/ = roleEnumList[i];
-				var option/*HTMLElement*/ = this.roleList.append( $("<option />") );
-				option.associatedValue = role;
-				option.text = role.value;
+				var option/*HTMLElement*/ = this.roleList.append( $("<option></option>") );
+				option.val("role");
+				option.text(role.value);
 			}
 		},
 
@@ -145,19 +158,24 @@ var RolePanel = Objs.add
 		 */
 		setUserRoles: function( userRoles )
 		{
-			/*First clear all*/
-			this.userRoleList.empty();
-	
+			// First clear all
+			this.userRoleList.jqGrid( 'clearGridData' );
+
 			if( !userRoles )
 				return;
-	
-			for( var i/*Number*/=0; i<userRoles.length; i++ )
+
+			// Fill the data-grid
+			for(var i/*Number*/=0; i<userRoles.length; i++)
 			{
 				var role/*RoleVO*/ = userRoles[i];
-				var option/*HTMLElement*/ = this.userRoleList.append( $("<option />") );
-				option.associatedValue = role;
-				option.text(role.value);
-			}
+				var rowData/*Object*/ = 
+				{
+					role: role,
+					value: role.value
+				};
+
+				this.userRoleList.jqGrid( 'addRowData', i+1, rowData );
+			}	
 		},
 
 		/**
@@ -215,6 +233,7 @@ var RolePanel = Objs.add
 			this.user = null;
 			this.setUserRoles(null);
 			this.roleList.selectedIndex = 0;
+			this.userRoleList.jqGrid('resetSelection');
 		},
 
 		/**

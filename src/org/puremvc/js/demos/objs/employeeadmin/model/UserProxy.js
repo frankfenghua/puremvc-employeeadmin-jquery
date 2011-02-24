@@ -58,6 +58,26 @@ var UserProxy = Objs.add("org.puremvc.js.demos.objs.employeeadmin.model.UserProx
 		},
 		
 		/**
+		 * Return a user given its user name.
+		 * 
+		 * @param {String} uname
+		 * 		The user name of the user to find.
+		 * 
+		 * @return {UserVO}
+		 * 		The user with the given user name or null if none exists with
+		 * 		this user name.
+		 */
+		getUser: function( uname )
+		{
+			var users/*Array*/ = this.getUsers();
+			for( var i/*Number*/=0; i<users.length; i++ )
+				if( users[i].uname == uname )
+					return users[i];
+					
+			return null; 
+		},
+		
+		/**
 		 * Update a user informations.
 		 * 
 		 * @param {UserVO} user

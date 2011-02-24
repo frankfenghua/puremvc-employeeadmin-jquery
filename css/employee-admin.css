@@ -95,13 +95,6 @@ HTML,BODY
 	margin-left:10px;
 }
 
-.user-list-panel .user-list
-{
-	font-family: monospaced;
-	width:640px;
-	height:200px;
-}
-
 .user-list-panel .control-bar
 {
 	text-align:center;

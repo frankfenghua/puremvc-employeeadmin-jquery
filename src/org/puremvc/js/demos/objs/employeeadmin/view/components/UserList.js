@@ -70,6 +70,7 @@ var UserList = Objs.add
 			(
 				{
 					datatype: "local",
+					width: 630,
 					height: 160,
 				   	colNames:['User Name', 'First Name', 'Last Name', 'Email', 'Department'],
 				   	colModel:
@@ -77,7 +78,7 @@ var UserList = Objs.add
 				   		{name:'uname', index:'uname', width:125 },
 				   		{name:'fname', index:'fname', width:125 },
 				   		{name:'lname', index:'lname', width:125 },
-				   		{name:'email', index:'lname', width:125 },
+				   		{name:'email', index:'email', width:130 },
 				   		{name:'department', index:'department', width:125}
 				   	]
 				}
@@ -116,7 +117,7 @@ var UserList = Objs.add
 			for(var i/*Number*/=0; i<userList.length; i++)
 			{
 				var user/*UserVO*/ = userList[i];
-				var row/*Object*/ = 
+				var rowData/*Object*/ = 
 				{
 					uname: user.uname,
 					fname: user.fname,
@@ -125,7 +126,7 @@ var UserList = Objs.add
 					department: user.department.value
 				};
 
-				this.userList.jqGrid( 'addRowData', user.uname, row );
+				this.userList.jqGrid( 'addRowData', i+1, rowData );
 			}	
 		},
 		
@@ -137,9 +138,11 @@ var UserList = Objs.add
 		 */
 		userList_selectHandler: function( id )
 		{
+			var rowData/*Object*/ = this.userList.jqGrid( 'getRowData', id );
+			
 			for( var i/*Number*/=0; i<this.users.length; i++ )
-				if( this.users[i].uname == id )
-					this.dispatchEvent( UserList.SELECT, this.users[i] );
+				if( this.users[i].uname == rowData.uname )
+					this.dispatchEvent( UserList.SELECT, rowData.uname );
 		},
 		
 		/**
