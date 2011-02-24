@@ -141,13 +141,20 @@ var RolePanel = Objs.add
 			/*First clear all*/
 			this.roleList.empty();
 	
-			for( var i/*Number*/=0; i<roleEnumList.length; i++ )
-			{
+			var htmlList/*String*/ = "";
+			for(var i/*Number*/=0; i<roleEnumList.length; i++)
+			{		
 				var role/*RoleVO*/ = roleEnumList[i];
-				var option/*HTMLElement*/ = this.roleList.append( $("<option></option>") );
-				option.val("role");
-				option.text(role.value);
+				
+				/*
+				 * An item not having a value in jQuery will be excluded from the
+				 * pop-up menu.
+				 */ 
+				var valueAttr = 'value="' + role.ordinal + '"';
+				htmlList += '<option ' + valueAttr + ' ' + selectedAttr + ' >' + role.value + '</option>';
 			}
+		
+			this.roleList.html(htmlList);
 		},
 
 		/**

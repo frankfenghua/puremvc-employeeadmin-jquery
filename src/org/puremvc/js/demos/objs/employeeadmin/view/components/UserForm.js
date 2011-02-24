@@ -191,7 +191,7 @@ var UserForm = Objs.add
 				 * An item not having a value in jQuery will be excluded from the
 				 * pop-up menu.
 				 */ 
-				var valueAttr = deptEnum.ordinal >= 0 ? 'value="' + deptEnum.ordinal + '"' : "";
+				var valueAttr = 'value="' + deptEnum.ordinal + '"';
 				var selectedAttr/*String*/ = deptEnum.equals(this.user.department) ? 'selected' : "";
 				htmlList += '<option ' + valueAttr + ' ' + selectedAttr + ' >' + deptEnum.value + '</option>';
 			}
