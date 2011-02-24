@@ -86,7 +86,7 @@ var UserList = Objs.add
 			this.newButton = this.userListPanel.find(".new-button").button();
 			this.deleteButton = this.userListPanel.find(".delete-button").button();	
 	    },
-		
+
 	    /**
 	     * Configure event listeners registration.
 	     */
@@ -98,7 +98,7 @@ var UserList = Objs.add
 			this.newButton.click( function(evt){ that.newButton_clickHandler(evt) } );
 			this.deleteButton.click( function(evt){ that.deleteButton_clickHandler(evt) } );
 	    },
-		
+
 		/**
 		 * Add users from a list to the <SELECT> component.
 		 * 
