@@ -55,7 +55,7 @@ var DeptEnum = Objs.add
 		 * @return {Boolean}
 		 * 		The compared <code>DeptEnum</code> is equal to the current.
 		 */
-		equals: function( deptEnum/*DeptEnum*/ )
+		equals: function( deptEnum )
 		{
 			return ( this.ordinal == deptEnum.ordinal && this.value == deptEnum.value );
 		}

@@ -74,11 +74,11 @@ var UserList = Objs.add
 				   	colNames:['User Name', 'First Name', 'Last Name', 'Email', 'Department'],
 				   	colModel:
 					[
-				   		{name:'uname', index:'uname', width:130 },
-				   		{name:'fname', index:'fname', width:130 },
-				   		{name:'lname', index:'lname', width:130 },
-				   		{name:'email', index:'lname', width:130 },
-				   		{name:'department', index:'department', width:130},
+				   		{name:'uname', index:'uname', width:125 },
+				   		{name:'fname', index:'fname', width:125 },
+				   		{name:'lname', index:'lname', width:125 },
+				   		{name:'email', index:'lname', width:125 },
+				   		{name:'department', index:'department', width:125}
 				   	]
 				}
 			);
@@ -91,8 +91,10 @@ var UserList = Objs.add
 	     * Configure event listeners registration.
 	     */
 	    configureListeners: function()
-	    {
+	    {		
 			var that/*UserList*/ = this; //Needed for closure to use "this" reference.
+			
+			this.userList.jqGrid( 'setGridParam', { onSelectRow: function( id ){ that.userList_selectHandler( id ); } } );
 			this.newButton.click( function(evt){ that.newButton_clickHandler(evt) } );
 			this.deleteButton.click( function(evt){ that.deleteButton_clickHandler(evt) } );
 	    },
@@ -114,7 +116,7 @@ var UserList = Objs.add
 			for(var i/*Number*/=0; i<userList.length; i++)
 			{
 				var user/*UserVO*/ = userList[i];
-				var col/*Object*/ = 
+				var row/*Object*/ = 
 				{
 					uname: user.uname,
 					fname: user.fname,
@@ -122,30 +124,22 @@ var UserList = Objs.add
 					email: user.email,
 					department: user.department.value
 				};
-				
-				this.userList.jqGrid( 'addRowData', i+1, col );
+
+				this.userList.jqGrid( 'addRowData', user.uname, row );
 			}	
 		},
 		
 		/**
-		 * List selection click event listener.
+		 * List row selection event listener.
 		 * 
-		 * <P>
-		 * We are currently unable to listen for a <code>select</code> event on an
-		 * unumbered list in jQuery so we have to listen for the click on the
-		 * whole list and identify the clicked <li /> element.
-		 *
-		 * @param {Event} event
-		 * 		The native Event propagated by jQuery.
+		 * @param {String} id
+		 * 		The id of the selected row.
 		 */
-		userList_clickHandler: function( event )
+		userList_selectHandler: function( id )
 		{
-			event.preventDefault()
-			var li/*HTMLElement*/ = $(event.currentTarget).parents("li");
-			
-			//Index of the clicked list item
-			var entry/*Number*/ = parseInt( $(li).attr("id") );			
-			this.dispatchEvent( UserList.SELECT, this.users[entry] );
+			for( var i/*Number*/=0; i<this.users.length; i++ )
+				if( this.users[i].uname == id )
+					this.dispatchEvent( UserList.SELECT, this.users[i] );
 		},
 		
 		/**
