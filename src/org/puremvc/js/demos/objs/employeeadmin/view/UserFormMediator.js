@@ -20,7 +20,7 @@
  *
  * @constructor
  */
-var UserFormMediator = Objs.add
+var UserFormMediator = Objs
 (
 	"org.puremvc.js.demos.objs.employeeadmin.view.UserFormMediator",
 	Mediator,

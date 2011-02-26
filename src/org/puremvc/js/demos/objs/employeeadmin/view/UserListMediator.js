@@ -19,7 +19,7 @@
  * 
  * @constructor
  */
-var UserListMediator = Objs.add
+var UserListMediator = Objs
 (
 	"org.puremvc.js.demos.objs.employeeadmin.view.UserListMediator",
 	Mediator,

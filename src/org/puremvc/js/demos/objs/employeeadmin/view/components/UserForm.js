@@ -12,7 +12,7 @@
  *
  * @constructor
  */
-var UserForm = Objs.add
+var UserForm = Objs
 (
 	"org.puremvc.js.demos.objs.employeeadmin.view.components.UserForm",
 	UiComponent,

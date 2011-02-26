@@ -17,7 +17,7 @@
  * 
  * @constructor
  */
-var AddRoleResultCommand =	Objs.add
+var AddRoleResultCommand =	Objs
 (
 	"org.puremvc.js.demos.objs.employeeadmin.controller.AddRoleResultCommand",
 	SimpleCommand,

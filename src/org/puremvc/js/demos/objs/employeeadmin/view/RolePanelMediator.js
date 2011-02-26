@@ -20,7 +20,7 @@
  *
  * @constructor
  */
-var RolePanelMediator = Objs.add
+var RolePanelMediator = Objs
 (
 	"org.puremvc.js.demos.objs.employeeadmin.view.components.RolePaneMediator",
 	Mediator,

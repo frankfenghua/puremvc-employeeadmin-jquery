@@ -19,7 +19,7 @@
  * 
  * @constructor
  */
-var DeleteUserCommand = Objs.add
+var DeleteUserCommand = Objs
 (
 	"org.puremvc.js.demos.objs.employeeadmin.controller.DeleteUserCommand",
 	SimpleCommand,

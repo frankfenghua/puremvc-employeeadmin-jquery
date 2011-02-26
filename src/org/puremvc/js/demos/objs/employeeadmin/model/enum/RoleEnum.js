@@ -11,7 +11,7 @@
  *
  * @constructor
  */
-var RoleEnum = Objs.add
+var RoleEnum = Objs
 (
 	"org.puremvc.js.demos.objs.employeeadmin.model.enum.RoleEnum",
 	{

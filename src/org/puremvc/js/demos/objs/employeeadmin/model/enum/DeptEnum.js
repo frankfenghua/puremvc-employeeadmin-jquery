@@ -11,7 +11,7 @@
  *
  * @constructor
  */
-var DeptEnum = Objs.add
+var DeptEnum = Objs
 (
 	"org.puremvc.js.demos.objs.employeeadmin.model.enum.DeptEnum",
 	{

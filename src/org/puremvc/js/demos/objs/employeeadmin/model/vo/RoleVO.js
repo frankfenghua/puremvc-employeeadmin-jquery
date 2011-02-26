@@ -12,7 +12,7 @@
  * 
  * @constructor
  */
-var RoleVO = Objs.add
+var RoleVO = Objs
 (
 	"org.puremvc.js.demos.objs.employeeadmin.model.vo.RoleVO",
 	{

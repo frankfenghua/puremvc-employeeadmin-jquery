@@ -19,7 +19,7 @@
  * 
  * @constructor
  */
-var UserProxy = Objs.add("org.puremvc.js.demos.objs.employeeadmin.model.UserProxy",
+var UserProxy = Objs("org.puremvc.js.demos.objs.employeeadmin.model.UserProxy",
 	Proxy,
 	{
 		

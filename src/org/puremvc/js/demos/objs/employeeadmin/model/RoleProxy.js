@@ -21,7 +21,7 @@
  * 
  * @constructor
  */
-var RoleProxy = Objs.add
+var RoleProxy = Objs
 (
 	"org.puremvc.js.demos.objs.employeeadmin.model.RoleProxy",
 	Proxy,

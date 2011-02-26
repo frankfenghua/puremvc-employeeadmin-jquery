@@ -16,7 +16,7 @@
  * 
  * @constructor
  */
-var UiComponent = Objs.add
+var UiComponent = Objs
 (
 	"org.puremvc.js.demos.objs.employeeadmin.view.components.UiComponent",
 	{

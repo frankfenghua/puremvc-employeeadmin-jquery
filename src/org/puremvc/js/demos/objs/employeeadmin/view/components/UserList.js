@@ -9,7 +9,7 @@
  * 
  * @extends org.puremvc.js.demos.objs.employeeadmin.view.components.UiComponent UiComponent
  */
-var UserList = Objs.add
+var UserList = Objs
 (
 	"org.puremvc.js.demos.objs.employeeadmin.view.components.UserList",
 	UiComponent,

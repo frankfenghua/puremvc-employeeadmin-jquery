@@ -12,7 +12,7 @@
  *
  * @constructor
  */
-var RolePanel = Objs.add
+var RolePanel = Objs
 (
 	"org.puremvc.js.demos.objs.employeeadmin.view.components.RolePanel",
 	UiComponent,
@@ -150,7 +150,8 @@ var RolePanel = Objs.add
 				 * An item not having a value in jQuery will be excluded from the
 				 * pop-up menu.
 				 */ 
-				var valueAttr = 'value="' + role.ordinal + '"';
+				var valueAttr/*String*/ = 'value="' + role.ordinal + '"';
+				var selectedAttr/*String*/ = i == 0 ? "selected" : "";
 				htmlList += '<option ' + valueAttr + ' ' + selectedAttr + ' >' + role.value + '</option>';
 			}
 		
