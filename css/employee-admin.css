@@ -30,16 +30,6 @@ HTML,BODY
 	vertical-align:middle;
 }
 
-.user-role-list
-{
-	width:280px;
-	height:190px;
-}
-
-.role-list
-{
-	width:170px;
-}
 
 
 /* =============================================================================== *
@@ -213,6 +203,15 @@ HTML,BODY
 	margin-bottom:10px;
 }
 
+.user-role-list
+{
+	width:280px;
+}
+
+.role-list
+{
+	width:170px;
+}
 
 
 
@@ -223,4 +222,18 @@ HTML,BODY
 .ui-widget
 {
 	font-size:0.6em;
+}
+
+/* Arbitrary maximum height fixed for listbox widgets */
+UL[role="listbox"]
+{
+	max-height: 150px;
+	overflow: auto;
+}
+
+.ui-autocomplete-input
+{
+	height:20px;
+	padding-left:0.5em;
+	width:115px;
 }
