@@ -100,7 +100,7 @@ var RolePanel = Objs
 			this.rolePanel = $(".role-panel");
 			
 			this.userRoleList = this.rolePanel.find("#user-role-list");
-			this.userRoleList.jqGrid
+			/*this.userRoleList.jqGrid
 			(
 				{
 					datatype: "local",
@@ -111,7 +111,7 @@ var RolePanel = Objs
 				   	],
 					multiselect: true
 				}
-			);
+			);*/
 
 			this.roleList = this.rolePanel.find(".role-list").combobox();
 			this.addRoleButton = this.rolePanel.find(".add-role-button").button();
