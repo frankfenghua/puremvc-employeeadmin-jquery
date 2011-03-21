@@ -148,7 +148,7 @@ var UserList = Objs
 				this.data.push(rowData);
 			}
 			
-			this.grid.invalidateRow( this.data.length );
+			//this.grid.invalidateRow( this.data.length );
 			this.grid.updateRowCount();
 			this.grid.render();	
 		},
