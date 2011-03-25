@@ -97,8 +97,7 @@ var UserList = Objs
 
 			var options = {
 				enableCellNavigation: false,
-				enableColumnReorder: false,
-				enableAddRow: true,
+				enableColumnReorder: false
 			};
 
 			this.data = [];
@@ -149,6 +148,8 @@ var UserList = Objs
 			}
 			
 			//this.grid.invalidateRow( this.data.length );
+			this.grid.invalidate();
+			this.grid.removeAllRows();
 			this.grid.updateRowCount();
 			this.grid.render();	
 		},
