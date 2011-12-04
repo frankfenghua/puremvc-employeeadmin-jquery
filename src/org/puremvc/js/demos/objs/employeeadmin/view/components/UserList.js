@@ -66,6 +66,8 @@ var UserList = Objs
 			this.userListPanel = $(".user-list-panel");
 
 			this.userList = this.userListPanel.find("#user-list");
+			
+			/*
 			this.userList.jqGrid
 			(
 				{
@@ -83,6 +85,23 @@ var UserList = Objs
 				   	]
 				}
 			);
+			*/
+			
+			var columns = [
+				{id:"uname", name:"User Name", field:"uname"},
+				{id:"fname", name:"First Name", field:"fname"},
+				{id:"lname", name:"Last Name", field:"lname"},
+				{id:"email", name:"Email", field:"email"},
+				{id:"department", name:"Department", field:"department"}
+			];
+
+			var options = {
+				enableCellNavigation: false,
+				enableColumnReorder: false
+			};
+
+			this.data = [];
+			this.grid = new Slick.Grid( this.userList, this.data, columns, options );
 	
 			this.newButton = this.userListPanel.find(".new-button").button();
 			this.deleteButton = this.userListPanel.find(".delete-button").button();	
@@ -95,7 +114,7 @@ var UserList = Objs
 	    {		
 			var that/*UserList*/ = this; //Needed for closure to use "this" reference.
 			
-			this.userList.jqGrid( 'setGridParam', { onSelectRow: function( id ){ that.userList_selectHandler( id ); } } );
+			//this.userList.jqGrid( 'setGridParam', { onSelectRow: function( id ){ that.userList_selectHandler( id ); } } );
 			this.newButton.click( function(evt){ that.newButton_clickHandler(evt) } );
 			this.deleteButton.click( function(evt){ that.deleteButton_clickHandler(evt) } );
 	    },
@@ -110,9 +129,8 @@ var UserList = Objs
 		{
 			this.users = userList;
 			
-			// First clear all
-			this.userList.jqGrid( 'clearGridData' );
-
+			this.data.splice(0);
+			
 			// Fill the data-grid
 			for(var i/*Number*/=0; i<userList.length; i++)
 			{
@@ -125,9 +143,15 @@ var UserList = Objs
 					email: user.email,
 					department: user.department.value
 				};
-
-				this.userList.jqGrid( 'addRowData', i+1, rowData );
-			}	
+				
+				this.data.push(rowData);
+			}
+			
+			//this.grid.invalidateRow( this.data.length );
+			this.grid.invalidate();
+			this.grid.removeAllRows();
+			this.grid.updateRowCount();
+			this.grid.render();	
 		},
 		
 		/**

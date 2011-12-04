@@ -100,7 +100,7 @@ var RolePanel = Objs
 			this.rolePanel = $(".role-panel");
 			
 			this.userRoleList = this.rolePanel.find("#user-role-list");
-			this.userRoleList.jqGrid
+			/*this.userRoleList.jqGrid
 			(
 				{
 					datatype: "local",
@@ -111,7 +111,7 @@ var RolePanel = Objs
 				   	],
 					multiselect: true
 				}
-			);
+			);*/
 
 			this.roleList = this.rolePanel.find(".role-list").combobox();
 			this.addRoleButton = this.rolePanel.find(".add-role-button").button();
@@ -167,7 +167,7 @@ var RolePanel = Objs
 		setUserRoles: function( userRoles )
 		{
 			// First clear all
-			this.userRoleList.jqGrid( 'clearGridData' );
+			//this.userRoleList.jqGrid( 'clearGridData' );
 
 			if( !userRoles )
 				return;
@@ -182,7 +182,7 @@ var RolePanel = Objs
 					value: role.value
 				};
 
-				this.userRoleList.jqGrid( 'addRowData', i+1, rowData );
+				//this.userRoleList.jqGrid( 'addRowData', i+1, rowData );
 			}	
 		},
 		
@@ -263,7 +263,7 @@ var RolePanel = Objs
 			this.user = null;
 			this.setUserRoles(null);
 			this.roleList.selectedIndex = 0;
-			this.userRoleList.jqGrid('resetSelection');
+			//this.userRoleList.jqGrid('resetSelection');
 		},
 
 		/**
