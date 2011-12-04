@@ -123,11 +123,11 @@ var RolePanel = Objs
 	     */
 	    configureListeners: function()
 	    {
-			var that/*RolePanel*/ = this; //Needed for closures to use "this" reference.
-			this.addRoleButton.click( function(evt){ that.addRoleButton_clickHandler } );
-			this.removeRoleButton.click( function(evt){ that.removeRoleButton_clickHandler } );
-			this.roleList.change( function(evt){ that.roleList_changeHandler } );
-			this.userRoleList.change( function(evt){ that.userRoleList_changeHandler } );
+			var that/*RolePanel*/ = this; //Needed to delegate click to this instance.
+			this.addRoleButton.click( function(evt){ that.addRoleButton_clickHandler() } );
+			this.removeRoleButton.click( function(evt){ that.removeRoleButton_clickHandler() } );
+			this.roleList.change( function(evt){ that.roleList_changeHandler() } );
+			this.userRoleList.change( function(evt){ that.userRoleList_changeHandler() } );
 	    },
 
 		/**
@@ -184,6 +184,28 @@ var RolePanel = Objs
 
 				this.userRoleList.jqGrid( 'addRowData', i+1, rowData );
 			}	
+		},
+		
+		/**
+		 * Get the selected user for whom roles list is displayed.
+		 * 
+		 * @return {User}
+		 * 		The selected user for whom roles list is displayed.
+		 */
+		getUser: function()
+		{
+			return this.user;
+		},
+		
+		/**
+		 * Get the selected role in the remove/add combobox if any.
+		 * 
+		 * @return {UserRole}
+		 * 		The selected role in the remove/add combobox if any.
+		 */
+		getSelectedRole: function()
+		{
+			return this.selectedRole;
 		},
 
 		/**
@@ -255,7 +277,7 @@ var RolePanel = Objs
 		/**
 		 * Remove button onclick event listener.
 		 */
-		removeRoleButton_clickHandle: function()
+		removeRoleButton_clickHandler: function()
 		{
 			this.dispatchEvent( RolePanel.REMOVE );
 		},

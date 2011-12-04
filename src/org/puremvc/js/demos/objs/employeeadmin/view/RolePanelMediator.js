@@ -74,7 +74,7 @@ var RolePanelMediator = Objs
 		 */
 		onAddRole: function( prop )
 		{
-			this.roleProxy.addRoleToUser( this.getRolePanel().user, this.getRolePanel().selectedRole );
+			this.roleProxy.addRoleToUser( this.getRolePanel().getUser(), this.getRolePanel().getSelectedRole() );
 			this.getRolePanel().setMode(null);
 		},
 
@@ -86,7 +86,7 @@ var RolePanelMediator = Objs
 		 */
 		onRemoveRole: function( event )
 		{
-			this.roleProxy.removeRoleFromUser( this.getRolePanel().user, this.getRolePanel().selectedRole );
+			this.roleProxy.removeRoleFromUser( this.getRolePanel().getUser(), this.getRolePanel().getSelectedRole() );
 		
 			this.updateUserRoleList();
 			this.getRolePanel().setMode(null);

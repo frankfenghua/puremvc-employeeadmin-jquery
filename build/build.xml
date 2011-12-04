@@ -15,7 +15,7 @@
         </delete>
 		
         <concat
-			destfile="${basedir}/bin/puremvc_employeeadmin_jquerymobile.js"
+			destfile="${basedir}/bin/puremvc_employeeadmin_jquery.js"
 			append="no"
 			encoding="UTF-8"
 			outputencoding="UTF-8"
@@ -29,35 +29,35 @@
 		 	-->
 			<path>
 
-				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/abc/MediatorNames.js" />
-				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/abc/NotificationNames.js" />
-				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/abc/ProxyNames.js" />
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/objs/employeeadmin/abc/MediatorNames.js" />
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/objs/employeeadmin/abc/NotificationNames.js" />
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/objs/employeeadmin/abc/ProxyNames.js" />
 		
-				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/controller/AddRoleResultCommand.js" />
-				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/controller/DeleteUserCommand.js" />
-				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/controller/PrepModelCommand.js" />
-				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/controller/PrepViewCommand.js" />
-				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/controller/StartupCommand.js" />
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/objs/employeeadmin/controller/AddRoleResultCommand.js" />
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/objs/employeeadmin/controller/DeleteUserCommand.js" />
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/objs/employeeadmin/controller/PrepModelCommand.js" />
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/objs/employeeadmin/controller/PrepViewCommand.js" />
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/objs/employeeadmin/controller/StartupCommand.js" />
 		
-				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/model/enum/DeptEnum.js" />
-				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/model/enum/RoleEnum.js" />
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/objs/employeeadmin/model/enum/DeptEnum.js" />
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/objs/employeeadmin/model/enum/RoleEnum.js" />
 		
-				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/model/vo/RoleVO.js" />
-				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/model/vo/UserVO.js" />
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/objs/employeeadmin/model/vo/RoleVO.js" />
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/objs/employeeadmin/model/vo/UserVO.js" />
 		
-				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/model/RoleProxy.js" />
-				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/model/UserProxy.js" />
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/objs/employeeadmin/model/RoleProxy.js" />
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/objs/employeeadmin/model/UserProxy.js" />
 		
-				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/view/components/UiComponent.js" />
-				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/view/components/RolePanel.js" />
-				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/view/components/UserForm.js" />
-				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/view/components/UserList.js" />
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/objs/employeeadmin/view/components/UiComponent.js" />
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/objs/employeeadmin/view/components/RolePanel.js" />
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/objs/employeeadmin/view/components/UserForm.js" />
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/objs/employeeadmin/view/components/UserList.js" />
 		
-				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/view/RolePanelMediator.js" />
-				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/view/UserFormMediator.js" />
-				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/view/UserListMediator.js" />
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/objs/employeeadmin/view/RolePanelMediator.js" />
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/objs/employeeadmin/view/UserFormMediator.js" />
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/objs/employeeadmin/view/UserListMediator.js" />
 		
-				<pathelement location="${basedir}/src/org/puremvc/js/demos/standard/employeeadmin/ApplicationFacade.js" />
+				<pathelement location="${basedir}/src/org/puremvc/js/demos/objs/employeeadmin/ApplicationFacade.js" />
 
 			</path>
 
