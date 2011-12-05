@@ -24,7 +24,15 @@ var RolePanel = Objs
 		 * @type {UserVO}
 		 */
 		user: null,
-	
+		
+		/**
+		 * The user roles list.
+		 * 
+		 * @private
+		 * @type {Array}
+		 */
+		userRoles: null,
+
 		/**
 		 * Currently selected role.
 		 * 
@@ -109,7 +117,7 @@ var RolePanel = Objs
 					colNames:['Roles'],
 				   	colModel:
 					[
-				   		{name:'value', index:'value' }
+				   		{name:'value', index:'value' }					
 				   	]
 				}
 			);
@@ -172,15 +180,14 @@ var RolePanel = Objs
 
 			if( !userRoles )
 				return;
+				
+			this.userRoles = userRoles;
 
 			// Fill the data-grid
 			for(var i/*Number*/=0; i<userRoles.length; i++)
 			{
 				var role/*RoleVO*/ = userRoles[i];
-				var rowData/*Object*/ =
-				{
-					value: role.value
-				};
+				var rowData/*Object*/ = role;
 
 				this.userRoleList.jqGrid( 'addRowData', i+1, rowData );
 			}	
@@ -300,10 +307,7 @@ var RolePanel = Objs
 		userRoleList_changeHandler: function( id )
 		{
 			var index/*Number*/ = this.userRoleList.jqGrid( 'getInd', id );
-			
-			var roleEnumList/*Array*/ = RoleEnum.getComboList();
-			this.selectedRole = roleEnumList[index];
-
+			this.selectedRole = this.userRoles[index-1];
 			this.setMode( RolePanel.REMOVE_MODE );
 		},
 
@@ -329,6 +333,11 @@ var RolePanel = Objs
 /*
  * Event names
  */
+RolePanel.ADD/*String*/ 			= "add";
 RolePanel.REMOVE/*String*/ 			= "remove";
+
+/*
+ * View states
+ */
 RolePanel.ADD_MODE/*String*/ 		= "addMode";
 RolePanel.REMOVE_MODE/*String*/ 	= "removeMode";

@@ -72,9 +72,11 @@ var RolePanelMediator = Objs
 		 * @param {UiComponent.Event} event
 		 * 		The dispatched event object.
 		 */
-		onAddRole: function( prop )
+		onAddRole: function( event )
 		{
 			this.roleProxy.addRoleToUser( this.getRolePanel().getUser(), this.getRolePanel().getSelectedRole() );
+
+			this.updateUserRoleList();
 			this.getRolePanel().setMode(null);
 		},
 
