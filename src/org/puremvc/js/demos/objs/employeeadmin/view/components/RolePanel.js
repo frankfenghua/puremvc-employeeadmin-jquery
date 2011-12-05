@@ -104,16 +104,17 @@ var RolePanel = Objs
 			(
 				{
 					datatype: "local",
-				   	colNames:['Roles'],
+					width: 280,
+					height: 170,
+					colNames:['Roles'],
 				   	colModel:
 					[
 				   		{name:'value', index:'value' }
-				   	],
-					multiselect: true
+				   	]
 				}
 			);
 
-			this.roleList = this.rolePanel.find(".role-list").combobox();
+			this.roleList = this.rolePanel.find(".role-list");
 			this.addRoleButton = this.rolePanel.find(".add-role-button").button();
 			this.removeRoleButton = this.rolePanel.find(".remove-role-button").button();
 	    },
@@ -123,11 +124,11 @@ var RolePanel = Objs
 	     */
 	    configureListeners: function()
 	    {
-			var that/*RolePanel*/ = this; //Needed to delegate click to this instance.
+			var that/*RolePanel*/ = this; //Needed to delegate events to this instance.
 			this.addRoleButton.click( function(evt){ that.addRoleButton_clickHandler() } );
 			this.removeRoleButton.click( function(evt){ that.removeRoleButton_clickHandler() } );
 			this.roleList.change( function(evt){ that.roleList_changeHandler() } );
-			this.userRoleList.change( function(evt){ that.userRoleList_changeHandler() } );
+			this.userRoleList.jqGrid( 'setGridParam', { onSelectRow: function( id ){ that.userRoleList_changeHandler( id ); } } );
 	    },
 
 		/**
@@ -176,9 +177,8 @@ var RolePanel = Objs
 			for(var i/*Number*/=0; i<userRoles.length; i++)
 			{
 				var role/*RoleVO*/ = userRoles[i];
-				var rowData/*Object*/ = 
+				var rowData/*Object*/ =
 				{
-					role: role,
 					value: role.value
 				};
 
@@ -216,16 +216,25 @@ var RolePanel = Objs
 		 */
 		setEnabled: function( isEnabled )
 		{
-			this.addRoleButton.disabled =
-			this.removeRoleButton.disabled =
-				!isEnabled;
-	
-			this.userRoleList.disabled =
-			this.roleList.disabled =
-				!isEnabled;
-			
-			if( !isEnabled )
+			if( isEnabled )
+			{
+				this.addRoleButton.attr('disabled', '');
+				this.removeRoleButton.attr('disabled', '');
+		
+				this.userRoleList.attr('disabled', '');
+				this.roleList.attr('disabled', '');			
+			}
+			else
+			{
+				this.addRoleButton.attr('disabled', 'disabled');
+				this.removeRoleButton.attr('disabled', 'disabled');
+		
+				this.userRoleList.attr('disabled', 'disabled');
+				this.roleList.attr('disabled', 'disabled');
+				
 				this.roleList.selectedIndex = -1;
+			}
+
 		},
 
 		/**
@@ -239,19 +248,19 @@ var RolePanel = Objs
 			switch( mode )
 			{
 				case RolePanel.ADD_MODE:
-					this.addRoleButton.disabled = false;
-					this.removeRoleButton.disabled = true;
+					this.addRoleButton.attr('disabled', '');
+					this.removeRoleButton.attr('disabled', 'disabled');
 				break;
 				
 				case RolePanel.REMOVE_MODE:
-					this.addRoleButton.disabled = true;
-					this.removeRoleButton.disabled = false;
+					this.addRoleButton.attr('disabled', 'disabled');
+					this.removeRoleButton.attr('disabled', '');
 					this.roleList.selectedIndex = 0;
 				break;
 	
 				default:
-					this.addRoleButton.disabled = true;
-					this.removeRoleButton.disabled = true;
+					this.addRoleButton.attr('disabled', 'disabled');
+					this.removeRoleButton.attr('disabled', 'disabled');
 			}
 		},
 
@@ -284,12 +293,17 @@ var RolePanel = Objs
 
 		/**
 		 * Select role to remove.
+		 * 
+		 * @param {String} id
+		 * 		The id of the selected row.
 		 */
-		userRoleList_changeHandler: function()
+		userRoleList_changeHandler: function( id )
 		{
-			this.roleList.selectedIndex = -1;
-			this.selectedRole = this.userRoleList.options[ this.userRoleList.selectedIndex ].associatedValue;
+			var index/*Number*/ = this.userRoleList.jqGrid( 'getInd', id );
 			
+			var roleEnumList/*Array*/ = RoleEnum.getComboList();
+			this.selectedRole = roleEnumList[index];
+
 			this.setMode( RolePanel.REMOVE_MODE );
 		},
 
@@ -298,8 +312,11 @@ var RolePanel = Objs
 		 */
 		roleList_changeHandler: function()
 		{
+			//TODO unselect userRoleList
 			this.userRoleList.selectedIndex = -1;
-			this.selectedRole = this.roleList[this.roleList.selectedIndex].associatedValue;
+
+			var roleEnumList/*Array*/ = RoleEnum.getComboList();
+			this.selectedRole = roleEnumList[this.roleList.attr("selectedIndex")];
 			
 			if( this.selectedRole == RoleEnum.NONE_SELECTED )
 				this.setMode( null );

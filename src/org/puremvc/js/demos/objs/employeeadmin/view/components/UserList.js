@@ -93,7 +93,7 @@ var UserList = Objs
 	     */
 	    configureListeners: function()
 	    {		
-			var that/*UserList*/ = this; //Needed for closure to use "this" reference.
+			var that/*UserList*/ = this; //Needed to delegate events to this instance.
 			
 			this.userList.jqGrid( 'setGridParam', { onSelectRow: function( id ){ that.userList_selectHandler( id ); } } );
 			this.newButton.click( function(evt){ that.newButton_clickHandler(evt) } );

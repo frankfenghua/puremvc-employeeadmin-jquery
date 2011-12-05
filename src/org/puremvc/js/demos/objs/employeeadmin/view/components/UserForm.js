@@ -171,7 +171,7 @@ var UserForm = Objs
 			this.submitButton.click( function(evt){ that.submit_clickHandler(evt) } );
 			this.cancelButton.click( function(evt){ that.cancel_clickHandler(evt) } );
 		
-			//Needed to erase prefilled form informations.
+			//Needed to erase prefiled form informations.
 			this.clearForm();
 		},
 		
@@ -197,22 +197,6 @@ var UserForm = Objs
 			}
 		
 			this.department.html(htmlList);
-		
-			/*
-			 * Don't ask me why but we have to do this that way (jQuery Mobile alpha3,
-			 * otherwise data displayed in the component stay the same between each
-			 * user
-			 */
-			$(document).bind
-			(
-				'pageshow',
-				function(event, ui)
-				{
-					$('.department').selectmenu('refresh',true);
-					$(document).unbind('pageshow',arguments.callee);
-					$(document).unbind('pageshow',arguments.callee);
-				}
-			);
 		},
 		
 		/**
