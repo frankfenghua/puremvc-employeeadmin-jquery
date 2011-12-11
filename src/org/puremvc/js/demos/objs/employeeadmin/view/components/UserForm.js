@@ -132,6 +132,10 @@ var UserForm = Objs
 			
 			this.initializeChildren();
 			this.configureListeners();
+
+			this.clearForm();
+			this.fillList();
+			this.setEnabled(false);
 		},
 	
 	    /**
@@ -150,8 +154,7 @@ var UserForm = Objs
 			this.email = this.userFormPanel.find(".email");
 			this.password = this.userFormPanel.find(".password");
 			this.confirm = this.userFormPanel.find(".confirm");
-			this.department = this.userFormPanel.find(".department").combobox();
-			this.roles = this.userFormPanel.find(".roles");
+			this.department = this.userFormPanel.find(".department");
 		
 			this.submitButton = this.userFormPanel.find(".submit-button").button();
 			this.cancelButton = this.userFormPanel.find(".cancel-button").button();	
@@ -167,7 +170,6 @@ var UserForm = Objs
 			this.password.focus( function(evt){ that.field_focusHandler(evt) } );
 			this.confirm.focus( function(evt){ that.field_focusHandler(evt) } );
 			this.department.focus( function(evt){ that.field_focusHandler(evt) } );
-			this.roles.focus( function(evt){ that.field_focusHandler(evt) } );
 			this.submitButton.click( function(evt){ that.submit_clickHandler(evt) } );
 			this.cancelButton.click( function(evt){ that.cancel_clickHandler(evt) } );
 		
@@ -178,7 +180,7 @@ var UserForm = Objs
 		/**
 		 * Add items from <code>DeptEnum</code> to the corresponding list UI component.
 		 */
-		fillDepartmentList: function()
+		fillList: function()
 		{
 			var deptEnumList/*Array*/ = DeptEnum.getComboList();
 		
@@ -192,37 +194,26 @@ var UserForm = Objs
 				 * pop-up menu.
 				 */ 
 				var valueAttr = 'value="' + deptEnum.ordinal + '"';
-				var selectedAttr/*String*/ = deptEnum.equals(this.user.department) ? 'selected' : "";
+				
+				var selectedAttr/*String*/ = "";
+				if( this.user && deptEnum.equals(this.user.department) )
+					selectedAttr = "selected";
+					
+				if( !this.user && deptEnum.equals(DeptEnum.NONE_SELECTED) )
+					selectedAttr = "selected";
+									
 				htmlList += '<option ' + valueAttr + ' ' + selectedAttr + ' >' + deptEnum.value + '</option>';
 			}
 		
 			this.department.html(htmlList);
 		},
-		
+
 		/**
-		 * Add items from <code>RoleEnum</code> to the corresponding list UI component.
+		 * Give focus to the form component.
 		 */
-		fillRoleList: function()
+		setFocus: function()
 		{
-			var roleEnumList/*Array*/ = RoleEnum.getComboList();
-		
-			this.roleListComparer = [];
-		
-			var htmlList/*String*/ = "";
-			for(var i/*Number*/=0; i<roleEnumList.length; i++)
-			{		
-				var roleEnum/*RoleEnum*/ = roleEnumList[i];
-		
-				/*
-				 * An item not having a value in jQuery will be excluded from the
-				 * pop-up menu.
-				 */ 
-				var valueAttr/*String*/ = roleEnum.ordinal >= 0 ? 'value="' + roleEnum.ordinal + '"' : "";
-				var selectedAttr/*String*/ = this.isUserRole( roleEnum ) ? 'selected' : "";
-				htmlList += '<option ' + valueAttr + ' ' + selectedAttr + ' >' + roleEnum.value + '</option>';
-			}
-		
-			this.roles.html(htmlList); 
+			this.fname.focus();
 		},
 		
 		/**
@@ -235,48 +226,25 @@ var UserForm = Objs
 		{
 			this.user = user;
 			
-			this.uname.val(user.uname);
-			this.fname.val(user.fname);
-			this.lname.val(user.lname);
-			this.email.val(user.email);
-			this.password.val(user.password);
-			this.confirm.val(user.password);
-			
-			this.fillDepartmentList();
+			if(user == null)
+				this.clearForm();
+			else
+			{
+				this.uname.val(user.uname);
+				this.fname.val(user.fname);
+				this.lname.val(user.lname);
+				this.email.val(user.email);
+				this.password.val(user.password);
+				this.confirm.val(user.password);
+
+				this.fillList();
+			}
 		},
 		
 		getUser: function()/*UserVO*/
 		{
 			this.updateUser();
 			return this.user;
-		},
-		
-		
-		/**
-		 * Set the roles for the selected user.
-		 * 
-		 * @param {Array} userRoles
-		 * 		The roles list for the currently selected user.
-		 *
-		 * @private
-		 */
-		setUserRoles: function( userRoles/*Array*/ )
-		{
-			this.userRoles = userRoles;
-			this.fillRoleList();
-		},
-		
-		/**
-		 * Return the roles selected in the UI role list component for the user.
-		 *
-		 * @return {Array}
-		 * 		The list of <code>RoleEnum</code> object selected for the user.
-		 *
-		 * @private
-		 */
-		getUserRoles: function()
-		{
-			//TODO Implement if necessary
 		},
 		
 		/**
@@ -299,8 +267,6 @@ var UserForm = Objs
 			var selected/*Number*/ = this.department.selectedIndex;
 			var deptEnumList/*Array*/ = DeptEnum.getComboList();
 			this.user.department = deptEnumList[selected];
-			
-			this.fillRoleList();
 		},
 		
 		/**
@@ -308,12 +274,43 @@ var UserForm = Objs
 		 */
 		clearForm: function()
 		{
+			this.uname.val();
+			this.fname.val();
+			this.lname.val();
+			this.email.val();
+			this.password.val();
+			this.confirm.val();	
+			this.department.selectedIndex = 0;
 			this.setFieldError( 'uname', false );
 			this.setFieldError( 'password', false );
 			this.setFieldError( 'confirm', false );
 			this.setFieldError( 'department', false );
 		},
-		
+
+		/**
+		 * Enable or disable the form.
+		 * 
+		 * @param {Boolean} isEnabled
+		 * 		The form must be enabled.
+		 */
+		setEnabled: function( isEnabled )
+		{
+			var disabled/*String*/ = isEnabled ? "" : "disabled";
+			this.fname.attr( "disabled", disabled );
+			this.lname.attr( "disabled", disabled );
+			this.email.attr( "disabled", disabled );
+			this.password.attr( "disabled", disabled );
+			this.confirm.attr( "disabled", disabled );
+			this.department.attr( "disabled", disabled );
+			this.submitButton.attr( "disabled", disabled );
+			this.cancelButton.attr( "disabled", disabled );
+
+			if( isEnabled && this.mode == UserForm.MODE_ADD )
+				this.uname.attr( "disabled", "" );
+			else
+				this.uname.attr( "disabled", "disabled" );
+		},
+
 		/**
 		 * Set the form mode to ADD or EDIT.
 		 * 
@@ -328,12 +325,10 @@ var UserForm = Objs
 			{
 				case UserForm.MODE_ADD:
 					this.submitButton.find(".ui-btn-text").text("Add");
-					//this.uname.removeAttr("disabled");
 				break;
 			
 				case UserForm.MODE_EDIT:
 					this.submitButton.find(".ui-btn-text").text("Save");
-					//this.uname.attr("disabled", "disabled" );
 				break;
 			}
 		},
@@ -363,14 +358,6 @@ var UserForm = Objs
 		cancel_clickHandler: function()
 		{
 			this.dispatchEvent( UserForm.CANCEL );
-		},
-		
-		/**
-		 * Remove button onclick event listener.
-		 */
-		deleteButton_clickHandler: function()
-		{
-			this.dispatchEvent( UserForm.REMOVE );
 		},
 		
 		/**
@@ -415,14 +402,6 @@ var UserForm = Objs
 				this.setFieldError( 'department', error = true );
 			else
 				this.setFieldError( 'department', false );
-				
-			selected = this.roles.val();
-			var rolesEnumList/*Array*/ = RoleEnum.getComboList();
-			var role/*RolesEnum*/ = rolesEnumList[selected];
-			if( role == RoleEnum.NONE_SELECTED )
-				this.setFieldError( 'roles', error = true );
-			else
-				this.setFieldError( 'roles', false );
 		
 			return error;
 		},
@@ -445,28 +424,6 @@ var UserForm = Objs
 				field.addClass( 'fieldError' );
 			else
 				field.removeClass( 'fieldError' );
-		},
-		
-		/**
-		 * Helper method that checks if a role from the UI role list exists in the user
-		 * roles list.
-		 * 
-		 * @param {RoleEnum} roleEnum
-		 * 		The <code>RoleEnum</code> item to check for	existence in the user roles
-		 * 		list.
-		 *
-		 * @return {Boolean}
-		 * 		The role exists in the list.
-		 *
-		 * @private
-		 */
-		isUserRole: function( roleEnum )
-		{
-		 	for( var i/*Number*/=0; i<this.userRoles.length; i++ )
-				if( roleEnum.equals(this.userRoles[i]) )
-					return true;
-		
-			return false;
 		}
 	}
 );
@@ -474,13 +431,9 @@ var UserForm = Objs
 /*
  * Event names
  */
-UserForm.ADD_USER/*String*/		= "add";
-UserForm.UPDATE_USER/*String*/	= "update";
-UserForm.DELETE_USER/*String*/	= "cancel";
+UserForm.ADD/*String*/		= "add";
+UserForm.UPDATE/*String*/	= "update";
 UserForm.CANCEL/*String*/		= "cancel";
 
 UserForm.MODE_ADD/*String*/		= "modeAdd";
 UserForm.MODE_EDIT/*String*/	= "modeEdit";
-
-UserForm.ADD_ROLE/*String*/		= "addRole";
-UserForm.REMOVE_ROLE/*String*/	= "removeRole";

@@ -106,10 +106,13 @@ var UserFormMediator = Objs
 		{
 			var user/*UserVO*/ = this.getUserForm().getUser();
 			var userRoles/*Array*/ = this.getUserForm().getUserRoles();
-		
 			this.userProxy.addItem( user );
-			//this.roleProxy.addItem( user );
 			this.sendNotification( NotificationNames.USER_ADDED, user );
+			
+			var userForm/*UserForm*/ = this.getUserForm();
+			userForm.clearForm();
+			userForm.setEnabled(false);
+			userForm.setMode(UserForm.MODE_ADD);
 		},
 
 		/**
@@ -126,8 +129,12 @@ var UserFormMediator = Objs
 			var userRoles/*Array*/ = this.getUserForm().getUserRoles();
 			
 			this.userProxy.updateItem( user );
-			//this.roleProxy.addItem( user );
 			this.sendNotification(  NotificationNames.USER_UPDATED, user );
+			
+			var userForm/*UserForm*/ = this.getUserForm();
+			userForm.clearForm();
+			userForm.setEnabled(false);
+			userForm.setMode(UserForm.MODE_ADD);
 		},
 
 		/**
@@ -141,6 +148,10 @@ var UserFormMediator = Objs
 		onCancel: function()
 		{
 			this.sendNotification(  NotificationNames.CANCEL_SELECTED );
+			var userForm/*UserForm*/ = this.getUserForm();
+			userForm.clearForm();
+			userForm.setEnabled(false);
+			userForm.setMode(UserForm.MODE_ADD);
 		},
 		
 		/**
@@ -150,6 +161,7 @@ var UserFormMediator = Objs
 		{
 			return [
 				NotificationNames.NEW_USER,
+				ApplicationFacade.USER_DELETED,
 				NotificationNames.USER_SELECTED
 			];
 		},
@@ -165,10 +177,10 @@ var UserFormMediator = Objs
 			switch ( note.getName() )
 			{
 				case NotificationNames.NEW_USER:
-					userForm.clearForm();
 					userForm.setUser( note.getBody() );
-					userForm.setUserRoles( [] );
 					userForm.setMode( UserForm.MODE_ADD );
+					userForm.setEnabled(true);
+					userForm.setFocus();
 				break;
 		
 				case NotificationNames.USER_SELECTED:
@@ -181,6 +193,8 @@ var UserFormMediator = Objs
 					userForm.setUserRoles( roles );
 		
 					userForm.setMode( UserForm.MODE_EDIT );
+					userForm.setEnabled(true);
+					userForm.setFocus();
 				break;
 			}
 		}

@@ -223,25 +223,15 @@ var RolePanel = Objs
 		 */
 		setEnabled: function( isEnabled )
 		{
-			if( isEnabled )
-			{
-				this.addRoleButton.attr('disabled', '');
-				this.removeRoleButton.attr('disabled', '');
-		
-				this.userRoleList.attr('disabled', '');
-				this.roleList.attr('disabled', '');			
-			}
-			else
-			{
-				this.addRoleButton.attr('disabled', 'disabled');
-				this.removeRoleButton.attr('disabled', 'disabled');
-		
-				this.userRoleList.attr('disabled', 'disabled');
-				this.roleList.attr('disabled', 'disabled');
-				
+			var disabled/*String*/ = isEnabled ? "" : "disabled";
+			this.addRoleButton.attr("disabled", disabled);
+			this.removeRoleButton.attr("disabled", disabled);
+	
+			this.userRoleList.attr("disabled", disabled);
+			this.roleList.attr("disabled", disabled);
+			
+			if( !isEnabled )
 				this.roleList.selectedIndex = -1;
-			}
-
 		},
 
 		/**
