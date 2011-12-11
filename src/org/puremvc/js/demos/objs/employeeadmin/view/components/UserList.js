@@ -127,7 +127,7 @@ var UserList = Objs
 				};
 
 				this.userList.jqGrid( 'addRowData', i+1, rowData );
-			}	
+			}
 		},
 		
 		/**
@@ -159,6 +159,16 @@ var UserList = Objs
 		deleteButton_clickHandler: function()
 		{
 			this.dispatchEvent( UserList.DELETE );
+		},
+		
+		/**
+		 * Remove selection in the user list.
+		 */
+		deSelect: function()
+		{
+			this.userList.unselectAll();
+			this.selectedUser = null;
+			this.deleteButton.disabled = true;
 		}
 	}
 );

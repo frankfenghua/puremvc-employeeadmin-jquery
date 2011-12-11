@@ -133,8 +133,8 @@ var UserForm = Objs
 			this.initializeChildren();
 			this.configureListeners();
 
+			//Needed to erase prefilled form informations.
 			this.clearForm();
-			this.fillList();
 			this.setEnabled(false);
 		},
 	
@@ -172,18 +172,18 @@ var UserForm = Objs
 			this.department.focus( function(evt){ that.field_focusHandler(evt) } );
 			this.submitButton.click( function(evt){ that.submit_clickHandler(evt) } );
 			this.cancelButton.click( function(evt){ that.cancel_clickHandler(evt) } );
-		
-			//Needed to erase prefiled form informations.
-			this.clearForm();
 		},
 		
 		/**
-		 * Add items from <code>DeptEnum</code> to the corresponding list UI component.
+		 * Add items from <code>DeptEnum</code> to the corresponding list UI
+		 * component.
+		 * 
+		 * @param {Array} deptEnumList
+		 *		List of <code>DeptEnum</code> items or an empty array to empty
+		 *		the list UI component content. 
 		 */
-		fillList: function()
+		fillList: function( deptEnumList )
 		{
-			var deptEnumList/*Array*/ = DeptEnum.getComboList();
-		
 			var htmlList/*String*/ = "";
 			for(var i/*Number*/=0; i<deptEnumList.length; i++)
 			{		
@@ -207,7 +207,7 @@ var UserForm = Objs
 		
 			this.department.html(htmlList);
 		},
-
+		
 		/**
 		 * Give focus to the form component.
 		 */
@@ -237,7 +237,7 @@ var UserForm = Objs
 				this.password.val(user.password);
 				this.confirm.val(user.password);
 
-				this.fillList();
+				this.fillList( DeptEnum.getComboList() );
 			}
 		},
 		
@@ -258,11 +258,11 @@ var UserForm = Objs
 		 */
 		updateUser: function()
 		{
-			this.user.uname = this.uname.val();
-			this.user.fname = this.fname.val();
-			this.user.lname = this.lname.val();
-			this.user.email = this.email.val();
-			this.user.password = this.password.val();
+			this.user.uname = this.uname.val("");
+			this.user.fname = this.fname.val("");
+			this.user.lname = this.lname.val("");
+			this.user.email = this.email.val("");
+			this.user.password = this.password.val("");
 		
 			var selected/*Number*/ = this.department.selectedIndex;
 			var deptEnumList/*Array*/ = DeptEnum.getComboList();
@@ -274,13 +274,13 @@ var UserForm = Objs
 		 */
 		clearForm: function()
 		{
-			this.uname.val();
-			this.fname.val();
-			this.lname.val();
-			this.email.val();
-			this.password.val();
-			this.confirm.val();	
-			this.department.selectedIndex = 0;
+			this.uname.val("");
+			this.fname.val("");
+			this.lname.val("");
+			this.email.val("");
+			this.password.val("");
+			this.confirm.val("");
+			this.fillList([]);
 			this.setFieldError( 'uname', false );
 			this.setFieldError( 'password', false );
 			this.setFieldError( 'confirm', false );
@@ -296,6 +296,7 @@ var UserForm = Objs
 		setEnabled: function( isEnabled )
 		{
 			var disabled/*String*/ = isEnabled ? "" : "disabled";
+			this.uname.attr( "disabled", disabled );
 			this.fname.attr( "disabled", disabled );
 			this.lname.attr( "disabled", disabled );
 			this.email.attr( "disabled", disabled );
@@ -305,9 +306,7 @@ var UserForm = Objs
 			this.submitButton.attr( "disabled", disabled );
 			this.cancelButton.attr( "disabled", disabled );
 
-			if( isEnabled && this.mode == UserForm.MODE_ADD )
-				this.uname.attr( "disabled", "" );
-			else
+			if( isEnabled && this.mode == UserForm.MODE_EDIT )
 				this.uname.attr( "disabled", "disabled" );
 		},
 

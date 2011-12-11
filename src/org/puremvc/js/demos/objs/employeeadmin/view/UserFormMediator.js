@@ -48,7 +48,6 @@ var UserFormMediator = Objs
 			userForm.addEventListener( UserForm.CANCEL, this.onCancel, this );
 		
 			this.userProxy = this.facade.retrieveProxy( UserProxy.NAME );
-			this.roleProxy = this.facade.retrieveProxy( ProxyNames.ROLE_PROXY );
 		},
 		
 		/**
@@ -105,7 +104,6 @@ var UserFormMediator = Objs
 		onAdd: function( event )
 		{
 			var user/*UserVO*/ = this.getUserForm().getUser();
-			var userRoles/*Array*/ = this.getUserForm().getUserRoles();
 			this.userProxy.addItem( user );
 			this.sendNotification( NotificationNames.USER_ADDED, user );
 			
@@ -126,7 +124,6 @@ var UserFormMediator = Objs
 		onUpdate: function()
 		{
 			var user/*UserVO*/ = this.getUserForm().getUser();
-			var userRoles/*Array*/ = this.getUserForm().getUserRoles();
 			
 			this.userProxy.updateItem( user );
 			this.sendNotification(  NotificationNames.USER_UPDATED, user );
@@ -161,7 +158,7 @@ var UserFormMediator = Objs
 		{
 			return [
 				NotificationNames.NEW_USER,
-				ApplicationFacade.USER_DELETED,
+				NotificationNames.USER_DELETED,
 				NotificationNames.USER_SELECTED
 			];
 		},
@@ -182,15 +179,17 @@ var UserFormMediator = Objs
 					userForm.setEnabled(true);
 					userForm.setFocus();
 				break;
+				
+				case NotificationNames.USER_DELETED:
+					userForm.clearForm();
+					userForm.setEnabled(false);
+				break;
 		
 				case NotificationNames.USER_SELECTED:
 					user = note.getBody();
 		
 					userForm.clearForm();
 					userForm.setUser( user );
-		
-					var roles/*Array*/ = this.roleProxy.getUserRoles(user.uname);
-					userForm.setUserRoles( roles );
 		
 					userForm.setMode( UserForm.MODE_EDIT );
 					userForm.setEnabled(true);
