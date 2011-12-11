@@ -28,8 +28,8 @@ var DeleteUserCommand = Objs("org.puremvc.js.demos.objs.employeeadmin.controller
 		execute: function( note )
 		{
 			var user/*UserVO*/ = note.getBody();
-			var userProxy/*UserProxy*/ = this.facade.retrieveProxy( UserProxy.NAME );
-			var roleProxy/*RoleProxy*/ = this.facade.retrieveProxy( RoleProxy.NAME );
+			var userProxy/*UserProxy*/ = this.facade.retrieveProxy( ProxyNames.USER_PROXY );
+			var roleProxy/*RoleProxy*/ = this.facade.retrieveProxy( ProxyNames.ROLE_PROXY );
 		
 			userProxy.deleteItem( user );        
 			roleProxy.deleteItem( user );

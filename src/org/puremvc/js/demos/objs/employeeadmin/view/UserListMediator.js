@@ -45,7 +45,7 @@ var UserListMediator = Objs("org.puremvc.js.demos.objs.employeeadmin.view.UserLi
 		 */
 		initialize: function( name, viewComponent )
 		{
-			Mediator.prototype.initialize.call( this, name, viewComponent );
+			UserListMediator.$super.initialize.call( this, name, viewComponent );
 			
 			var userList/*UserList*/ = this.getUserList();
 			userList.addEventListener( UserList.NEW, this.onNew, this );
@@ -128,15 +128,11 @@ var UserListMediator = Objs("org.puremvc.js.demos.objs.employeeadmin.view.UserLi
 		
 		onDelete: function()
 		{
-			var selectedUser = this.getUserList().selectedUser ;
-			if(selectedUser == null)
-				return;
+			var uname/*String*/ = this.getUserList().getSelectedUser();
+			var userProxy/*UserProxy*/ = this.facade.retrieveProxy( ProxyNames.USER_PROXY );
+			var selectedUser/*UserVO*/ = userProxy.getUser( uname );
 
-			this.sendNotification
-			(
-				NotificationNames.DELETE_USER,
-				this.getUserList().selectedUser 
-			);
+			this.sendNotification( NotificationNames.DELETE_USER, selectedUser );
 		},
 
 		/**
@@ -149,9 +145,10 @@ var UserListMediator = Objs("org.puremvc.js.demos.objs.employeeadmin.view.UserLi
 		 */
 		onSelect: function( selectedUserName )
 		{
+			var uname/*String*/ = this.getUserList().getSelectedUser();
 			var userProxy/*UserProxy*/ = this.facade.retrieveProxy( ProxyNames.USER_PROXY );
+			var selectedUser/*UserVO*/ = userProxy.getUser( uname );
 
-			var selectedUser/*UserVO*/ = userProxy.getUser( selectedUserName );
 			this.sendNotification( NotificationNames.USER_SELECTED, selectedUser );
 		}
 	}

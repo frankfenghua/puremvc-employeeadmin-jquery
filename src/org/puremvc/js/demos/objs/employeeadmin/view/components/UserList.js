@@ -19,7 +19,7 @@ var UserList = Objs("org.puremvc.js.demos.objs.employeeadmin.view.components.Use
 		 * @type {HTMLElement}
 		 * @private
 		 */
-		userListPanel/*HTMLElement*/: null,
+		userListPanel: null,
 		
 		/**
 		 * The user list HTML element.
@@ -27,7 +27,7 @@ var UserList = Objs("org.puremvc.js.demos.objs.employeeadmin.view.components.Use
 		 * @type {HTMLElement}
 		 * @private
 		 */
-		userList/*HTMLElement*/: null,
+		userList: null,
 		
 		/**
 		 * The "new" button HTML element.
@@ -35,7 +35,15 @@ var UserList = Objs("org.puremvc.js.demos.objs.employeeadmin.view.components.Use
 		 * @type {HTMLElement}
 		 * @private
 		 */
-		newButton/*HTMLElement*/: null,
+		newButton: null,
+
+		/**
+		 * The current selected user.
+		 * 
+		 * @type {String}
+		 * @private
+		 */
+		selectedUser: null,
 		
 		/**
 		 * The user list of the application.
@@ -43,7 +51,7 @@ var UserList = Objs("org.puremvc.js.demos.objs.employeeadmin.view.components.Use
 		 * @type {Array}
 		 * @private
 		 */
-		users/*Array*/: null,
+		users: null,
 		
 		/**
 		 * Initialize a <code>UserList</code> instance.
@@ -129,6 +137,20 @@ var UserList = Objs("org.puremvc.js.demos.objs.employeeadmin.view.components.Use
 		},
 		
 		/**
+		 * Return current selected user in user list.
+		 * 
+		 * <p>Note that jQgrid cannot embed any external data to transport the
+		 * UserVo. So it is best to return uname.
+		 * 
+		 * @return {String}
+		 * 		The user name selected in the user list.
+		 */
+		getSelectedUser: function()
+		{
+			return this.selectedUser;
+		},
+		
+		/**
 		 * List row selection event listener.
 		 * 
 		 * @param {String} id
@@ -137,10 +159,19 @@ var UserList = Objs("org.puremvc.js.demos.objs.employeeadmin.view.components.Use
 		userList_selectHandler: function( id )
 		{
 			var rowData/*Object*/ = this.userList.jqGrid( 'getRowData', id );
-			
+
+			var uname/*String*/;
 			for( var i/*Number*/=0; i<this.users.length; i++ )
+			{
 				if( this.users[i].uname == rowData.uname )
-					this.dispatchEvent( UserList.SELECT, rowData.uname );
+				{
+					uname = rowData.uname;
+					break;
+				}	
+			}	
+
+			this.selectedUser = uname;
+			this.dispatchEvent( UserList.SELECT );
 		},
 		
 		/**

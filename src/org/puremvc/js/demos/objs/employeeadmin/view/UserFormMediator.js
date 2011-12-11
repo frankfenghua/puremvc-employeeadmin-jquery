@@ -38,7 +38,7 @@ var UserFormMediator = Objs("org.puremvc.js.demos.objs.employeeadmin.view.UserFo
 		 */
 		initialize: function( name, viewComponent )
 		{
-			Mediator.prototype.initialize.call( this, name, viewComponent );
+			UserFormMediator.$super.initialize.call( this, name, viewComponent );
 		
 			var userForm/*UserForm*/ = this.getUserForm();
 			userForm.addEventListener( UserForm.ADD, this.onAdd, this );

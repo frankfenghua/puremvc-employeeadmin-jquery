@@ -49,7 +49,7 @@ var ApplicationFacade = Objs("org.puremvc.js.demos.objs.employeeadmin.Applicatio
 		 */
 		initializeController: function()
 		{
-			Facade.prototype.initializeController.call(this);
+			ApplicationFacade.$super.initializeController.call( this );
 		
 			this.registerCommand( NotificationNames.STARTUP, StartupCommand );
 			this.registerCommand( NotificationNames.DELETE_USER, DeleteUserCommand );
