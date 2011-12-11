@@ -264,7 +264,7 @@ var UserForm = Objs
 			this.user.email = this.email.val("");
 			this.user.password = this.password.val("");
 		
-			var selected/*Number*/ = this.department.selectedIndex;
+			var selected/*Number*/ = parseInt(this.department.val())+1;
 			var deptEnumList/*Array*/ = DeptEnum.getComboList();
 			this.user.department = deptEnumList[selected];
 		},
@@ -337,10 +337,10 @@ var UserForm = Objs
 		 */
 		submit_clickHandler: function()
 		{
+			this.updateUser();
+			
 			if( this.getErrors() )
 				return;
-		
-			this.updateUser();
 		
 			if( this.user.getIsValid() )
 			{
@@ -393,11 +393,11 @@ var UserForm = Objs
 			else
 				this.setFieldError( 'confirm', false );
 		
-			var selected/*Number*/ = this.department.val();
+			var selected/*Number*/ = parseInt(this.department.val())+1;
 			var deptEnumList/*Array*/ = DeptEnum.getComboList();
 			var department/*DeptEnum*/ = deptEnumList[selected];
 		
-			if( department == DeptEnum.NONE_SELECTED )
+			if( DeptEnum.NONE_SELECTED.equals( department ) )
 				this.setFieldError( 'department', error = true );
 			else
 				this.setFieldError( 'department', false );
