@@ -12,9 +12,7 @@
  *
  * @constructor
  */
-var UserForm = Objs
-(
-	"org.puremvc.js.demos.objs.employeeadmin.view.components.UserForm",
+var UserForm = Objs("org.puremvc.js.demos.objs.employeeadmin.view.components.UserForm",
 	UiComponent,
 	{
 		
@@ -226,7 +224,7 @@ var UserForm = Objs
 		{
 			this.user = user;
 			
-			if(user == null)
+			if( !user )
 				this.clearForm();
 			else
 			{
@@ -258,11 +256,11 @@ var UserForm = Objs
 		 */
 		updateUser: function()
 		{
-			this.user.uname = this.uname.val("");
-			this.user.fname = this.fname.val("");
-			this.user.lname = this.lname.val("");
-			this.user.email = this.email.val("");
-			this.user.password = this.password.val("");
+			this.user.uname = this.uname.val();
+			this.user.fname = this.fname.val();
+			this.user.lname = this.lname.val();
+			this.user.email = this.email.val();
+			this.user.password = this.password.val();
 		
 			var selected/*Number*/ = parseInt(this.department.val())+1;
 			var deptEnumList/*Array*/ = DeptEnum.getComboList();
@@ -323,11 +321,11 @@ var UserForm = Objs
 			switch(mode)
 			{
 				case UserForm.MODE_ADD:
-					this.submitButton.find(".ui-button-text").html("Add");
+					this.submitButton.find(".ui-button-text").text("Add");
 				break;
 			
 				case UserForm.MODE_EDIT:
-					this.submitButton.find(".ui-button-text").html("Save");
+					this.submitButton.find(".ui-button-text").text("Save");
 				break;
 			}
 		},

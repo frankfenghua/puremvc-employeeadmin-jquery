@@ -13,9 +13,7 @@
  *
  * @constructor
  */
-var PrepModelCommand = Objs
-(
-	"org.puremvc.js.demos.objs.employeeadmin.controller.PrepModelCommand",
+var PrepModelCommand = Objs("org.puremvc.js.demos.objs.employeeadmin.controller.PrepModelCommand",
 	SimpleCommand,
 	{	
 		/**
@@ -43,7 +41,7 @@ var PrepModelCommand = Objs
 			user.fname = "Larry";
 			user.lname = "Stooge";
 			user.email = "larry@stooges.com";
-			user.pass = "ijk456";
+			user.password = "ijk456";
 			user.department = DeptEnum.ACCT;
 			users.push(user);
 			 
@@ -52,7 +50,7 @@ var PrepModelCommand = Objs
 			user.fname = "Curly";
 			user.lname = "Stooge";
 			user.email = "curly@stooges.com";
-			user.pass = "xyz987";
+			user.password = "xyz987";
 			user.department = DeptEnum.SALES;
 			users.push(user);
 			
@@ -61,7 +59,7 @@ var PrepModelCommand = Objs
 			user.fname = "Moe";
 			user.lname = "Stooge";
 			user.email = "moe@stooges.com";
-			user.pass = "abc123";
+			user.password = "abc123";
 			user.department = DeptEnum.PLANT;
 			users.push(user);
 			

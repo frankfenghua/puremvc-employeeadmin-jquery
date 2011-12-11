@@ -12,9 +12,7 @@
  * 
  * @constructor
  */
-var RoleVO = Objs
-(
-	"org.puremvc.js.demos.objs.employeeadmin.model.vo.RoleVO",
+var RoleVO = Objs("org.puremvc.js.demos.objs.employeeadmin.model.vo.RoleVO",
 	{
 		/**
 		 * Unique name of the user to whom is associated the role.

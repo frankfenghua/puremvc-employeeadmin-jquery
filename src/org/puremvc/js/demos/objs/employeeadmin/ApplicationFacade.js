@@ -17,9 +17,7 @@
  * 
  * @extends org.puremvc.js.patterns.facade.Facade Facade
  */
-var ApplicationFacade = Objs
-(
-	"org.puremvc.js.demos.objs.employeeadmin.ApplicationFacade",
+var ApplicationFacade = Objs("org.puremvc.js.demos.objs.employeeadmin.ApplicationFacade",
 	Facade,
 	{
 		

@@ -9,9 +9,7 @@
  * 
  * @extends org.puremvc.js.demos.objs.employeeadmin.view.components.UiComponent UiComponent
  */
-var UserList = Objs
-(
-	"org.puremvc.js.demos.objs.employeeadmin.view.components.UserList",
+var UserList = Objs("org.puremvc.js.demos.objs.employeeadmin.view.components.UserList",
 	UiComponent,
 	{
 
@@ -166,7 +164,7 @@ var UserList = Objs
 		 */
 		deSelect: function()
 		{
-			this.userList.unselectAll();
+			this.userList.jqGrid( 'resetSelection' );
 			this.selectedUser = null;
 			this.deleteButton.disabled = true;
 		}

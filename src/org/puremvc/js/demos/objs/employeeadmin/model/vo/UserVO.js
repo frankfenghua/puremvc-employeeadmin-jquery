@@ -14,9 +14,7 @@
  * 
  * @constructor
  */
-var UserVO = Objs
-(
-	"org.puremvc.js.demos.objs.employeeadmin.model.vo.UserVO",
+var UserVO = Objs("org.puremvc.js.demos.objs.employeeadmin.model.vo.UserVO",
 	{
 		
 		/** 

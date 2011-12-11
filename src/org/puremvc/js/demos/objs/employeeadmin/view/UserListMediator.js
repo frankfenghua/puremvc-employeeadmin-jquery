@@ -19,9 +19,7 @@
  * 
  * @constructor
  */
-var UserListMediator = Objs
-(
-	"org.puremvc.js.demos.objs.employeeadmin.view.UserListMediator",
+var UserListMediator = Objs("org.puremvc.js.demos.objs.employeeadmin.view.UserListMediator",
 	Mediator,
 	{		
 		
@@ -51,6 +49,7 @@ var UserListMediator = Objs
 			
 			var userList/*UserList*/ = this.getUserList();
 			userList.addEventListener( UserList.NEW, this.onNew, this );
+			userList.addEventListener( UserList.DELETE, this.onDelete, this );
 			userList.addEventListener( UserList.SELECT, this.onSelect, this );
 			
 			var userProxy/*UserProxy*/ = this.facade.retrieveProxy( ProxyNames.USER_PROXY );
@@ -125,15 +124,21 @@ var UserListMediator = Objs
 		{
 			var user/*UserVO*/ = new UserVO();
 			this.sendNotification( NotificationNames.NEW_USER, user );
-			
-			/*
-			 * In the jQuery implementation of the demo adding the demo imply to
-			 * set it as the currently selected user.
-			 */
-			this.sendNotification( NotificationNames.USER_SELECTED, user );
 		},
 		
-		
+		onDelete: function()
+		{
+			var selectedUser = this.getUserList().selectedUser ;
+			if(selectedUser == null)
+				return;
+
+			this.sendNotification
+			(
+				NotificationNames.DELETE_USER,
+				this.getUserList().selectedUser 
+			);
+		},
+
 		/**
 		 * @private
 		 * 

@@ -13,9 +13,7 @@
  *
  * @constructor
  */
-var PrepViewCommand = Objs
-(
-	"org.puremvc.js.demos.objs.employeeadmin.controller.PrepViewCommand",
+var PrepViewCommand = Objs("org.puremvc.js.demos.objs.employeeadmin.controller.PrepViewCommand",
 	SimpleCommand,
 	{	
 		/**

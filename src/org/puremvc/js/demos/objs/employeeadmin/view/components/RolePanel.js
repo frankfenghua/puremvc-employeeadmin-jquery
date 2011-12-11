@@ -12,9 +12,7 @@
  *
  * @constructor
  */
-var RolePanel = Objs
-(
-	"org.puremvc.js.demos.objs.employeeadmin.view.components.RolePanel",
+var RolePanel = Objs("org.puremvc.js.demos.objs.employeeadmin.view.components.RolePanel",
 	UiComponent,
 	{
 		/** 

@@ -13,9 +13,7 @@
  *
  * @constructor
  */
-var StartupCommand = Objs
-(
-	"org.puremvc.js.demos.objs.employeeadmin.controller.StartupCommand",
+var StartupCommand = Objs("org.puremvc.js.demos.objs.employeeadmin.controller.StartupCommand",
 	MacroCommand,
 	{
 		/**
