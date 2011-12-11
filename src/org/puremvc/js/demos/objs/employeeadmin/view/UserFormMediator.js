@@ -46,40 +46,18 @@ var UserFormMediator = Objs
 			userForm.addEventListener( UserForm.ADD, this.onAdd, this );
 			userForm.addEventListener( UserForm.UPDATE, this.onUpdate, this );
 			userForm.addEventListener( UserForm.CANCEL, this.onCancel, this );
-		
-			this.userProxy = this.facade.retrieveProxy( UserProxy.NAME );
+			
+			this.userProxy = this.facade.retrieveProxy( ProxyNames.USER_PROXY );
 		},
 		
 		/**
 		 * @private
 		 *
-		 * A shortcut to the application <code>RoleProxy</code> instance.
-		 * 
-		 * @type {RoleProxy}
-		 */
-		roleProxy: null,
-		
-		/**
-		 * @private
-		 *
-		 * A shortcut to the application <code>RoleProxy</code> instance.
+		 * A shortcut to the application <code>UserProxy</code> instance.
 		 * 
 		 * @type {UserProxy}
 		 */
 		userProxy: null,
-		
-		/**
-		 * @private
-		 *
-		 * The form component is in ADD or EDIT mode.
-		 *
-		 * <P>
-		 * Note that in the jQuery version this is only needed to be able to
-		 * disable the <code>uname</code> field when in EDIT mode.
-		 *
-		 * @type {String}
-		 */
-		mode: null,
 
 		/**
 		 * @private
@@ -124,7 +102,6 @@ var UserFormMediator = Objs
 		onUpdate: function()
 		{
 			var user/*UserVO*/ = this.getUserForm().getUser();
-			
 			this.userProxy.updateItem( user );
 			this.sendNotification(  NotificationNames.USER_UPDATED, user );
 			

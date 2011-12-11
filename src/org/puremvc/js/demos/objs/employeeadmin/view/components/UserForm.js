@@ -323,11 +323,11 @@ var UserForm = Objs
 			switch(mode)
 			{
 				case UserForm.MODE_ADD:
-					this.submitButton.find(".ui-btn-text").text("Add");
+					this.submitButton.find(".ui-button-text").html("Add");
 				break;
 			
 				case UserForm.MODE_EDIT:
-					this.submitButton.find(".ui-btn-text").text("Save");
+					this.submitButton.find(".ui-button-text").html("Save");
 				break;
 			}
 		},
