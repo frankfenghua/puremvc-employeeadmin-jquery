@@ -154,24 +154,57 @@ var UiComponent = Objs("org.puremvc.js.demos.objs.employeeadmin.view.components.
 });
 
 /**
+ * @class
+ * @private
  * The event object dispatched by the <code>UiComponent</code> class to its
  * event listeners.
  */
-UiComponent.Event = function(){}
+UiComponent.Event = Objs("org.puremvc.js.demos.objs.employeeadmin.view.components.UiComponent.Event",
+{
+	/**
+	 * Type of the dispatched event.
+	 * 
+	 * @type {String}
+	 */
+	type: null,
+	
+	/**
+	 * Properties that follow the dispatched event.
+	 * 
+	 * @type {Object}	
+	 */
+	properties: null
+
+});
 
 /**
- * Type of the dispatched event.
+ * @private
  * 
- * @type {String}
- */
-UiComponent.Event.prototype.type = null;
-
-/**
- * Properties that follow the dispatched event.
+ * A descriptor object used by the <code>UiComponent.listenerMap</code>
+ * to identify each event listener.
  * 
- * @type {Object}	
+ * <P>
+ * It is intentionally not declared on prototype as it built a kind of inner
+ * class for JavaScript.
  */
-UiComponent.Event.prototype.properties = null;
+UiComponent.ListenerDescriptor = Objs("org.puremvc.js.demos.objs.employeeadmin.view.components.UiComponent.Event",
+{
+	/**
+	 * @construct
+	 * Initialize a <code>UiComponent.ListenerDescriptor</code> instance.
+	 * 
+	 * @param {Function} listener
+	 * 		The listener method to call.
+	 * 
+	 * @param {Function} listener
+	 * 		The listener context on which to call the method.
+	 */	
+	initialize: function( listener, context )
+	{
+		this.listener = listener;
+		this.context = context;
+	}
+});
 
 /* 
  * Private statics
@@ -186,22 +219,6 @@ UiComponent.Event.prototype.properties = null;
  * @constant
  */
 UiComponent.QUEUE_PATTERN = '@_@';
-
-/**
- * @private
- * 
- * A descriptor object used by the <code>UiComponent.listenerMap</code>
- * to identify each event listener.
- * 
- * <P>
- * It is intentionally not declared on prototype as it built a kind of inner
- * class for JavaScript.
- */
-UiComponent.ListenerDescriptor = function( listener/*Function*/, context/*Object*/ )
-{
-	this.listener = listener;
-	this.context = context;
-}
 
 /**
  * @private
