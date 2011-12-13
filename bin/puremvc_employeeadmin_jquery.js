@@ -1,7 +1,7 @@
 /**
  * Defines <code>Mediator</code> names for the application.
  */
-var MediatorNames = Objs("org.puremvc.js.demos.objs.employeeadmin.abc.MediatorNames");
+var MediatorNames = Objs("org.puremvc.js.demos.objs.employeeadmin.abc.MediatorNames",{});
 
 MediatorNames.USER_FORM_MEDIATOR = "userFormMediator";
 MediatorNames.USER_LIST_MEDIATOR = "userListMediator";
@@ -9,7 +9,7 @@ MediatorNames.ROLE_PANEL_MEDIATOR = "rolePanelMediator";
 /**
  * Defines <code>Notification</code> names for the application.
  */
-var NotificationNames = Objs("org.puremvc.js.demos.objs.employeeadmin.abc.NotificationNames");
+var NotificationNames = Objs("org.puremvc.js.demos.objs.employeeadmin.abc.NotificationNames",{});
 
 NotificationNames.STARTUP = "startup";
 NotificationNames.NEW_USER = "newUser"
@@ -24,7 +24,7 @@ NotificationNames.ADD_ROLE_RESULT = "addRoleResult";
 /**
  * Defines <code>Proxy</code> names for the application.
  */
-var ProxyNames = Objs("org.puremvc.js.demos.objs.employeeadmin.abc.ProxyNames");
+var ProxyNames = Objs("org.puremvc.js.demos.objs.employeeadmin.abc.ProxyNames",{});
 
 ProxyNames.ROLE_PROXY = "roleProxy";
 ProxyNames.USER_PROXY = "userProxy";
@@ -47,9 +47,7 @@ ProxyNames.USER_PROXY = "userProxy";
  * 
  * @constructor
  */
-var AddRoleResultCommand =	Objs
-(
-	"org.puremvc.js.demos.objs.employeeadmin.controller.AddRoleResultCommand",
+var AddRoleResultCommand =	Objs("org.puremvc.js.demos.objs.employeeadmin.controller.AddRoleResultCommand",
 	SimpleCommand,
 	{
 		/**
@@ -84,9 +82,7 @@ var AddRoleResultCommand =	Objs
  * 
  * @constructor
  */
-var DeleteUserCommand = Objs
-(
-	"org.puremvc.js.demos.objs.employeeadmin.controller.DeleteUserCommand",
+var DeleteUserCommand = Objs("org.puremvc.js.demos.objs.employeeadmin.controller.DeleteUserCommand",
 	SimpleCommand,
 	{
 		/**
@@ -95,8 +91,8 @@ var DeleteUserCommand = Objs
 		execute: function( note )
 		{
 			var user/*UserVO*/ = note.getBody();
-			var userProxy/*UserProxy*/ = this.facade.retrieveProxy( UserProxy.NAME );
-			var roleProxy/*RoleProxy*/ = this.facade.retrieveProxy( RoleProxy.NAME );
+			var userProxy/*UserProxy*/ = this.facade.retrieveProxy( ProxyNames.USER_PROXY );
+			var roleProxy/*RoleProxy*/ = this.facade.retrieveProxy( ProxyNames.ROLE_PROXY );
 		
 			userProxy.deleteItem( user );        
 			roleProxy.deleteItem( user );
@@ -120,9 +116,7 @@ var DeleteUserCommand = Objs
  *
  * @constructor
  */
-var PrepModelCommand = Objs
-(
-	"org.puremvc.js.demos.objs.employeeadmin.controller.PrepModelCommand",
+var PrepModelCommand = Objs("org.puremvc.js.demos.objs.employeeadmin.controller.PrepModelCommand",
 	SimpleCommand,
 	{	
 		/**
@@ -150,7 +144,7 @@ var PrepModelCommand = Objs
 			user.fname = "Larry";
 			user.lname = "Stooge";
 			user.email = "larry@stooges.com";
-			user.pass = "ijk456";
+			user.password = "ijk456";
 			user.department = DeptEnum.ACCT;
 			users.push(user);
 			 
@@ -159,7 +153,7 @@ var PrepModelCommand = Objs
 			user.fname = "Curly";
 			user.lname = "Stooge";
 			user.email = "curly@stooges.com";
-			user.pass = "xyz987";
+			user.password = "xyz987";
 			user.department = DeptEnum.SALES;
 			users.push(user);
 			
@@ -168,7 +162,7 @@ var PrepModelCommand = Objs
 			user.fname = "Moe";
 			user.lname = "Stooge";
 			user.email = "moe@stooges.com";
-			user.pass = "abc123";
+			user.password = "abc123";
 			user.department = DeptEnum.PLANT;
 			users.push(user);
 			
@@ -220,9 +214,7 @@ var PrepModelCommand = Objs
  *
  * @constructor
  */
-var PrepViewCommand = Objs
-(
-	"org.puremvc.js.demos.objs.employeeadmin.controller.PrepViewCommand",
+var PrepViewCommand = Objs("org.puremvc.js.demos.objs.employeeadmin.controller.PrepViewCommand",
 	SimpleCommand,
 	{	
 		/**
@@ -271,9 +263,7 @@ var PrepViewCommand = Objs
  *
  * @constructor
  */
-var StartupCommand = Objs
-(
-	"org.puremvc.js.demos.objs.employeeadmin.controller.StartupCommand",
+var StartupCommand = Objs("org.puremvc.js.demos.objs.employeeadmin.controller.StartupCommand",
 	MacroCommand,
 	{
 		/**
@@ -309,9 +299,7 @@ var StartupCommand = Objs
  *
  * @constructor
  */
-var DeptEnum = Objs
-(
-	"org.puremvc.js.demos.objs.employeeadmin.model.enum.DeptEnum",
+var DeptEnum = Objs("org.puremvc.js.demos.objs.employeeadmin.model.enum.DeptEnum",
 	{
 		
 		/**
@@ -411,9 +399,7 @@ DeptEnum.getComboList = function()
  *
  * @constructor
  */
-var RoleEnum = Objs
-(
-	"org.puremvc.js.demos.objs.employeeadmin.model.enum.RoleEnum",
+var RoleEnum = Objs("org.puremvc.js.demos.objs.employeeadmin.model.enum.RoleEnum",
 	{
 		
 		/**
@@ -556,9 +542,7 @@ RoleEnum.getItem = function( ordinal )
  * 
  * @constructor
  */
-var RoleVO = Objs
-(
-	"org.puremvc.js.demos.objs.employeeadmin.model.vo.RoleVO",
+var RoleVO = Objs("org.puremvc.js.demos.objs.employeeadmin.model.vo.RoleVO",
 	{
 		/**
 		 * Unique name of the user to whom is associated the role.
@@ -591,9 +575,7 @@ var RoleVO = Objs
  * 
  * @constructor
  */
-var UserVO = Objs
-(
-	"org.puremvc.js.demos.objs.employeeadmin.model.vo.UserVO",
+var UserVO = Objs("org.puremvc.js.demos.objs.employeeadmin.model.vo.UserVO",
 	{
 		
 		/** 
@@ -689,9 +671,7 @@ var UserVO = Objs
  * 
  * @constructor
  */
-var RoleProxy = Objs
-(
-	"org.puremvc.js.demos.objs.employeeadmin.model.RoleProxy",
+var RoleProxy = Objs("org.puremvc.js.demos.objs.employeeadmin.model.RoleProxy",
 	Proxy,
 	{
 	
@@ -1005,9 +985,7 @@ var UserProxy = Objs("org.puremvc.js.demos.objs.employeeadmin.model.UserProxy",
  * 
  * @constructor
  */
-var UiComponent = Objs
-(
-	"org.puremvc.js.demos.objs.employeeadmin.view.components.UiComponent",
+var UiComponent = Objs("org.puremvc.js.demos.objs.employeeadmin.view.components.UiComponent",
 	{
 
 		/**
@@ -1239,9 +1217,7 @@ UiComponent.equals = function( compared )
  *
  * @constructor
  */
-var RolePanel = Objs
-(
-	"org.puremvc.js.demos.objs.employeeadmin.view.components.RolePanel",
+var RolePanel = Objs("org.puremvc.js.demos.objs.employeeadmin.view.components.RolePanel",
 	UiComponent,
 	{
 		/** 
@@ -1251,7 +1227,15 @@ var RolePanel = Objs
 		 * @type {UserVO}
 		 */
 		user: null,
-	
+		
+		/**
+		 * The user roles list.
+		 * 
+		 * @private
+		 * @type {Array}
+		 */
+		userRoles: null,
+
 		/**
 		 * Currently selected role.
 		 * 
@@ -1331,16 +1315,17 @@ var RolePanel = Objs
 			(
 				{
 					datatype: "local",
-				   	colNames:['Roles'],
+					width: 280,
+					height: 170,
+					colNames:['Roles'],
 				   	colModel:
 					[
-				   		{name:'value', index:'value' }
-				   	],
-					multiselect: true
+				   		{name:'value', index:'value' }					
+				   	]
 				}
 			);
 
-			this.roleList = this.rolePanel.find(".role-list").combobox();
+			this.roleList = this.rolePanel.find(".role-list");
 			this.addRoleButton = this.rolePanel.find(".add-role-button").button();
 			this.removeRoleButton = this.rolePanel.find(".remove-role-button").button();
 	    },
@@ -1350,11 +1335,11 @@ var RolePanel = Objs
 	     */
 	    configureListeners: function()
 	    {
-			var that/*RolePanel*/ = this; //Needed to delegate click to this instance.
+			var that/*RolePanel*/ = this; //Needed to delegate events to this instance.
 			this.addRoleButton.click( function(evt){ that.addRoleButton_clickHandler() } );
 			this.removeRoleButton.click( function(evt){ that.removeRoleButton_clickHandler() } );
 			this.roleList.change( function(evt){ that.roleList_changeHandler() } );
-			this.userRoleList.change( function(evt){ that.userRoleList_changeHandler() } );
+			this.userRoleList.jqGrid( 'setGridParam', { onSelectRow: function( id ){ that.userRoleList_changeHandler( id ); } } );
 	    },
 
 		/**
@@ -1398,16 +1383,14 @@ var RolePanel = Objs
 
 			if( !userRoles )
 				return;
+				
+			this.userRoles = userRoles;
 
 			// Fill the data-grid
 			for(var i/*Number*/=0; i<userRoles.length; i++)
 			{
 				var role/*RoleVO*/ = userRoles[i];
-				var rowData/*Object*/ = 
-				{
-					role: role,
-					value: role.value
-				};
+				var rowData/*Object*/ = role;
 
 				this.userRoleList.jqGrid( 'addRowData', i+1, rowData );
 			}	
@@ -1443,13 +1426,12 @@ var RolePanel = Objs
 		 */
 		setEnabled: function( isEnabled )
 		{
-			this.addRoleButton.disabled =
-			this.removeRoleButton.disabled =
-				!isEnabled;
+			var disabled/*String*/ = isEnabled ? "" : "disabled";
+			this.addRoleButton.attr("disabled", disabled);
+			this.removeRoleButton.attr("disabled", disabled);
 	
-			this.userRoleList.disabled =
-			this.roleList.disabled =
-				!isEnabled;
+			this.userRoleList.attr("disabled", disabled);
+			this.roleList.attr("disabled", disabled);
 			
 			if( !isEnabled )
 				this.roleList.selectedIndex = -1;
@@ -1466,19 +1448,19 @@ var RolePanel = Objs
 			switch( mode )
 			{
 				case RolePanel.ADD_MODE:
-					this.addRoleButton.disabled = false;
-					this.removeRoleButton.disabled = true;
+					this.addRoleButton.attr('disabled', '');
+					this.removeRoleButton.attr('disabled', 'disabled');
 				break;
 				
 				case RolePanel.REMOVE_MODE:
-					this.addRoleButton.disabled = true;
-					this.removeRoleButton.disabled = false;
+					this.addRoleButton.attr('disabled', 'disabled');
+					this.removeRoleButton.attr('disabled', '');
 					this.roleList.selectedIndex = 0;
 				break;
 	
 				default:
-					this.addRoleButton.disabled = true;
-					this.removeRoleButton.disabled = true;
+					this.addRoleButton.attr('disabled', 'disabled');
+					this.removeRoleButton.attr('disabled', 'disabled');
 			}
 		},
 
@@ -1511,12 +1493,14 @@ var RolePanel = Objs
 
 		/**
 		 * Select role to remove.
+		 * 
+		 * @param {String} id
+		 * 		The id of the selected row.
 		 */
-		userRoleList_changeHandler: function()
+		userRoleList_changeHandler: function( id )
 		{
-			this.roleList.selectedIndex = -1;
-			this.selectedRole = this.userRoleList.options[ this.userRoleList.selectedIndex ].associatedValue;
-			
+			var index/*Number*/ = this.userRoleList.jqGrid( 'getInd', id );
+			this.selectedRole = this.userRoles[index-1];
 			this.setMode( RolePanel.REMOVE_MODE );
 		},
 
@@ -1525,8 +1509,11 @@ var RolePanel = Objs
 		 */
 		roleList_changeHandler: function()
 		{
+			//TODO unselect userRoleList
 			this.userRoleList.selectedIndex = -1;
-			this.selectedRole = this.roleList[this.roleList.selectedIndex].associatedValue;
+
+			var roleEnumList/*Array*/ = RoleEnum.getComboList();
+			this.selectedRole = roleEnumList[this.roleList.attr("selectedIndex")];
 			
 			if( this.selectedRole == RoleEnum.NONE_SELECTED )
 				this.setMode( null );
@@ -1539,7 +1526,12 @@ var RolePanel = Objs
 /*
  * Event names
  */
+RolePanel.ADD/*String*/ 			= "add";
 RolePanel.REMOVE/*String*/ 			= "remove";
+
+/*
+ * View states
+ */
 RolePanel.ADD_MODE/*String*/ 		= "addMode";
 RolePanel.REMOVE_MODE/*String*/ 	= "removeMode";
 /*
@@ -1556,9 +1548,7 @@ RolePanel.REMOVE_MODE/*String*/ 	= "removeMode";
  *
  * @constructor
  */
-var UserForm = Objs
-(
-	"org.puremvc.js.demos.objs.employeeadmin.view.components.UserForm",
+var UserForm = Objs("org.puremvc.js.demos.objs.employeeadmin.view.components.UserForm",
 	UiComponent,
 	{
 		
@@ -1676,6 +1666,10 @@ var UserForm = Objs
 			
 			this.initializeChildren();
 			this.configureListeners();
+
+			//Needed to erase prefilled form informations.
+			this.clearForm();
+			this.setEnabled(false);
 		},
 	
 	    /**
@@ -1694,8 +1688,7 @@ var UserForm = Objs
 			this.email = this.userFormPanel.find(".email");
 			this.password = this.userFormPanel.find(".password");
 			this.confirm = this.userFormPanel.find(".confirm");
-			this.department = this.userFormPanel.find(".department").combobox();
-			this.roles = this.userFormPanel.find(".roles");
+			this.department = this.userFormPanel.find(".department");
 		
 			this.submitButton = this.userFormPanel.find(".submit-button").button();
 			this.cancelButton = this.userFormPanel.find(".cancel-button").button();	
@@ -1711,21 +1704,20 @@ var UserForm = Objs
 			this.password.focus( function(evt){ that.field_focusHandler(evt) } );
 			this.confirm.focus( function(evt){ that.field_focusHandler(evt) } );
 			this.department.focus( function(evt){ that.field_focusHandler(evt) } );
-			this.roles.focus( function(evt){ that.field_focusHandler(evt) } );
 			this.submitButton.click( function(evt){ that.submit_clickHandler(evt) } );
 			this.cancelButton.click( function(evt){ that.cancel_clickHandler(evt) } );
-		
-			//Needed to erase prefilled form informations.
-			this.clearForm();
 		},
 		
 		/**
-		 * Add items from <code>DeptEnum</code> to the corresponding list UI component.
+		 * Add items from <code>DeptEnum</code> to the corresponding list UI
+		 * component.
+		 * 
+		 * @param {Array} deptEnumList
+		 *		List of <code>DeptEnum</code> items or an empty array to empty
+		 *		the list UI component content. 
 		 */
-		fillDepartmentList: function()
+		fillList: function( deptEnumList )
 		{
-			var deptEnumList/*Array*/ = DeptEnum.getComboList();
-		
 			var htmlList/*String*/ = "";
 			for(var i/*Number*/=0; i<deptEnumList.length; i++)
 			{		
@@ -1736,53 +1728,26 @@ var UserForm = Objs
 				 * pop-up menu.
 				 */ 
 				var valueAttr = 'value="' + deptEnum.ordinal + '"';
-				var selectedAttr/*String*/ = deptEnum.equals(this.user.department) ? 'selected' : "";
+				
+				var selectedAttr/*String*/ = "";
+				if( this.user && deptEnum.equals(this.user.department) )
+					selectedAttr = "selected";
+					
+				if( !this.user && deptEnum.equals(DeptEnum.NONE_SELECTED) )
+					selectedAttr = "selected";
+									
 				htmlList += '<option ' + valueAttr + ' ' + selectedAttr + ' >' + deptEnum.value + '</option>';
 			}
 		
 			this.department.html(htmlList);
-		
-			/*
-			 * Don't ask me why but we have to do this that way (jQuery Mobile alpha3,
-			 * otherwise data displayed in the component stay the same between each
-			 * user
-			 */
-			$(document).bind
-			(
-				'pageshow',
-				function(event, ui)
-				{
-					$('.department').selectmenu('refresh',true);
-					$(document).unbind('pageshow',arguments.callee);
-					$(document).unbind('pageshow',arguments.callee);
-				}
-			);
 		},
 		
 		/**
-		 * Add items from <code>RoleEnum</code> to the corresponding list UI component.
+		 * Give focus to the form component.
 		 */
-		fillRoleList: function()
+		setFocus: function()
 		{
-			var roleEnumList/*Array*/ = RoleEnum.getComboList();
-		
-			this.roleListComparer = [];
-		
-			var htmlList/*String*/ = "";
-			for(var i/*Number*/=0; i<roleEnumList.length; i++)
-			{		
-				var roleEnum/*RoleEnum*/ = roleEnumList[i];
-		
-				/*
-				 * An item not having a value in jQuery will be excluded from the
-				 * pop-up menu.
-				 */ 
-				var valueAttr/*String*/ = roleEnum.ordinal >= 0 ? 'value="' + roleEnum.ordinal + '"' : "";
-				var selectedAttr/*String*/ = this.isUserRole( roleEnum ) ? 'selected' : "";
-				htmlList += '<option ' + valueAttr + ' ' + selectedAttr + ' >' + roleEnum.value + '</option>';
-			}
-		
-			this.roles.html(htmlList); 
+			this.fname.focus();
 		},
 		
 		/**
@@ -1795,48 +1760,25 @@ var UserForm = Objs
 		{
 			this.user = user;
 			
-			this.uname.val(user.uname);
-			this.fname.val(user.fname);
-			this.lname.val(user.lname);
-			this.email.val(user.email);
-			this.password.val(user.password);
-			this.confirm.val(user.password);
-			
-			this.fillDepartmentList();
+			if( !user )
+				this.clearForm();
+			else
+			{
+				this.uname.val(user.uname);
+				this.fname.val(user.fname);
+				this.lname.val(user.lname);
+				this.email.val(user.email);
+				this.password.val(user.password);
+				this.confirm.val(user.password);
+
+				this.fillList( DeptEnum.getComboList() );
+			}
 		},
 		
 		getUser: function()/*UserVO*/
 		{
 			this.updateUser();
 			return this.user;
-		},
-		
-		
-		/**
-		 * Set the roles for the selected user.
-		 * 
-		 * @param {Array} userRoles
-		 * 		The roles list for the currently selected user.
-		 *
-		 * @private
-		 */
-		setUserRoles: function( userRoles/*Array*/ )
-		{
-			this.userRoles = userRoles;
-			this.fillRoleList();
-		},
-		
-		/**
-		 * Return the roles selected in the UI role list component for the user.
-		 *
-		 * @return {Array}
-		 * 		The list of <code>RoleEnum</code> object selected for the user.
-		 *
-		 * @private
-		 */
-		getUserRoles: function()
-		{
-			//TODO Implement if necessary
 		},
 		
 		/**
@@ -1856,11 +1798,9 @@ var UserForm = Objs
 			this.user.email = this.email.val();
 			this.user.password = this.password.val();
 		
-			var selected/*Number*/ = this.department.selectedIndex;
+			var selected/*Number*/ = parseInt(this.department.val())+1;
 			var deptEnumList/*Array*/ = DeptEnum.getComboList();
 			this.user.department = deptEnumList[selected];
-			
-			this.fillRoleList();
 		},
 		
 		/**
@@ -1868,12 +1808,42 @@ var UserForm = Objs
 		 */
 		clearForm: function()
 		{
+			this.uname.val("");
+			this.fname.val("");
+			this.lname.val("");
+			this.email.val("");
+			this.password.val("");
+			this.confirm.val("");
+			this.fillList([]);
 			this.setFieldError( 'uname', false );
 			this.setFieldError( 'password', false );
 			this.setFieldError( 'confirm', false );
 			this.setFieldError( 'department', false );
 		},
-		
+
+		/**
+		 * Enable or disable the form.
+		 * 
+		 * @param {Boolean} isEnabled
+		 * 		The form must be enabled.
+		 */
+		setEnabled: function( isEnabled )
+		{
+			var disabled/*String*/ = isEnabled ? "" : "disabled";
+			this.uname.attr( "disabled", disabled );
+			this.fname.attr( "disabled", disabled );
+			this.lname.attr( "disabled", disabled );
+			this.email.attr( "disabled", disabled );
+			this.password.attr( "disabled", disabled );
+			this.confirm.attr( "disabled", disabled );
+			this.department.attr( "disabled", disabled );
+			this.submitButton.attr( "disabled", disabled );
+			this.cancelButton.attr( "disabled", disabled );
+
+			if( isEnabled && this.mode == UserForm.MODE_EDIT )
+				this.uname.attr( "disabled", "disabled" );
+		},
+
 		/**
 		 * Set the form mode to ADD or EDIT.
 		 * 
@@ -1887,13 +1857,11 @@ var UserForm = Objs
 			switch(mode)
 			{
 				case UserForm.MODE_ADD:
-					this.submitButton.find(".ui-btn-text").text("Add");
-					//this.uname.removeAttr("disabled");
+					this.submitButton.find(".ui-button-text").text("Add");
 				break;
 			
 				case UserForm.MODE_EDIT:
-					this.submitButton.find(".ui-btn-text").text("Save");
-					//this.uname.attr("disabled", "disabled" );
+					this.submitButton.find(".ui-button-text").text("Save");
 				break;
 			}
 		},
@@ -1903,10 +1871,10 @@ var UserForm = Objs
 		 */
 		submit_clickHandler: function()
 		{
+			this.updateUser();
+			
 			if( this.getErrors() )
 				return;
-		
-			this.updateUser();
 		
 			if( this.user.getIsValid() )
 			{
@@ -1923,14 +1891,6 @@ var UserForm = Objs
 		cancel_clickHandler: function()
 		{
 			this.dispatchEvent( UserForm.CANCEL );
-		},
-		
-		/**
-		 * Remove button onclick event listener.
-		 */
-		deleteButton_clickHandler: function()
-		{
-			this.dispatchEvent( UserForm.REMOVE );
 		},
 		
 		/**
@@ -1967,22 +1927,14 @@ var UserForm = Objs
 			else
 				this.setFieldError( 'confirm', false );
 		
-			var selected/*Number*/ = this.department.val();
+			var selected/*Number*/ = parseInt(this.department.val())+1;
 			var deptEnumList/*Array*/ = DeptEnum.getComboList();
 			var department/*DeptEnum*/ = deptEnumList[selected];
 		
-			if( department == DeptEnum.NONE_SELECTED )
+			if( DeptEnum.NONE_SELECTED.equals( department ) )
 				this.setFieldError( 'department', error = true );
 			else
 				this.setFieldError( 'department', false );
-				
-			selected = this.roles.val();
-			var rolesEnumList/*Array*/ = RoleEnum.getComboList();
-			var role/*RolesEnum*/ = rolesEnumList[selected];
-			if( role == RoleEnum.NONE_SELECTED )
-				this.setFieldError( 'roles', error = true );
-			else
-				this.setFieldError( 'roles', false );
 		
 			return error;
 		},
@@ -2005,28 +1957,6 @@ var UserForm = Objs
 				field.addClass( 'fieldError' );
 			else
 				field.removeClass( 'fieldError' );
-		},
-		
-		/**
-		 * Helper method that checks if a role from the UI role list exists in the user
-		 * roles list.
-		 * 
-		 * @param {RoleEnum} roleEnum
-		 * 		The <code>RoleEnum</code> item to check for	existence in the user roles
-		 * 		list.
-		 *
-		 * @return {Boolean}
-		 * 		The role exists in the list.
-		 *
-		 * @private
-		 */
-		isUserRole: function( roleEnum )
-		{
-		 	for( var i/*Number*/=0; i<this.userRoles.length; i++ )
-				if( roleEnum.equals(this.userRoles[i]) )
-					return true;
-		
-			return false;
 		}
 	}
 );
@@ -2034,16 +1964,12 @@ var UserForm = Objs
 /*
  * Event names
  */
-UserForm.ADD_USER/*String*/		= "add";
-UserForm.UPDATE_USER/*String*/	= "update";
-UserForm.DELETE_USER/*String*/	= "cancel";
+UserForm.ADD/*String*/		= "add";
+UserForm.UPDATE/*String*/	= "update";
 UserForm.CANCEL/*String*/		= "cancel";
 
 UserForm.MODE_ADD/*String*/		= "modeAdd";
 UserForm.MODE_EDIT/*String*/	= "modeEdit";
-
-UserForm.ADD_ROLE/*String*/		= "addRole";
-UserForm.REMOVE_ROLE/*String*/	= "removeRole";
 /*
  PureMVC Javascript Employee Admin Demo for Mootools by Frederic Saunier <frederic.saunier@puremvc.org> 
  PureMVC - Copyright(c) 2006-11 Futurescale, Inc., Some rights reserved. 
@@ -2055,9 +1981,7 @@ UserForm.REMOVE_ROLE/*String*/	= "removeRole";
  * 
  * @extends org.puremvc.js.demos.objs.employeeadmin.view.components.UiComponent UiComponent
  */
-var UserList = Objs
-(
-	"org.puremvc.js.demos.objs.employeeadmin.view.components.UserList",
+var UserList = Objs("org.puremvc.js.demos.objs.employeeadmin.view.components.UserList",
 	UiComponent,
 	{
 
@@ -2067,7 +1991,7 @@ var UserList = Objs
 		 * @type {HTMLElement}
 		 * @private
 		 */
-		userListPanel/*HTMLElement*/: null,
+		userListPanel: null,
 		
 		/**
 		 * The user list HTML element.
@@ -2075,7 +1999,7 @@ var UserList = Objs
 		 * @type {HTMLElement}
 		 * @private
 		 */
-		userList/*HTMLElement*/: null,
+		userList: null,
 		
 		/**
 		 * The "new" button HTML element.
@@ -2083,7 +2007,15 @@ var UserList = Objs
 		 * @type {HTMLElement}
 		 * @private
 		 */
-		newButton/*HTMLElement*/: null,
+		newButton: null,
+
+		/**
+		 * The current selected user.
+		 * 
+		 * @type {String}
+		 * @private
+		 */
+		selectedUser: null,
 		
 		/**
 		 * The user list of the application.
@@ -2091,7 +2023,7 @@ var UserList = Objs
 		 * @type {Array}
 		 * @private
 		 */
-		users/*Array*/: null,
+		users: null,
 		
 		/**
 		 * Initialize a <code>UserList</code> instance.
@@ -2139,7 +2071,7 @@ var UserList = Objs
 	     */
 	    configureListeners: function()
 	    {		
-			var that/*UserList*/ = this; //Needed for closure to use "this" reference.
+			var that/*UserList*/ = this; //Needed to delegate events to this instance.
 			
 			this.userList.jqGrid( 'setGridParam', { onSelectRow: function( id ){ that.userList_selectHandler( id ); } } );
 			this.newButton.click( function(evt){ that.newButton_clickHandler(evt) } );
@@ -2173,7 +2105,21 @@ var UserList = Objs
 				};
 
 				this.userList.jqGrid( 'addRowData', i+1, rowData );
-			}	
+			}
+		},
+		
+		/**
+		 * Return current selected user in user list.
+		 * 
+		 * <p>Note that jQgrid cannot embed any external data to transport the
+		 * UserVo. So it is best to return uname.
+		 * 
+		 * @return {String}
+		 * 		The user name selected in the user list.
+		 */
+		getSelectedUser: function()
+		{
+			return this.selectedUser;
 		},
 		
 		/**
@@ -2185,10 +2131,19 @@ var UserList = Objs
 		userList_selectHandler: function( id )
 		{
 			var rowData/*Object*/ = this.userList.jqGrid( 'getRowData', id );
-			
+
+			var uname/*String*/;
 			for( var i/*Number*/=0; i<this.users.length; i++ )
+			{
 				if( this.users[i].uname == rowData.uname )
-					this.dispatchEvent( UserList.SELECT, rowData.uname );
+				{
+					uname = rowData.uname;
+					break;
+				}	
+			}	
+
+			this.selectedUser = uname;
+			this.dispatchEvent( UserList.SELECT );
 		},
 		
 		/**
@@ -2205,6 +2160,16 @@ var UserList = Objs
 		deleteButton_clickHandler: function()
 		{
 			this.dispatchEvent( UserList.DELETE );
+		},
+		
+		/**
+		 * Remove selection in the user list.
+		 */
+		deSelect: function()
+		{
+			this.userList.jqGrid( 'resetSelection' );
+			this.selectedUser = null;
+			this.deleteButton.disabled = true;
 		}
 	}
 );
@@ -2237,9 +2202,7 @@ UserList.SELECT/*String*/ 	= "select";
  *
  * @constructor
  */
-var RolePanelMediator = Objs
-(
-	"org.puremvc.js.demos.objs.employeeadmin.view.components.RolePaneMediator",
+var RolePanelMediator = Objs("org.puremvc.js.demos.objs.employeeadmin.view.components.RolePaneMediator",
 	Mediator,
 	{
 		/**
@@ -2289,9 +2252,11 @@ var RolePanelMediator = Objs
 		 * @param {UiComponent.Event} event
 		 * 		The dispatched event object.
 		 */
-		onAddRole: function( prop )
+		onAddRole: function( event )
 		{
 			this.roleProxy.addRoleToUser( this.getRolePanel().getUser(), this.getRolePanel().getSelectedRole() );
+
+			this.updateUserRoleList();
 			this.getRolePanel().setMode(null);
 		},
 
@@ -2410,9 +2375,7 @@ var RolePanelMediator = Objs
  *
  * @constructor
  */
-var UserFormMediator = Objs
-(
-	"org.puremvc.js.demos.objs.employeeadmin.view.UserFormMediator",
+var UserFormMediator = Objs("org.puremvc.js.demos.objs.employeeadmin.view.UserFormMediator",
 	Mediator,
 	{	
 
@@ -2430,47 +2393,24 @@ var UserFormMediator = Objs
 		 */
 		initialize: function( name, viewComponent )
 		{
-			Mediator.prototype.initialize.call( this, name, viewComponent );
+			UserFormMediator.$super.initialize.call( this, name, viewComponent );
 		
 			var userForm/*UserForm*/ = this.getUserForm();
 			userForm.addEventListener( UserForm.ADD, this.onAdd, this );
 			userForm.addEventListener( UserForm.UPDATE, this.onUpdate, this );
 			userForm.addEventListener( UserForm.CANCEL, this.onCancel, this );
-		
-			this.userProxy = this.facade.retrieveProxy( UserProxy.NAME );
-			this.roleProxy = this.facade.retrieveProxy( ProxyNames.ROLE_PROXY );
+			
+			this.userProxy = this.facade.retrieveProxy( ProxyNames.USER_PROXY );
 		},
 		
 		/**
 		 * @private
 		 *
-		 * A shortcut to the application <code>RoleProxy</code> instance.
-		 * 
-		 * @type {RoleProxy}
-		 */
-		roleProxy: null,
-		
-		/**
-		 * @private
-		 *
-		 * A shortcut to the application <code>RoleProxy</code> instance.
+		 * A shortcut to the application <code>UserProxy</code> instance.
 		 * 
 		 * @type {UserProxy}
 		 */
 		userProxy: null,
-		
-		/**
-		 * @private
-		 *
-		 * The form component is in ADD or EDIT mode.
-		 *
-		 * <P>
-		 * Note that in the jQuery version this is only needed to be able to
-		 * disable the <code>uname</code> field when in EDIT mode.
-		 *
-		 * @type {String}
-		 */
-		mode: null,
 
 		/**
 		 * @private
@@ -2495,11 +2435,13 @@ var UserFormMediator = Objs
 		onAdd: function( event )
 		{
 			var user/*UserVO*/ = this.getUserForm().getUser();
-			var userRoles/*Array*/ = this.getUserForm().getUserRoles();
-		
 			this.userProxy.addItem( user );
-			//this.roleProxy.addItem( user );
 			this.sendNotification( NotificationNames.USER_ADDED, user );
+			
+			var userForm/*UserForm*/ = this.getUserForm();
+			userForm.clearForm();
+			userForm.setEnabled(false);
+			userForm.setMode(UserForm.MODE_ADD);
 		},
 
 		/**
@@ -2513,11 +2455,13 @@ var UserFormMediator = Objs
 		onUpdate: function()
 		{
 			var user/*UserVO*/ = this.getUserForm().getUser();
-			var userRoles/*Array*/ = this.getUserForm().getUserRoles();
-			
 			this.userProxy.updateItem( user );
-			//this.roleProxy.addItem( user );
 			this.sendNotification(  NotificationNames.USER_UPDATED, user );
+			
+			var userForm/*UserForm*/ = this.getUserForm();
+			userForm.clearForm();
+			userForm.setEnabled(false);
+			userForm.setMode(UserForm.MODE_ADD);
 		},
 
 		/**
@@ -2531,6 +2475,10 @@ var UserFormMediator = Objs
 		onCancel: function()
 		{
 			this.sendNotification(  NotificationNames.CANCEL_SELECTED );
+			var userForm/*UserForm*/ = this.getUserForm();
+			userForm.clearForm();
+			userForm.setEnabled(false);
+			userForm.setMode(UserForm.MODE_ADD);
 		},
 		
 		/**
@@ -2540,6 +2488,7 @@ var UserFormMediator = Objs
 		{
 			return [
 				NotificationNames.NEW_USER,
+				NotificationNames.USER_DELETED,
 				NotificationNames.USER_SELECTED
 			];
 		},
@@ -2555,10 +2504,15 @@ var UserFormMediator = Objs
 			switch ( note.getName() )
 			{
 				case NotificationNames.NEW_USER:
-					userForm.clearForm();
 					userForm.setUser( note.getBody() );
-					userForm.setUserRoles( [] );
 					userForm.setMode( UserForm.MODE_ADD );
+					userForm.setEnabled(true);
+					userForm.setFocus();
+				break;
+				
+				case NotificationNames.USER_DELETED:
+					userForm.clearForm();
+					userForm.setEnabled(false);
 				break;
 		
 				case NotificationNames.USER_SELECTED:
@@ -2567,10 +2521,9 @@ var UserFormMediator = Objs
 					userForm.clearForm();
 					userForm.setUser( user );
 		
-					var roles/*Array*/ = this.roleProxy.getUserRoles(user.uname);
-					userForm.setUserRoles( roles );
-		
 					userForm.setMode( UserForm.MODE_EDIT );
+					userForm.setEnabled(true);
+					userForm.setFocus();
 				break;
 			}
 		}
@@ -2607,9 +2560,7 @@ UserFormMediator.MODE_EDIT/*String*/	= "modeEdit";
  * 
  * @constructor
  */
-var UserListMediator = Objs
-(
-	"org.puremvc.js.demos.objs.employeeadmin.view.UserListMediator",
+var UserListMediator = Objs("org.puremvc.js.demos.objs.employeeadmin.view.UserListMediator",
 	Mediator,
 	{		
 		
@@ -2635,10 +2586,11 @@ var UserListMediator = Objs
 		 */
 		initialize: function( name, viewComponent )
 		{
-			Mediator.prototype.initialize.call( this, name, viewComponent );
+			UserListMediator.$super.initialize.call( this, name, viewComponent );
 			
 			var userList/*UserList*/ = this.getUserList();
 			userList.addEventListener( UserList.NEW, this.onNew, this );
+			userList.addEventListener( UserList.DELETE, this.onDelete, this );
 			userList.addEventListener( UserList.SELECT, this.onSelect, this );
 			
 			var userProxy/*UserProxy*/ = this.facade.retrieveProxy( ProxyNames.USER_PROXY );
@@ -2713,15 +2665,17 @@ var UserListMediator = Objs
 		{
 			var user/*UserVO*/ = new UserVO();
 			this.sendNotification( NotificationNames.NEW_USER, user );
-			
-			/*
-			 * In the jQuery implementation of the demo adding the demo imply to
-			 * set it as the currently selected user.
-			 */
-			this.sendNotification( NotificationNames.USER_SELECTED, user );
 		},
 		
-		
+		onDelete: function()
+		{
+			var uname/*String*/ = this.getUserList().getSelectedUser();
+			var userProxy/*UserProxy*/ = this.facade.retrieveProxy( ProxyNames.USER_PROXY );
+			var selectedUser/*UserVO*/ = userProxy.getUser( uname );
+
+			this.sendNotification( NotificationNames.DELETE_USER, selectedUser );
+		},
+
 		/**
 		 * @private
 		 * 
@@ -2732,9 +2686,10 @@ var UserListMediator = Objs
 		 */
 		onSelect: function( selectedUserName )
 		{
+			var uname/*String*/ = this.getUserList().getSelectedUser();
 			var userProxy/*UserProxy*/ = this.facade.retrieveProxy( ProxyNames.USER_PROXY );
+			var selectedUser/*UserVO*/ = userProxy.getUser( uname );
 
-			var selectedUser/*UserVO*/ = userProxy.getUser( selectedUserName );
 			this.sendNotification( NotificationNames.USER_SELECTED, selectedUser );
 		}
 	}
@@ -2758,9 +2713,7 @@ var UserListMediator = Objs
  * 
  * @extends org.puremvc.js.patterns.facade.Facade Facade
  */
-var ApplicationFacade = Objs
-(
-	"org.puremvc.js.demos.objs.employeeadmin.ApplicationFacade",
+var ApplicationFacade = Objs("org.puremvc.js.demos.objs.employeeadmin.ApplicationFacade",
 	Facade,
 	{
 		
@@ -2792,7 +2745,7 @@ var ApplicationFacade = Objs
 		 */
 		initializeController: function()
 		{
-			Facade.prototype.initializeController.call(this);
+			ApplicationFacade.$super.initializeController.call( this );
 		
 			this.registerCommand( NotificationNames.STARTUP, StartupCommand );
 			this.registerCommand( NotificationNames.DELETE_USER, DeleteUserCommand );
