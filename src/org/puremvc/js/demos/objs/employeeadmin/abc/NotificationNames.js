@@ -1,7 +1,7 @@
 /**
  * Defines <code>Notification</code> names for the application.
  */
-var NotificationNames = Objs("org.puremvc.js.demos.objs.employeeadmin.abc.NotificationNames");
+var NotificationNames = Objs("org.puremvc.js.demos.objs.employeeadmin.abc.NotificationNames",{});
 
 NotificationNames.STARTUP = "startup";
 NotificationNames.NEW_USER = "newUser"
