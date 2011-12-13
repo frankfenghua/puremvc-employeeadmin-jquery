@@ -5,7 +5,7 @@
 */
 
 /**
- * @classDescription
+ * @class
  * A base class used for UI components of the application.
  * 
  * <P>
@@ -13,148 +13,145 @@
  * listenable from the <code>Mediator</code>s. Here to simplify the demo we
  * don't use a real <code>Event</code> class. Implementers and listeners are
  * responsible for the anonymous events object they dispatch and receive.
- * 
- * @constructor
  */
 var UiComponent = Objs("org.puremvc.js.demos.objs.employeeadmin.view.components.UiComponent",
+{
+	/**
+	 * @construct
+	 * Initialize a <code>UiComponent</code> instance.
+	 */
+	initialize: function()
 	{
-
-		/**
-		 * Initialize a <code>UiComponent</code> instance.
-		 */
-		initialize: function()
-		{
-			this.listenerMap = new Object();
-		},
-		
-		/**
-		 * A map of <code>UiComponent.listenerDescriptor</code> objects.
-		 * 
-		 * @type {Object}
-		 * @private
-		 */
-		listenerMap: null,
-		
-		/**
-		* Dispatches an event into the event flow.
-		* 
-		* @param {String} type
-		* 		The type of the event to dispatch.
-		* 
-		* @param {Object} properties
-		* 		An optional anonymous object to send to listeners of the event when it
-		* 		is dispatched.
-		*/
-		dispatchEvent: function( type, properties )
-		{
-			if( typeof type == 'undefined' )
-				return;
-				
-			if( typeof this.listenerMap[UiComponent.QUEUE_PATTERN + type] == 'undefined' )
-				return;
-		
-			var queue/*Array*/ = this.listenerMap[UiComponent.QUEUE_PATTERN + type].slice(0);
+		this.listenerMap = new Object();
+	},
+	
+	/**
+	 * A map of <code>UiComponent.listenerDescriptor</code> objects.
+	 * 
+	 * @type {Object}
+	 * @private
+	 */
+	listenerMap: null,
+	
+	/**
+	* Dispatches an event into the event flow.
+	* 
+	* @param {String} type
+	* 		The type of the event to dispatch.
+	* 
+	* @param {Object} properties
+	* 		An optional anonymous object to send to listeners of the event when it
+	* 		is dispatched.
+	*/
+	dispatchEvent: function( type, properties )
+	{
+		if( typeof type == 'undefined' )
+			return;
 			
-			var props/*Object*/ = properties || {};
-			var len/*Number*/ = queue.length;
-			for(var i/*Number*/=0; i<len; i++)
-			{
-				var listenerDescriptor/*UiComponent.ListenerDescriptor*/ = queue[i];
+		if( typeof this.listenerMap[UiComponent.QUEUE_PATTERN + type] == 'undefined' )
+			return;
+	
+		var queue/*Array*/ = this.listenerMap[UiComponent.QUEUE_PATTERN + type].slice(0);
 		
-				if( typeof listenerDescriptor.listener == 'function' )
-				{
-					if( typeof listenerDescriptor.context != "undefined" )
-						listenerDescriptor.listener.call( listenerDescriptor.context, props );
-					else
-						listenerDescriptor.listener.call( this, event, props );
-				}
-			}
-		},
-		
-		/**
-		* Add an event listener so that the listener receives notification of an event.
-		 *  
-		 * @param {String} type
-		 * 		Type of the event to add.
-		 * 
-		 * @param {Function} listener
-		 * 		The listener method of the event to add.
-		 * 
-		 * @param {Object} context
-		 * 		The context attached for the listener method of the event to remove.
-		 */
-		addEventListener: function
-		(
-			type/*String*/,
-			listener/*Function*/,
-			context/*Object*/
-		)
+		var props/*Object*/ = properties || {};
+		var len/*Number*/ = queue.length;
+		for(var i/*Number*/=0; i<len; i++)
 		{
-			if( typeof type == "undefined" )
-				return;
-		
-			if( typeof listener == "undefined" )
-				return;
-				
-			var newListener/*UiComponent.ListenerDescriptor*/ = new UiComponent.ListenerDescriptor( listener, context );
-		
-			var queue/*Object*/;
-			if( typeof this.listenerMap[ UiComponent.QUEUE_PATTERN + type ] == "undefined" )
-				queue = this.listenerMap[ UiComponent.QUEUE_PATTERN + type ] = new Array();
-			else
-				queue = this.listenerMap[ UiComponent.QUEUE_PATTERN + type ];
-		
-			var len/*Number*/ = queue.length;
-			for(var i/*Number*/=0; i<len; i++ )
+			var listenerDescriptor/*UiComponent.ListenerDescriptor*/ = queue[i];
+	
+			if( typeof listenerDescriptor.listener == 'function' )
 			{
-				var listenerDescriptor/*UiComponent.ListenerDescriptor*/ = queue[i];
-				if( listenerDescriptor.equals( newListener ) )
-					return;
+				if( typeof listenerDescriptor.context != "undefined" )
+					listenerDescriptor.listener.call( listenerDescriptor.context, props );
+				else
+					listenerDescriptor.listener.call( this, event, props );
 			}
-		
-			queue.push(newListener);
-		},
-		
-		/**
-		 * Remove an event listener so that the listener stops receiving notification
-		 * of an event.
-		 *  
-		 * @param {String} type
-		 * 		Type of the event to remove.
-		 * 
-		 * @param {Function} listener
-		 * 		The listener method of the event to remove.
-		 * 
-		 * @param {Object} context
-		 * 		The context attached for the listener method of the event to remove.
-		 */
-		removeEventListener: function
-		(
-			type/*String*/,
-			listener/*Function*/,
-			context/*Object*/
-		)
-		{
-			if( typeof type == "undefined" )
-				return;
-		
-			if( typeof listener == "undefined" )
-				return;
-		
-			if( typeof this.listenerMap[UiComponent.QUEUE_PATTERN + type] == "undefined" )
-				return;
-				
-			var queue/*Object*/ = this.listenerMap[ UiComponent.QUEUE_PATTERN + type ];
-			var len/*Number*/ = queue.length;
-			for(var i/*Number*/=0; i<len; i++)
-				if( UiComponent.ListenerDescriptor.equals( new UiComponent.ListenerDescriptor( listener, context ) ) )
-				{
-					queue.splice(i,1);
-					return;
-				}
 		}
+	},
+	
+	/**
+	* Add an event listener so that the listener receives notification of an event.
+	 *  
+	 * @param {String} type
+	 * 		Type of the event to add.
+	 * 
+	 * @param {Function} listener
+	 * 		The listener method of the event to add.
+	 * 
+	 * @param {Object} context
+	 * 		The context attached for the listener method of the event to remove.
+	 */
+	addEventListener: function
+	(
+		type/*String*/,
+		listener/*Function*/,
+		context/*Object*/
+	)
+	{
+		if( typeof type == "undefined" )
+			return;
+	
+		if( typeof listener == "undefined" )
+			return;
+			
+		var newListener/*UiComponent.ListenerDescriptor*/ = new UiComponent.ListenerDescriptor( listener, context );
+	
+		var queue/*Object*/;
+		if( typeof this.listenerMap[ UiComponent.QUEUE_PATTERN + type ] == "undefined" )
+			queue = this.listenerMap[ UiComponent.QUEUE_PATTERN + type ] = new Array();
+		else
+			queue = this.listenerMap[ UiComponent.QUEUE_PATTERN + type ];
+	
+		var len/*Number*/ = queue.length;
+		for(var i/*Number*/=0; i<len; i++ )
+		{
+			var listenerDescriptor/*UiComponent.ListenerDescriptor*/ = queue[i];
+			if( listenerDescriptor.equals( newListener ) )
+				return;
+		}
+	
+		queue.push(newListener);
+	},
+	
+	/**
+	 * Remove an event listener so that the listener stops receiving notification
+	 * of an event.
+	 *  
+	 * @param {String} type
+	 * 		Type of the event to remove.
+	 * 
+	 * @param {Function} listener
+	 * 		The listener method of the event to remove.
+	 * 
+	 * @param {Object} context
+	 * 		The context attached for the listener method of the event to remove.
+	 */
+	removeEventListener: function
+	(
+		type/*String*/,
+		listener/*Function*/,
+		context/*Object*/
+	)
+	{
+		if( typeof type == "undefined" )
+			return;
+	
+		if( typeof listener == "undefined" )
+			return;
+	
+		if( typeof this.listenerMap[UiComponent.QUEUE_PATTERN + type] == "undefined" )
+			return;
+			
+		var queue/*Object*/ = this.listenerMap[ UiComponent.QUEUE_PATTERN + type ];
+		var len/*Number*/ = queue.length;
+		for(var i/*Number*/=0; i<len; i++)
+			if( UiComponent.ListenerDescriptor.equals( new UiComponent.ListenerDescriptor( listener, context ) ) )
+			{
+				queue.splice(i,1);
+				return;
+			}
 	}
-);
+});
 
 /**
  * The event object dispatched by the <code>UiComponent</code> class to its

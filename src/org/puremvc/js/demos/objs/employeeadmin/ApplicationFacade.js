@@ -6,7 +6,7 @@
 */
 
 /**
- * @classDescription
+ * @class
  * PureMVC <code>Facade</code> for this application.
  * 
  * @see org.puremvc.js.patterns.facade.Facade Facade

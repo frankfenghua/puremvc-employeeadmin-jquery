@@ -8,58 +8,55 @@
 /**
  * @classDescription
  * An enumeration of role items.
- *
- * @constructor
  */
 var RoleEnum = Objs("org.puremvc.js.demos.objs.employeeadmin.model.enum.RoleEnum",
+{
+	/**
+	 * The <code>RoleEnum</code> entry identifier.
+	 * 
+	 * @type {Number}
+	 */
+	ordinal: null,
+	
+	
+	/**
+	 * The <code>RoleEnum</code> entry value.
+	 * 
+	 * @type {String}
+	 */
+	value: null,
+	
+	/**
+	 * @construct
+	 * Initialize a <code>RoleEnum</code> instance.
+	 * 
+	 * @param {String} value
+	 * 		Value shared by each enum item.
+	 * 
+	 * @param {Number} ordinal
+	 * 		Index of the item in the list.	
+	 */
+	initialize: function( value, ordinal )
 	{
-		
-		/**
-		 * The <code>RoleEnum</code> entry identifier.
-		 * 
-		 * @type {Number}
-		 */
-		ordinal: null,
-		
-		
-		/**
-		 * The <code>RoleEnum</code> entry value.
-		 * 
-		 * @type {String}
-		 */
-		value: null,
-		
-		/**
-		 * Initialize a <code>RoleEnum</code> instance.
-		 * 
-		 * @param {String} value
-		 * 		Value shared by each enum item.
-		 * 
-		 * @param {Number} ordinal
-		 * 		Index of the item in the list.	
-		 */
-		initialize: function( value, ordinal )
-		{
-			this.value = value;
-			this.ordinal = ordinal;
-		},
-		
-		/**
-		 * Compare a <code>RoleEnum</code> object to the current one to check for their
-		 * equality.
-		 * 
-		 * @param {RoleEnum} roleEnum
-		 * 		The <code>RoleEnum</code> item to compare to the current.
-		 * 
-		 * @return {Boolean}
-		 * 		The compared <code>RoleEnum</code> is equal to the current.
-		 */
-		equals: function( roleEnum/*RoleEnum*/ )
-		{
-			return ( this.ordinal == roleEnum.ordinal && this.value == roleEnum.value );
-		}
+		this.value = value;
+		this.ordinal = ordinal;
+	},
+	
+	/**
+	 * Compare a <code>RoleEnum</code> object to the current one to check for their
+	 * equality.
+	 * 
+	 * @param {RoleEnum} roleEnum
+	 * 		The <code>RoleEnum</code> item to compare to the current.
+	 * 
+	 * @return {Boolean}
+	 * 		The compared <code>RoleEnum</code> is equal to the current.
+	 */
+	equals: function( roleEnum/*RoleEnum*/ )
+	{
+		return ( this.ordinal == roleEnum.ordinal && this.value == roleEnum.value );
 	}
-);
+});
 
 RoleEnum.NONE_SELECTED/*RoleEnum*/ 	= new RoleEnum( "Select a role", -1 );
 RoleEnum.ADMIN/*RoleEnum*/ 			= new RoleEnum( "Administrator", 0  );

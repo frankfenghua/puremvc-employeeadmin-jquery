@@ -6,59 +6,56 @@
 */
 
 /**
- * @classDescription
+ * @class
  * An enumeration of department items.
- *
- * @constructor
  */
 var DeptEnum = Objs("org.puremvc.js.demos.objs.employeeadmin.model.enum.DeptEnum",
+{
+	/**
+	 * @construct
+	 * Initialize a <code>DeptEnum</code> instance.
+	 * 
+	 * @param {String} value
+	 * 		Value shared by each enum item.
+	 * 
+	 * @param {Number} ordinal
+	 * 		Index of the item in the list.	
+	 */
+	initialize: function( value, ordinal )
 	{
-		
-		/**
-		 * Initialize a <code>DeptEnum</code> instance.
-		 * 
-		 * @param {String} value
-		 * 		Value shared by each enum item.
-		 * 
-		 * @param {Number} ordinal
-		 * 		Index of the item in the list.	
-		 */
-		initialize: function( value, ordinal )
-		{
-			this.value = value;
-			this.ordinal = ordinal;
-		},
-		
-		/**
-		 * The <code>DeptEnum</code> entry identifier.
-		 * 
-		 * @type {Number}
-		 */
-		ordinal: null,
-		
-		/**
-		 * The <code>DeptEnum</code> entry value.
-		 * 
-		 * @type {String}
-		 */
-		value: null,
-		
-		/**
-		 * Compare a <code>DeptEnum</code> object to the current one to check for their
-		 * equality.
-		 * 
-		 * @param {DeptEnum} deptEnum
-		 * 		The <code>DeptEnum</code> item to compare to the current.
-		 * 
-		 * @return {Boolean}
-		 * 		The compared <code>DeptEnum</code> is equal to the current.
-		 */
-		equals: function( deptEnum )
-		{
-			return ( this.ordinal == deptEnum.ordinal && this.value == deptEnum.value );
-		}
+		this.value = value;
+		this.ordinal = ordinal;
+	},
+	
+	/**
+	 * The <code>DeptEnum</code> entry identifier.
+	 * 
+	 * @type {Number}
+	 */
+	ordinal: null,
+	
+	/**
+	 * The <code>DeptEnum</code> entry value.
+	 * 
+	 * @type {String}
+	 */
+	value: null,
+	
+	/**
+	 * Compare a <code>DeptEnum</code> object to the current one to check for their
+	 * equality.
+	 * 
+	 * @param {DeptEnum} deptEnum
+	 * 		The <code>DeptEnum</code> item to compare to the current.
+	 * 
+	 * @return {Boolean}
+	 * 		The compared <code>DeptEnum</code> is equal to the current.
+	 */
+	equals: function( deptEnum )
+	{
+		return ( this.ordinal == deptEnum.ordinal && this.value == deptEnum.value );
 	}
-);
+});
 
 DeptEnum.NONE_SELECTED/*DeptEnum*/ 	= new DeptEnum( "Select a department", -1 );
 DeptEnum.ACCT/*DeptEnum*/ 			= new DeptEnum( "Accounting", 0  );
