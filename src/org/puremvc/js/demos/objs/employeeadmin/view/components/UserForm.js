@@ -292,19 +292,35 @@ var UserForm = Objs("org.puremvc.js.demos.objs.employeeadmin.view.components.Use
 	 */
 	setEnabled: function( isEnabled )
 	{
-		var disabled/*String*/ = isEnabled ? "" : "disabled";
-		this.uname.attr( "disabled", disabled );
-		this.fname.attr( "disabled", disabled );
-		this.lname.attr( "disabled", disabled );
-		this.email.attr( "disabled", disabled );
-		this.password.attr( "disabled", disabled );
-		this.confirm.attr( "disabled", disabled );
-		this.department.attr( "disabled", disabled );
-		this.submitButton.attr( "disabled", disabled );
-		this.cancelButton.attr( "disabled", disabled );
-
-		if( isEnabled && this.mode == UserForm.MODE_EDIT )
+		if( isEnabled )
+		{
+			this.fname.removeAttr("disabled");
+			this.lname.removeAttr("disabled");
+			this.email.removeAttr("disabled");
+			this.password.removeAttr("disabled");
+			this.confirm.removeAttr("disabled");
+			this.department.removeAttr("disabled");
+			this.submitButton.button("enable");
+			this.cancelButton.button("enable");
+		
+			if( this.mode == UserForm.MODE_EDIT )
+				this.uname.attr( "disabled", "disabled" );
+			else
+				this.uname.removeAttr("disabled");
+		}
+		else
+		{
 			this.uname.attr( "disabled", "disabled" );
+			this.fname.attr( "disabled", "disabled" );
+			this.lname.attr( "disabled", "disabled" );
+			this.email.attr( "disabled", "disabled" );
+			this.password.attr( "disabled", "disabled" );
+			this.confirm.attr( "disabled", "disabled" );
+			this.department.attr( "disabled", "disabled" );
+			this.submitButton.button( "disable" );
+			this.cancelButton.button( "disable" );
+		}		
+
 	},
 
 	/**

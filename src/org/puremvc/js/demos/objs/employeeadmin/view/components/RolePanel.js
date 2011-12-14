@@ -222,15 +222,23 @@ var RolePanel = Objs("org.puremvc.js.demos.objs.employeeadmin.view.components.Ro
 	 */
 	setEnabled: function( isEnabled )
 	{
-		var disabled/*String*/ = isEnabled ? "" : "disabled";
-		this.addRoleButton.attr("disabled", disabled);
-		this.removeRoleButton.attr("disabled", disabled);
+		if( isEnabled )
+		{
+			this.userRoleList.removeAttr("disabled");
+			this.roleList.removeAttr("disabled");
+			this.addRoleButton.button( "enable" );
+			this.removeRoleButton.button( "enable" );
+		}
+		else
+		{
+			this.userRoleList.attr("disabled", "disabled");
+			this.roleList.attr("disabled", "disabled");
+			this.addRoleButton.button( "disable" );
+			this.removeRoleButton.button( "disable" );
+		}
 
-		this.userRoleList.attr("disabled", disabled);
-		this.roleList.attr("disabled", disabled);
-		
 		if( !isEnabled )
-			this.roleList.selectedIndex = -1;
+			this.roleList.prop("selectedIndex",0);
 	},
 
 	/**
@@ -244,19 +252,19 @@ var RolePanel = Objs("org.puremvc.js.demos.objs.employeeadmin.view.components.Ro
 		switch( mode )
 		{
 			case RolePanel.ADD_MODE:
-				this.addRoleButton.attr('disabled', '');
-				this.removeRoleButton.attr('disabled', 'disabled');
+				this.addRoleButton.button("enable");
+				this.removeRoleButton.button("disable");
 			break;
 			
 			case RolePanel.REMOVE_MODE:
-				this.addRoleButton.attr('disabled', 'disabled');
-				this.removeRoleButton.attr('disabled', '');
+				this.addRoleButton.button("disable");
+				this.removeRoleButton.button("enable");
 				this.roleList.selectedIndex = 0;
 			break;
 
 			default:
-				this.addRoleButton.attr('disabled', 'disabled');
-				this.removeRoleButton.attr('disabled', 'disabled');
+				this.addRoleButton.button("disable");
+				this.removeRoleButton.button("disable");
 		}
 	},
 
@@ -267,7 +275,7 @@ var RolePanel = Objs("org.puremvc.js.demos.objs.employeeadmin.view.components.Ro
 	{
 		this.user = null;
 		this.setUserRoles(null);
-		this.roleList.selectedIndex = 0;
+		this.roleList.prop("selectedIndex",0);
 		this.userRoleList.jqGrid('resetSelection');
 	},
 
@@ -305,13 +313,23 @@ var RolePanel = Objs("org.puremvc.js.demos.objs.employeeadmin.view.components.Ro
 	 */
 	roleList_changeHandler: function()
 	{
-		//TODO unselect userRoleList
-		this.userRoleList.selectedIndex = -1;
+		this.userRoleList.jqGrid( 'resetSelection' );
 
 		var roleEnumList/*Array*/ = RoleEnum.getComboList();
-		this.selectedRole = roleEnumList[this.roleList.attr("selectedIndex")];
+		this.selectedRole = roleEnumList[this.roleList.prop("selectedIndex")];
 		
-		if( this.selectedRole == RoleEnum.NONE_SELECTED )
+		var alreadyInList/*Boolean*/ = false;
+		for(var i/*Number*/=0; i<this.userRoles.length; i++)
+		{
+			var role/*RoleVO*/ = this.userRoles[i];
+			if( role.equals(this.selectedRole) )
+			{
+				alreadyInList = true;
+				break;
+			}
+		}	
+		
+		if( this.selectedRole == RoleEnum.NONE_SELECTED || alreadyInList )
 			this.setMode( null );
 		else
 			this.setMode( RolePanel.ADD_MODE );
