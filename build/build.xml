@@ -33,7 +33,6 @@
 				<pathelement location="${basedir}/src/org/puremvc/js/demos/objs/employeeadmin/abc/NotificationNames.js" />
 				<pathelement location="${basedir}/src/org/puremvc/js/demos/objs/employeeadmin/abc/ProxyNames.js" />
 		
-				<pathelement location="${basedir}/src/org/puremvc/js/demos/objs/employeeadmin/controller/AddRoleResultCommand.js" />
 				<pathelement location="${basedir}/src/org/puremvc/js/demos/objs/employeeadmin/controller/DeleteUserCommand.js" />
 				<pathelement location="${basedir}/src/org/puremvc/js/demos/objs/employeeadmin/controller/PrepModelCommand.js" />
 				<pathelement location="${basedir}/src/org/puremvc/js/demos/objs/employeeadmin/controller/PrepViewCommand.js" />

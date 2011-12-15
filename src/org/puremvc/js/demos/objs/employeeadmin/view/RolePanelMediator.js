@@ -134,8 +134,11 @@ var RolePanelMediator = Objs("org.puremvc.js.demos.objs.employeeadmin.view.compo
 			break;
 
 			case NotificationNames.USER_ADDED:
-				rolePanel.user/*UserVO*/ = note.getBody();
-			var roleVO/*RoleVO*/ = new RoleVO ( rolePanel.user.uname );
+				rolePanel.user = note.getBody();
+				
+				var roleVO/*RoleVO*/ = new RoleVO ();
+				roleVO.uname = rolePanel.user.uname;
+				
 				this.roleProxy.addItem( roleVO );
 				rolePanel.clearForm();
 				rolePanel.setEnabled(false);
