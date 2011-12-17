@@ -25,7 +25,7 @@
 			<!--
 				We need to respect an order for classes declaration to allow
 				classes to inherit from their dependencies so we have to list
-				each file here
+				each file here in their declaration order
 		 	-->
 			<path>
 

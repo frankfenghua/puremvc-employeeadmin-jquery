@@ -21,9 +21,6 @@ var PrepViewCommand = Objs("org.puremvc.js.demos.objs.employeeadmin.controller.P
 	 */
 	execute: function( note )
 	{
-		//TODO Can we use it as a context for JQuery not to use the dollar sign?
-		var app/*HTMLElement*/ = note.getBody();
-	
 		/*
 		 * View Components initialization
 		 */

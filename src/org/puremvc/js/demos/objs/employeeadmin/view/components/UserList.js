@@ -95,6 +95,7 @@ var UserList = Objs("org.puremvc.js.demos.objs.employeeadmin.view.components.Use
 
 		this.newButton = this.userListPanel.find(".new-button").button();
 		this.deleteButton = this.userListPanel.find(".delete-button").button();	
+		this.deleteButton.button("disable");
     },
 
     /**
@@ -175,6 +176,8 @@ var UserList = Objs("org.puremvc.js.demos.objs.employeeadmin.view.components.Use
 
 		this.selectedUser = uname;
 		this.dispatchEvent( UserList.SELECT );
+		
+		this.deleteButton.button("enable");
 	},
 	
 	/**
@@ -182,6 +185,7 @@ var UserList = Objs("org.puremvc.js.demos.objs.employeeadmin.view.components.Use
 	 */
 	newButton_clickHandler: function()
 	{
+		this.deSelect();
 		this.dispatchEvent( UserList.NEW );
 	},
 
@@ -200,7 +204,8 @@ var UserList = Objs("org.puremvc.js.demos.objs.employeeadmin.view.components.Use
 	{
 		this.userList.jqGrid( 'resetSelection' );
 		this.selectedUser = null;
-		this.deleteButton.disabled = true;
+
+		this.deleteButton.button("disable");
 	}
 });
 
