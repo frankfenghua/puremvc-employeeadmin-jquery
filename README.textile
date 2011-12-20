@@ -36,12 +36,3 @@ The Ant task need both
 "YUIant":http://www.ubik-ingenierie.com/miscellanous/YUIAnt/. Respective jar
 file for both library need to be copied in the /build/lib/ folder for the task
 to run correctly.
-
-h2. Unit Tests
-
-Unit tests are built upon
-"YUI Test Standalone Library":http://yuilibrary.com/yuitest/.
-
-The tests run by opening the /index.html. The test runner and Unit Test
-framework loads all the libraries it needs from the /lib/yuitest folder. They
-were first built upon YUI 3.2.0 and YUITest 1.0.0 b1 standalone libraries.
